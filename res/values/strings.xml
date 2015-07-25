@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">客户端</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_save">存储</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_section1_input">数据录入</string>
+    <string name="title_section2_display_params">参数显示</string>
+    <string name="title_section3_realtime_curve">实时曲线</string>
+    <string name="title_section4_array">数组显示</string>
+
+</resources>
