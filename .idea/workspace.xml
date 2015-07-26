@@ -17,15 +17,13 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: edu.scut.se.lee" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="5dfb47e3-311e-4f24-8d06-fc1874ea23bf" name="Default" comment="">
+    <list default="true" readonly="true" id="5dfb47e3-311e-4f24-8d06-fc1874ea23bf" name="Default" comment="手动设置名字保存数据文件成功">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/scut/se/lee/fragment/InputFragment.java" afterPath="$PROJECT_DIR$/src/edu/scut/se/lee/fragment/InputFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/generated/source/r/debug/edu/scut/se/lee/R.java" afterPath="$PROJECT_DIR$/build/generated/source/r/debug/edu/scut/se/lee/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/scut/se/lee/fragment/CurveRealtimeFragment.java" afterPath="$PROJECT_DIR$/src/edu/scut/se/lee/fragment/CurveRealtimeFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edut/scut/se/lee/util/Util.java" afterPath="$PROJECT_DIR$/src/edut/scut/se/lee/util/Util.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/fragment_input.xml" afterPath="$PROJECT_DIR$/res/layout/fragment_input.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="tumuClient.iws" />
@@ -49,25 +47,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="InputFragment.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/edu/scut/se/lee/fragment/InputFragment.java">
+      <file leaf-file-name="CurveRealtimeFragment.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/edu/scut/se/lee/fragment/CurveRealtimeFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="788" max-vertical-offset="1275">
-              <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+            <state vertical-scroll-proportion="-0.6923077" vertical-offset="1485" max-vertical-offset="9345">
+              <caret line="75" column="31" selection-start-line="75" selection-start-column="31" selection-end-line="75" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Util.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/edut/scut/se/lee/util/Util.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.68586385" vertical-offset="308" max-vertical-offset="705">
-              <caret line="51" column="9" selection-start-line="51" selection-start-column="9" selection-end-line="51" selection-end-column="9" />
-              <folding>
-                <element signature="e#1334#1342#0" expanded="true" />
+                <element signature="e#20773#21419#0" expanded="true" />
+                <element signature="e#21404#21405#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -608,7 +596,6 @@
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/edu/scut/se/lee/fragment/BaseFragment.java" />
         <option value="$PROJECT_DIR$/res/layout/fragment_curve_realtime.xml" />
-        <option value="$PROJECT_DIR$/src/edu/scut/se/lee/fragment/CurveRealtimeFragment.java" />
         <option value="$PROJECT_DIR$/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/src/edu/scut/se/lee/NavigationDrawerFragment.java" />
         <option value="$PROJECT_DIR$/src/edut/scut/se/lee/util/Cache.java" />
@@ -622,6 +609,7 @@
         <option value="$PROJECT_DIR$/res/layout/fragment_input.xml" />
         <option value="$PROJECT_DIR$/src/edu/scut/se/lee/fragment/InputFragment.java" />
         <option value="$PROJECT_DIR$/src/edut/scut/se/lee/util/Util.java" />
+        <option value="$PROJECT_DIR$/src/edu/scut/se/lee/fragment/CurveRealtimeFragment.java" />
       </list>
     </option>
   </component>
@@ -1079,12 +1067,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="797" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1380323" sideWeight="0.7910448" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1380323" sideWeight="0.7910448" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1103,7 +1091,7 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3979442" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3979442" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1129,18 +1117,11 @@
     </option>
     <MESSAGE value="创建文件夹成功" />
     <MESSAGE value="所有Fragment创建和关联成功&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="所有Fragment创建和关联成功&#10;" />
+    <MESSAGE value="手动设置名字保存数据文件成功" />
+    <option name="LAST_COMMIT_MESSAGE" value="手动设置名字保存数据文件成功" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/edu/scut/se/lee/fragment/InputFragment.java</url>
-          <line>61</line>
-          <properties />
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="7" />
     </breakpoint-manager>
   </component>
@@ -1168,22 +1149,8 @@
           <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3777#8128#0" expanded="true" />
-            <element signature="e#3886#8095#0" expanded="true" />
-            <element signature="e#6332#6587#0" expanded="true" />
-            <element signature="e#6552#6553#0" expanded="true" />
-            <element signature="e#6985#7298#0" expanded="true" />
-            <element signature="e#7263#7264#0" expanded="true" />
-            <element signature="e#7564#7906#0" expanded="true" />
-            <element signature="e#7875#7876#0" expanded="true" />
-            <element signature="e#8076#8077#0" expanded="true" />
-            <element signature="e#8117#8118#0" expanded="true" />
-            <element signature="e#11091#12320#0" expanded="true" />
-            <element signature="e#11782#12185#0" expanded="true" />
-            <element signature="e#12174#12175#0" expanded="true" />
-            <element signature="e#12315#12316#0" expanded="true" />
-            <element signature="e#17527#17763#0" expanded="true" />
-            <element signature="e#17752#17753#0" expanded="true" />
+            <element signature="e#20773#21419#0" expanded="true" />
+            <element signature="e#21404#21405#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1428,32 +1395,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/scut/se/lee/fragment/CurveRealtimeFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.576923" vertical-offset="4055" max-vertical-offset="9645">
-          <caret line="280" column="71" selection-start-line="280" selection-start-column="19" selection-end-line="280" selection-end-column="71" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3777#8128#0" expanded="true" />
-            <element signature="e#3886#8095#0" expanded="true" />
-            <element signature="e#6332#6587#0" expanded="true" />
-            <element signature="e#6552#6553#0" expanded="true" />
-            <element signature="e#6985#7298#0" expanded="true" />
-            <element signature="e#7263#7264#0" expanded="true" />
-            <element signature="e#7564#7906#0" expanded="true" />
-            <element signature="e#7875#7876#0" expanded="true" />
-            <element signature="e#8076#8077#0" expanded="true" />
-            <element signature="e#8117#8118#0" expanded="true" />
-            <element signature="e#11091#12320#0" expanded="true" />
-            <element signature="e#11782#12185#0" expanded="true" />
-            <element signature="e#12174#12175#0" expanded="true" />
-            <element signature="e#12315#12316#0" expanded="true" />
-            <element signature="e#17527#17763#0" expanded="true" />
-            <element signature="e#17752#17753#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/edut/scut/se/lee/util/Cache.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.22727273" vertical-offset="0" max-vertical-offset="795">
@@ -1604,9 +1545,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/edut/scut/se/lee/util/Util.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5930736" vertical-offset="71" max-vertical-offset="735">
+          <caret line="36" column="25" selection-start-line="36" selection-start-column="25" selection-end-line="36" selection-end-column="25" />
+          <folding>
+            <element signature="e#1388#1396#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/scut/se/lee/fragment/InputFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="788" max-vertical-offset="1275">
+        <state vertical-scroll-proportion="0.27489176" vertical-offset="788" max-vertical-offset="1275">
           <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1614,12 +1565,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edut/scut/se/lee/util/Util.java">
+    <entry file="file://$PROJECT_DIR$/src/edu/scut/se/lee/fragment/CurveRealtimeFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.68586385" vertical-offset="308" max-vertical-offset="705">
-          <caret line="51" column="9" selection-start-line="51" selection-start-column="9" selection-end-line="51" selection-end-column="9" />
+        <state vertical-scroll-proportion="-0.6923077" vertical-offset="1485" max-vertical-offset="9345">
+          <caret line="75" column="31" selection-start-line="75" selection-start-column="31" selection-end-line="75" selection-end-column="31" />
           <folding>
-            <element signature="e#1334#1342#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#20773#21419#0" expanded="true" />
+            <element signature="e#21404#21405#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -26,13 +26,15 @@ public class Util {
         Toast.makeText(App.getInstance(),text,Toast.LENGTH_SHORT).show();
     }
 
-    public static void saveFileInPrjDir(String fileName,String content){
+    public static boolean saveFileInPrjDir(String fileName,String content){
         try {
             FileWriter writer = new FileWriter(getPrjDir()+"/"+fileName);
             writer.write(content);
             writer.close();
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
     }
 

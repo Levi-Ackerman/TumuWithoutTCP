@@ -19,6 +19,8 @@ import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
 import edu.scut.se.lee.R;
+import edut.scut.se.lee.util.Util;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -71,8 +73,9 @@ public class CurveRealtimeFragment extends BaseFragment implements
     @ViewInject(id = R.id.sw_curve_start)
     private Switch sw_start;
     @ViewInject(id = R.id.btn_curve_jiagong, click = "onClick")
+	private Button btn_jiagong;
+    @ViewInject(id = R.id.btn_curve_save,click = "onClick")
     private Button btn_save;
-	//private Button btn_jiagong;
     @ViewInject(id = R.id.button, click = "onClick")
     private Button  btnSend;
     @ViewInject(id =R.id.editText)
@@ -93,7 +96,6 @@ public class CurveRealtimeFragment extends BaseFragment implements
 	private myListener listener;
 	private SensorManager sensors;
 	private Sensor sensor;
-	private String filepath;
 
     boolean isAvailable;
     boolean isEable = false;
@@ -278,8 +280,6 @@ public class CurveRealtimeFragment extends BaseFragment implements
 		sensors = (SensorManager) getActivity().getSystemService(
 				Context.SENSOR_SERVICE);
 		sensor = sensors.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
-		filepath = Environment.getExternalStorageDirectory().toString()
-				+ "/AccelerateData.txt";
 	}
 
 	private void initChart() {
@@ -602,27 +602,36 @@ public class CurveRealtimeFragment extends BaseFragment implements
 		xMax = 1.5;
 	}
 
+    String content;
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.btn_curve_save:
-			try {
-				FileWriter fileWriter = new FileWriter(filepath, false);
-				for (int i = 0; i < line1.getItemCount(); i++) {
-					fileWriter.write(line1.getX(i) + "\t" + line1.getY(i)
-							+ "\n");
-				}
-				fileWriter.close();
-				Toast.makeText(getActivity(), "保存成功", Toast.LENGTH_SHORT)
-						.show();
-			} catch (Exception e) {
-				e.printStackTrace();
-				Toast.makeText(getActivity(), "保存出错", Toast.LENGTH_SHORT)
-						.show();
-			}
-			break;
-		case R.id.btn_curve_jiagong:
+            content = "";
+            for (int i = 0; i < line1.getItemCount(); i++) {
+                content += line1.getX(i) + "\t" + line1.getY(i)
+                        + "\n";
+            }
+            final EditText editText = new EditText(getActivity());
+            editText.setHint("输入文件名");
+            new AlertDialog.Builder(getActivity()).setTitle("保存数据").setView(editText).setPositiveButton("保存",new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    String name = editText.getText().toString().trim();
+                    if(name.equals("")){
+                        Util.showToast("请输入文件名");
+                        return ;
+                    }
+                    if (Util.saveFileInPrjDir(name, content))
+                        Toast.makeText(getActivity(), "保存成功", Toast.LENGTH_SHORT)
+                                .show();
+                    else
+                        Util.showToast("保存失败");
+                }
+            }).setNegativeButton("取消",null).show();
+            break;
+            case R.id.btn_curve_jiagong:
 			for (int i = 0; i < line1.getItemCount(); i++) {
 				double x = line1.getX(i);
 				double y = -line1.getY(i);
