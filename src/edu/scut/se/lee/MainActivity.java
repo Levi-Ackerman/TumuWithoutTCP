@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.io.File;
 
@@ -54,15 +55,22 @@ public class MainActivity extends BaseActivity implements
 
     private void initAlertDlg() {
         final EditText etName = new EditText(this);
-        etName.setHint(Cache.getInstance().load(Cache.PRJ_NAME,"输入项目名称"));
+        etName.setHint("输入项目名称");
+        etName.setText(Cache.getInstance().load(Cache.PRJ_NAME,""));
         new AlertDialog.Builder(this).setTitle("项目名称")
                 .setView(etName)
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Cache.getInstance().save(Cache.PRJ_NAME,etName.getText().toString().trim());
+                        String name = etName.getText().toString().trim();
+                        if (name == null||name.equals("")) {
+                            Util.showToast("项目名字不能为空");
+                            finish();
+                            return ;
+                        }
+                        Cache.getInstance().save(Cache.PRJ_NAME,name);
                         File file = new File(Util.getPrjDir());
-                        if(!file.exists()||!file.isDirectory()){
+                        if (!file.exists() || !file.isDirectory()) {
                             file.mkdirs();
                         }
                     }
