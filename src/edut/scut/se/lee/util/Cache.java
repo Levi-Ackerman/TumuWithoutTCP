@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 public class Cache {
 	public static Cache instance;
 	public SharedPreferences sp;
+    public static final String PRJ_NAME = "prj_name";
 
 	/**
 	 * 在App初始化时调用，其他地方请勿调用
