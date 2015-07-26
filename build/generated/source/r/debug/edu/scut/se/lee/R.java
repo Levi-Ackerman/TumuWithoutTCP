@@ -47,9 +47,12 @@ public final class R {
         public static final int activity_main=0x7f030000;
         public static final int fragment_array_display=0x7f030001;
         public static final int fragment_curve_realtime=0x7f030002;
-        public static final int fragment_input=0x7f030003;
-        public static final int fragment_params_display=0x7f030004;
-        public static final int navigation_drawer=0x7f030005;
+        public static final int fragment_fft_analysis=0x7f030003;
+        public static final int fragment_force_compute=0x7f030004;
+        public static final int fragment_force_result=0x7f030005;
+        public static final int fragment_input=0x7f030006;
+        public static final int fragment_params_display=0x7f030007;
+        public static final int navigation_drawer=0x7f030008;
     }
     public static final class menu {
         public static final int fragment_curve=0x7f070000;

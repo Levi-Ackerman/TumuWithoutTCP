@@ -3,6 +3,9 @@ package edu.scut.se.lee;
 import edu.scut.se.lee.fragment.ArrayDisplayFragment;
 import edu.scut.se.lee.fragment.BaseFragment;
 import edu.scut.se.lee.fragment.CurveRealtimeFragment;
+import edu.scut.se.lee.fragment.FFTAnalysisFragment;
+import edu.scut.se.lee.fragment.ForceComputeFragment;
+import edu.scut.se.lee.fragment.ForceResultFragment;
 import edu.scut.se.lee.fragment.InputFragment;
 import edu.scut.se.lee.fragment.ParamsDisplayFragment;
 import edut.scut.se.lee.util.Cache;
@@ -100,6 +103,15 @@ public class MainActivity extends BaseActivity implements
                 break;
             case 3:
                 fragment = new ArrayDisplayFragment();
+                break;
+            case 4:
+                fragment = new FFTAnalysisFragment();
+                break;
+            case 5:
+                fragment = new ForceComputeFragment();
+                break;
+            case 6:
+                fragment = new ForceResultFragment();
                 break;
             default:
                 break;
