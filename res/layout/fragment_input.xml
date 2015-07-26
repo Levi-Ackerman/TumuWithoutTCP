@@ -8,11 +8,18 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="edu.scut.se.lee.MainActivity$PlaceholderFragment" >
+    tools:context="edu.scut.se.lee.MainActivity$PlaceholderFragment">
+
+    <EditText
+        android:id="@+id/et_input_linename"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="索名(几号索)" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
         <EditText
             android:id="@+id/et_input_linelong"
@@ -20,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="索长(m)" >
+            android:hint="索长(m)">
 
             <requestFocus />
         </EditText>
@@ -32,17 +39,59 @@
 
     </LinearLayout>
 
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
     <EditText
-        android:id="@+id/et_input_linename"
+        android:id="@+id/et_input_density"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:ems="10"
-        android:hint="索名(几号索)" />
+        android:hint="线密度(N/m)">
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(N/m)" />
+
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/et_input_strength"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="抗弯强度(KN*m2)">
+
+            <requestFocus />
+        </EditText>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(KN*m2)" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/btn_input_save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="保存" />
+        android:text="保存数据" />
+
+    <Button
+    android:id="@+id/btn_input_load"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="加载已有数据" />
 
 </LinearLayout>
