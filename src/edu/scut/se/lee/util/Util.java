@@ -1,4 +1,4 @@
-package edut.scut.se.lee.util;
+package edu.scut.se.lee.util;
 
 import android.content.Context;
 import android.os.Environment;
@@ -16,8 +16,8 @@ import java.util.List;
 import edu.scut.se.lee.App;
 
 public class Util {
-	public final static String SD_CARD_PATH = Environment.getExternalStorageDirectory().toString();
-
+//	public final static String SD_CARD_PATH = Environment.getExternalStorageDirectory().toString();
+    public final static String SD_CARD_PATH = "/sdcard";
     public static String getPrjDir(){
         return SD_CARD_PATH+ "/"+ Cache.getInstance().load(Cache.PRJ_NAME,"acceleration");
     }

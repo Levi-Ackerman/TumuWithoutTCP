@@ -19,7 +19,7 @@ import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
 import edu.scut.se.lee.R;
-import edut.scut.se.lee.util.Util;
+import edu.scut.se.lee.util.Util;
 
 import android.app.AlertDialog;
 import android.content.Context;

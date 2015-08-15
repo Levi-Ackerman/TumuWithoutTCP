@@ -1,6 +1,6 @@
 package edu.scut.se.lee;
 
-import edut.scut.se.lee.util.Cache;
+import edu.scut.se.lee.util.Cache;
 import android.app.Application;
 
 public class App extends Application {

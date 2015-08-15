@@ -1,4 +1,4 @@
-package edut.scut.se.lee.util;
+package edu.scut.se.lee.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
