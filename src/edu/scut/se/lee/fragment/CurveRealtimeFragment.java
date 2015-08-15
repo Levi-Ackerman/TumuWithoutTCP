@@ -623,7 +623,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
                         Util.showToast("请输入文件名");
                         return ;
                     }
-                    if (Util.saveFileInPrjDir(name, content))
+                    if (Util.saveFileInPrjDir(name+".data", content))
                         Toast.makeText(getActivity(), "保存成功", Toast.LENGTH_SHORT)
                                 .show();
                     else
