@@ -5,5 +5,5 @@ package edu.scut.se.lee.util;
  */
 public class Data {
     public static String name = "name";
-    public static String frequence = "frequence";
+    public static double frequence = 0;
 }

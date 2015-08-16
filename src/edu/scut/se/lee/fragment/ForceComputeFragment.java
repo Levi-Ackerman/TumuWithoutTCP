@@ -7,6 +7,7 @@ import android.widget.TextView;
 import net.tsz.afinal.annotation.view.ViewInject;
 
 import edu.scut.se.lee.R;
+import edu.scut.se.lee.util.DB;
 import edu.scut.se.lee.util.Data;
 import edu.scut.se.lee.util.Util;
 
@@ -33,7 +34,7 @@ public class ForceComputeFragment extends BaseFragment implements View.OnClickLi
     @Override
     public void initData() {
         tvName.setText(Data.name);
-        tvFrequence.setText(Data.frequence);
+        tvFrequence.setText(Data.frequence+"");
     }
 
     private double calculate1() {
@@ -51,5 +52,6 @@ public class ForceComputeFragment extends BaseFragment implements View.OnClickLi
         double res2 = calculate2();
         tvResult1.setText(res1+"");
         tvResult2.setText(res2+"");
+        DB.putResult(new DB.Result(Data.name, Data.frequence,res1,res2));
     }
 }
