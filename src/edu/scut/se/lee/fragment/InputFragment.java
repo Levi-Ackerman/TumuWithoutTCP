@@ -3,6 +3,7 @@ package edu.scut.se.lee.fragment;
 import net.tsz.afinal.annotation.view.ViewInject;
 import edu.scut.se.lee.R;
 import edu.scut.se.lee.util.Cache;
+import edu.scut.se.lee.util.Data;
 import edu.scut.se.lee.util.Util;
 
 import android.view.View;
@@ -75,5 +76,6 @@ public class InputFragment extends BaseFragment implements OnClickListener {
                 Util.showToast("数据加载完成");
                 break;
         }
+        Data.name = mEditLineName.getText().toString().trim();
 	}
 }
