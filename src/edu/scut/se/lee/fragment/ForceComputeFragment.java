@@ -9,6 +9,7 @@ import net.tsz.afinal.annotation.view.ViewInject;
 import edu.scut.se.lee.R;
 import edu.scut.se.lee.util.DB;
 import edu.scut.se.lee.util.Data;
+import edu.scut.se.lee.util.FFT;
 import edu.scut.se.lee.util.Util;
 
 /**
@@ -38,11 +39,13 @@ public class ForceComputeFragment extends BaseFragment implements View.OnClickLi
     }
 
     private double calculate1() {
-        return 1;
+        double t = 4 * Data.midu * Data.lineLength *Data.lineLength;
+        return t;
     }
 
     private double calculate2() {
-        return 2;
+        double t = calculate1()+0;
+        return t;
     }
 
     @Override
@@ -52,6 +55,12 @@ public class ForceComputeFragment extends BaseFragment implements View.OnClickLi
         double res2 = calculate2();
         tvResult1.setText(res1+"");
         tvResult2.setText(res2+"");
-        DB.putResult(new DB.Result(Data.name, Data.frequence,res1,res2));
+        DB.putResult(new DB.Result(Data.name, Data.frequence, res1, res2));
+        int[] a = {1,1,1,1,1,1};
+        try {
+            new FFT(a);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
