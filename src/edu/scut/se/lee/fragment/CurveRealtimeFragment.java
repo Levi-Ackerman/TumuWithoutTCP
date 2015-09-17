@@ -1,9 +1,6 @@
 package edu.scut.se.lee.fragment;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -19,6 +16,7 @@ import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
 import edu.scut.se.lee.R;
+import edu.scut.se.lee.util.Data;
 import edu.scut.se.lee.util.FFT;
 import edu.scut.se.lee.util.Util;
 
@@ -31,7 +29,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.Environment;
+import android.os.AsyncTask;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
@@ -43,12 +41,6 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import android.app.Activity;
-import android.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
@@ -77,7 +69,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 	private Button btn_jiagong;
     @ViewInject(id = R.id.btn_curve_save,click = "onClick")
     private Button btn_save;
-    @ViewInject(id = R.id.button, click = "onClick")
+    @ViewInject(id = R.id.button_send, click = "onClick")
     private Button  btnSend;
     @ViewInject(id =R.id.editText)
     private EditText etIP;
@@ -121,100 +113,101 @@ public class CurveRealtimeFragment extends BaseFragment implements
 		// TODO Auto-generated method stub
         //改动：初始化控件switch
         sw_start = (Switch)rootView.findViewById(R.id.sw_curve_start);
+		datas = new ArrayList<Data>();
 		initAcceler();
 		initChart();
         isEable=false;
-        btnSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new Thread() {
-                    @Override
-                    public void run() {
-                        if (!isOpening) {
-                            try {
-                                connector = new NioSocketConnector(); // 创建连接客户端
-                                connector.setConnectTimeoutMillis(10000); // 设置连接超时
-                                // 添加处理器，主要负责收包
-                                iohandler = new IoHandler() {
-                                    @Override
-                                    public void sessionCreated(IoSession ioSession) throws Exception {
-
-                                    }
-
-                                    @Override
-                                    public void sessionOpened(IoSession ioSession) throws Exception {
-
-                                    }
-
-                                    @Override
-                                    public void sessionClosed(IoSession ioSession) throws Exception {
-
-                                    }
-
-                                    @Override
-                                    public void sessionIdle(IoSession ioSession, IdleStatus idleStatus) throws Exception {
-
-                                    }
-
-                                    @Override
-                                    public void exceptionCaught(IoSession ioSession, Throwable throwable) throws Exception {
-
-                                    }
-
-                                    @Override
-                                    public void messageReceived(IoSession ioSession, Object o) throws Exception {
-
-                                    }
-
-                                    @Override
-                                    public void messageSent(IoSession ioSession, Object o) throws Exception {
-
-                                    }
-                                };
-                                connector.setHandler(iohandler);
-                                strIP = etIP.getText().toString().trim();
-                                // strContent = etContent.getText().toString().trim();
-                                port = Integer.parseInt(etPort.getText().toString().trim());
-                                setConfig("ip", strIP);
-                                setConfig("port", port + "");
-                                createConnection();
-                                isEable=true;
-                                getActivity().runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        btnSend.setText("停止发送");
-                                    }
-                                });
-                                //manager.registerListener(listener, sensor, SensorManager.SENSOR_DELAY_FASTEST);
-                                //manager.registerListener(listener, sensor, SensorManager.SENSOR_DELAY_NORMAL);
-                                isOpening = !isOpening;
-                            } catch (Exception e) {
-                                getActivity().runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        //  Toast.makeText(CurveRealtimeFragment.this, "连接出错", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
-
-                        } else {
-                            ioSession.close(true);
-                            connector.dispose();
-                            isEable=false;
-                            getActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    btnSend.setText("发送");
-                                    //Toast.makeText(MainActivity.this, "连接已断开", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                            // manager.unregisterListener(listener);
-                            isOpening = !isOpening;
-                        }
-                    }
-                }.start();
-            }
-        });
+//        btnSend.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                new Thread() {
+//                    @Override
+//                    public void run() {
+//                        if (!isOpening) {
+//                            try {
+//                                connector = new NioSocketConnector(); // 创建连接客户端
+//                                connector.setConnectTimeoutMillis(10000); // 设置连接超时
+//                                // 添加处理器，主要负责收包
+//                                iohandler = new IoHandler() {
+//                                    @Override
+//                                    public void sessionCreated(IoSession ioSession) throws Exception {
+//
+//                                    }
+//
+//                                    @Override
+//                                    public void sessionOpened(IoSession ioSession) throws Exception {
+//
+//                                    }
+//
+//                                    @Override
+//                                    public void sessionClosed(IoSession ioSession) throws Exception {
+//
+//                                    }
+//
+//                                    @Override
+//                                    public void sessionIdle(IoSession ioSession, IdleStatus idleStatus) throws Exception {
+//
+//                                    }
+//
+//                                    @Override
+//                                    public void exceptionCaught(IoSession ioSession, Throwable throwable) throws Exception {
+//
+//                                    }
+//
+//                                    @Override
+//                                    public void messageReceived(IoSession ioSession, Object o) throws Exception {
+//
+//                                    }
+//
+//                                    @Override
+//                                    public void messageSent(IoSession ioSession, Object o) throws Exception {
+//
+//                                    }
+//                                };
+//                                connector.setHandler(iohandler);
+//                                strIP = etIP.getText().toString().trim();
+//                                // strContent = etContent.getText().toString().trim();
+//                                port = Integer.parseInt(etPort.getText().toString().trim());
+//                                setConfig("ip", strIP);
+//                                setConfig("port", port + "");
+//                                createConnection();
+//                                isEable=true;
+//                                getActivity().runOnUiThread(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        btnSend.setText("停止发送");
+//                                    }
+//                                });
+//                                //manager.registerListener(listener, sensor, SensorManager.SENSOR_DELAY_FASTEST);
+//                                //manager.registerListener(listener, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+//                                isOpening = !isOpening;
+//                            } catch (Exception e) {
+//                                getActivity().runOnUiThread(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        //  Toast.makeText(CurveRealtimeFragment.this, "连接出错", Toast.LENGTH_SHORT).show();
+//                                    }
+//                                });
+//                            }
+//
+//                        } else {
+//                            ioSession.close(true);
+//                            connector.dispose();
+//                            isEable=false;
+//                            getActivity().runOnUiThread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    btnSend.setText("发送");
+//                                    //Toast.makeText(MainActivity.this, "连接已断开", Toast.LENGTH_SHORT).show();
+//                                }
+//                            });
+//                            // manager.unregisterListener(listener);
+//                            isOpening = !isOpening;
+//                        }
+//                    }
+//                }.start();
+//            }
+//        });
 		// refreshChart();
 	}
 
@@ -308,7 +301,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 
 		// 配置chart参数
 		setChartSettings(mXYMultipleSeriesRenderer, "时间(s)", "加速度(m/s^2)",
-				-2.5, 2.5, Color.RED, Color.WHITE);
+				-1, 1, Color.RED, Color.WHITE);
 
 		// 通过该函数获取到一个View 对象
 		chart = ChartFactory.getLineChartView(getActivity(), mDataset,
@@ -518,7 +511,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 									}
 								});
 			} else {
-				datas = new ArrayList<Data>();
+				datas.clear();
 				index = 0;
 				lastX = lastY = 0;
 				isFirst = true;
@@ -608,6 +601,34 @@ public class CurveRealtimeFragment extends BaseFragment implements
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
+			case R.id.button_send:
+				final EditText et = new EditText(getActivity());
+				et.setText("data.txt");
+				new AlertDialog.Builder(getActivity()).setTitle("输入数据名字").setView(et).setPositiveButton("ok", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						String[] data = Util.loadFileLinesInPrjDir(et.getText().toString().trim());
+						int count = data.length;
+						if(count>FFT.POINT_COUNT) {
+							count = FFT.POINT_COUNT;
+						}
+						initLine();
+						for (int i=0;i<count;i++){
+							float f = Float.parseFloat(data[i]);
+							Data pt = new Data(20*i,f);
+							datas.add(pt);
+						}
+						new Thread(){
+							@Override
+							public void run() {
+								Runnable run = new RefreshSeriesTask();
+								run.run();
+								run.run();
+System.out.println("刷新完成");							}
+						}.start();
+					}
+				}).setNegativeButton("cancel",null).show();
+				break;
 		case R.id.btn_curve_save:
             content = "";
             for (int i = 0; i < line1.getItemCount(); i++) {
@@ -633,24 +654,30 @@ public class CurveRealtimeFragment extends BaseFragment implements
             }).setNegativeButton("取消",null).show();
             break;
             case R.id.btn_curve_jiagong:
-				int size = line1.getItemCount();
-				double[] arr = new double[size];
-				for (int i = 0; i < size; i++) {
-					arr[i] = line1.getY(0);
-					line1.remove(0);
-				}
-				FFT fft = new FFT(arr);
-				int count = fft.count;
-				double[] ys = fft.result;
-				for (int i=0;i<count;i++){
-					line1.add(25.0*i/count,ys[i]);
-				}
-//					double x = line1.getX(i);
-//					double y = -line1.getY(i);
-//					line1.remove(i);
-//					line1.add(i, x, y);
-			chart.postInvalidate();
-			Toast.makeText(getActivity(), "反转Y值", Toast.LENGTH_SHORT).show();
+				new AsyncTask<Void,Void,Void>(){
+
+					@Override
+					protected Void doInBackground(Void... params) {
+						int size = line1.getItemCount();
+						double[] arr = new double[size];
+						for (int i = 0; i < size; i++) {
+							arr[i] = line1.getY(0);
+							line1.remove(0);
+						}
+						FFT fft = new FFT(arr);
+						int count = fft.count;
+						double[] ys = fft.result;
+						for (int i=0;i<count;i++){
+							line1.add(25.0*i/count,ys[i]);
+						}
+						return null;
+					}
+
+					@Override
+					protected void onPostExecute(Void aVoid) {
+						chart.postInvalidate();
+					}
+				}.execute((Void) null);
 			break;
 		}
 	}
