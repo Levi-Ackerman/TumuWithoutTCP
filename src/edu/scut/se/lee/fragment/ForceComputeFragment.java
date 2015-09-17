@@ -56,7 +56,7 @@ public class ForceComputeFragment extends BaseFragment implements View.OnClickLi
         tvResult1.setText(res1+"");
         tvResult2.setText(res2+"");
         DB.putResult(new DB.Result(Data.name, Data.frequence, res1, res2));
-        int[] a = {1,1,1,1,1,1};
+        double[] a = {1,1,1,1,1,1};
         try {
             new FFT(a);
         } catch (Exception e) {
