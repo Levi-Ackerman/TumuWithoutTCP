@@ -22,20 +22,27 @@ package edu.scut.se.lee.util;
 public class FFT {
 
     private double[] xConv;//对x[n]进行二进制倒序排列的结果
+    public double[] result;
+    public int count;
 
-    public FFT(double[] x) throws Exception{
-        double a1024[] = new double[POINT_COUNT];
-        for (int i = 0; i < POINT_COUNT; i++) {
-            a1024[i] = x[i];
-        }
-        x = a1024;
+    public FFT(double[] x){
+
         //int[] x;	存放采样值的数组
         int n,m,j;
         n = x.length;
         m = 0;
         j = 1;
-
-        if(n < 1 || n >POINT_COUNT) throw new Exception("采样序列的个数不能小于1，或大于"+POINT_COUNT+"。当前为"+n);//保证采样序列的个数介于1到POINT_COUNT之间
+        if(n < 1) {
+            System.out.println("采样序列的个数不能小于1。当前为" + n);//保证采样序列的个数介于1到POINT_COUNT之间
+            return;
+        }
+        else if(n>POINT_COUNT){
+            double cutArr[] = new double[POINT_COUNT];
+            for (int i = 0; i < POINT_COUNT; i++) {
+                cutArr[i] = x[i];
+            }
+            x = cutArr;
+        }
         for(int i=1;i<=Math.log(POINT_COUNT)/Math.log(2);i++){
             j *= 2;
             m ++;
@@ -51,9 +58,9 @@ public class FFT {
                 xConv[i] = 0;
 
         i2Sort(xConv,m);							//将xConv进行二进制倒序排序
-        System.out.println("x[n]共有"+x.length+'('+m+"阶)"+"个采样值！"+"补零个数为："+(j-n)+'\n');
-
-        myFFT(xConv,m);
+        System.out.println("x[n]共有" + x.length + '(' + m + "阶)" + "个采样值！" + "补零个数为：" + (j - n) + '\n');
+        count = (int)Math.pow(2,m-1);
+        result = myFFT(xConv,m);
     }
 
     /*
@@ -99,7 +106,7 @@ public class FFT {
     * int m;	m = log2(n),n为采样个数
     * 返回值：void
     */
-    private void myFFT(double[] xConv2,int m) {
+    private double[] myFFT(double[] xConv2,int m) {
         int divBy;									//divBy等分
         double[] Xr,Xi,Wr,Wi;						//分别表示：FFT结果的实部和虚部、旋转因子的实部和虚部
         double[] tempXr,tempXi;						//蝶形结果暂存器
@@ -147,10 +154,14 @@ public class FFT {
             }
         }
 
-        System.out.println("FFT结果共有"+n+"个：");
-        for(int i=0;i<n;i++)						//FFT结果显示
+        System.out.println("FFT结果共有"+n/2+"个：");
+        double[] mod = new double[n/2];
+        for(int i=1;i<=n/2;i++) {                        //FFT结果显示
 //            System.out.println(String.format("%f", Xr[i])+" + j"+String.format("%f",Xi[i]));
-            System.out.println(String.format("%f",Math.sqrt(Xr[i]*Xr[i]+Xi[i]*Xi[i])));
+            mod[i - 1] = Math.sqrt(Xr[i] * Xr[i] + Xi[i] * Xi[i]);
+            System.out.println(mod[i-1]+"");
+        }
+        return mod;
     }
 
 
@@ -3773,8 +3784,11 @@ public class FFT {
                 0,
                 0,
         };
-
-        new FFT(a);
+        double cutArr[] = new double[POINT_COUNT-2];
+        for (int i = 0; i < POINT_COUNT-2; i++) {
+            cutArr[i] = a[i];
+        }
+        new FFT(cutArr);
     }
 }
 

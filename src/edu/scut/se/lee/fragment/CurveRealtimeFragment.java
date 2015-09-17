@@ -19,6 +19,7 @@ import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
 import edu.scut.se.lee.R;
+import edu.scut.se.lee.util.FFT;
 import edu.scut.se.lee.util.Util;
 
 import android.app.AlertDialog;
@@ -632,12 +633,22 @@ public class CurveRealtimeFragment extends BaseFragment implements
             }).setNegativeButton("取消",null).show();
             break;
             case R.id.btn_curve_jiagong:
-			for (int i = 0; i < line1.getItemCount(); i++) {
-				double x = line1.getX(i);
-				double y = -line1.getY(i);
-				line1.remove(i);
-				line1.add(i, x, y);
-			}
+				int size = line1.getItemCount();
+				double[] arr = new double[size];
+				for (int i = 0; i < size; i++) {
+					arr[i] = line1.getY(0);
+					line1.remove(0);
+				}
+				FFT fft = new FFT(arr);
+				int count = fft.count;
+				double[] ys = fft.result;
+				for (int i=0;i<count;i++){
+					line1.add(25.0*i/count,ys[i]);
+				}
+//					double x = line1.getX(i);
+//					double y = -line1.getY(i);
+//					line1.remove(i);
+//					line1.add(i, x, y);
 			chart.postInvalidate();
 			Toast.makeText(getActivity(), "反转Y值", Toast.LENGTH_SHORT).show();
 			break;
