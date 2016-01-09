@@ -27,8 +27,8 @@ public class InputFragment extends BaseFragment implements OnClickListener {
     private final String strength = "强度=";
 	@ViewInject(id = R.id.btn_input_save,click="onClick")
 	private Button btn_save;
-    @ViewInject(id=R.id.btn_input_load,click = "onClick")
-    private Button btn_load;
+//    @ViewInject(id=R.id.btn_input_load,click = "onClick")
+//    private Button btn_load;
 
 	@Override
 	public int getRootRes() {
@@ -52,29 +52,29 @@ public class InputFragment extends BaseFragment implements OnClickListener {
                     content += lineLong + mEditLineLong.getText().toString().trim() + "\n";
                     content += density + mEditDensity.getText().toString().trim() + "\n";
                     content += strength + mEditStrength.getText().toString().trim() + "\n";
-                    Util.saveFileInPrjDir("BaseInfo.txt", content);
-                    Util.showToast("保存基本信息为BaseInfo.txt成功");
+                    Util.saveFileInPrjDir(mEditLineName.getText().toString().trim()+".txt", content);
+                    Util.showToast("保存基本信息为"+mEditLineName.getText().toString().trim()+".txt成功");
                 } catch (Exception e) {
                     Util.showToast("保存基本信息失败");
                 }
                 break;
 
-            case R.id.btn_input_load:
-                String[] strs = Util.loadFileLinesInPrjDir("BaseInfo.txt");
-                if (strs == null || strs.length != 4) {
-                    Util.showToast("没有已保存的数据");
-                    return;
-                }
-                String[] names = strs[0].split("=");
-                mEditLineName.setText(names.length == 2 ? names[1] : "0");
-                String[] longs = strs[1].split("=");
-                mEditLineLong.setText(longs.length == 2 ? longs[1] : "0");
-                String[] densities = strs[2].split("=");
-                mEditDensity.setText(densities.length == 2 ? densities[1] : "0");
-                String[] strengths = strs[3].split("=");
-                mEditStrength.setText(strengths.length == 2 ? strengths[1] : "0");
-                Util.showToast("数据加载完成");
-                break;
+//            case R.id.btn_input_load:
+//                String[] strs = Util.loadFileLinesInPrjDir("BaseInfo.txt");
+//                if (strs == null || strs.length != 4) {
+//                    Util.showToast("没有已保存的数据");
+//                    return;
+//                }
+//                String[] names = strs[0].split("=");
+//                mEditLineName.setText(names.length == 2 ? names[1] : "0");
+//                String[] longs = strs[1].split("=");
+//                mEditLineLong.setText(longs.length == 2 ? longs[1] : "0");
+//                String[] densities = strs[2].split("=");
+//                mEditDensity.setText(densities.length == 2 ? densities[1] : "0");
+//                String[] strengths = strs[3].split("=");
+//                mEditStrength.setText(strengths.length == 2 ? strengths[1] : "0");
+//                Util.showToast("数据加载完成");
+//                break;
         }
         Data.name = mEditLineName.getText().toString().trim();
         Data.lineLength = Double.parseDouble(mEditLineLong.getText().toString());

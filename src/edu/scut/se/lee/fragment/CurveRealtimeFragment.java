@@ -16,6 +16,7 @@ import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
 import edu.scut.se.lee.R;
+import edu.scut.se.lee.util.Data;
 import edu.scut.se.lee.util.FFT;
 import edu.scut.se.lee.util.Util;
 
@@ -440,6 +441,16 @@ public class CurveRealtimeFragment extends BaseFragment implements
 			enableAllBtnsAndInput();
 			timer.cancel();
 			sensors.unregisterListener(listener);
+			content = "";
+			for (int i = 0; i < line1.getItemCount(); i++) {
+				content += line1.getX(i) + "\t" + line1.getY(i)
+						+ "\n";
+			}
+			if (Util.saveFileInPrjDir(edu.scut.se.lee.util.Data.name+".data", content))
+				Toast.makeText(getActivity(), "保存成功", Toast.LENGTH_SHORT)
+						.show();
+			else
+				Util.showToast("保存失败");
 			// try {
 			// fileWriter.close();
 			// } catch (IOException e) {
@@ -567,30 +578,30 @@ System.out.println("刷新完成");							}
 					}
 				}).setNegativeButton("cancel",null).show();
 				break;
-		case R.id.btn_save:
-            content = "";
-            for (int i = 0; i < line1.getItemCount(); i++) {
-                content += line1.getX(i) + "\t" + line1.getY(i)
-                        + "\n";
-            }
-            final EditText editText = new EditText(getActivity());
-            editText.setHint("输入文件名");
-            new AlertDialog.Builder(getActivity()).setTitle("保存数据").setView(editText).setPositiveButton("保存",new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    String name = editText.getText().toString().trim();
-                    if(name.equals("")){
-                        Util.showToast("请输入文件名");
-                        return ;
-                    }
-                    if (Util.saveFileInPrjDir(name+".data", content))
-                        Toast.makeText(getActivity(), "保存成功", Toast.LENGTH_SHORT)
-                                .show();
-                    else
-                        Util.showToast("保存失败");
-                }
-            }).setNegativeButton("取消",null).show();
-            break;
+//		case R.id.btn_save:
+//            content = "";
+//            for (int i = 0; i < line1.getItemCount(); i++) {
+//                content += line1.getX(i) + "\t" + line1.getY(i)
+//                        + "\n";
+//            }
+//            final EditText editText = new EditText(getActivity());
+//            editText.setHint("输入文件名");
+//            new AlertDialog.Builder(getActivity()).setTitle("保存数据").setView(editText).setPositiveButton("保存",new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    String name = editText.getText().toString().trim();
+//                    if(name.equals("")){
+//                        Util.showToast("请输入文件名");
+//                        return ;
+//                    }
+//                    if (Util.saveFileInPrjDir(name+".data", content))
+//                        Toast.makeText(getActivity(), "保存成功", Toast.LENGTH_SHORT)
+//                                .show();
+//                    else
+//                        Util.showToast("保存失败");
+//                }
+//            }).setNegativeButton("取消",null).show();
+//            break;
             case R.id.btn_curve_pinyu:
 				new AsyncTask<Void,Void,Void>(){
 

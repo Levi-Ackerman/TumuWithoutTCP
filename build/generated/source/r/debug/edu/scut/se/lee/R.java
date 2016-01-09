@@ -22,11 +22,10 @@ public final class R {
     }
     public static final class id {
         public static final int LinearLayout1=0x7f080003;
-        public static final int action_save=0x7f080019;
-        public static final int action_settings=0x7f08001a;
+        public static final int action_save=0x7f080018;
+        public static final int action_settings=0x7f080019;
         public static final int btn_curve_pinyu=0x7f080008;
         public static final int btn_curve_shiyu=0x7f080007;
-        public static final int btn_input_load=0x7f080014;
         public static final int btn_input_save=0x7f080013;
         public static final int btn_load_result=0x7f08000d;
         public static final int btn_save=0x7f08000c;
@@ -44,10 +43,10 @@ public final class R {
         public static final int lvResult=0x7f08000e;
         public static final int navigation_drawer=0x7f080002;
         public static final int sw_curve_start=0x7f080006;
-        public static final int tv0=0x7f080015;
-        public static final int tv1=0x7f080016;
-        public static final int tv2=0x7f080017;
-        public static final int tv3=0x7f080018;
+        public static final int tv0=0x7f080014;
+        public static final int tv1=0x7f080015;
+        public static final int tv2=0x7f080016;
+        public static final int tv3=0x7f080017;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;

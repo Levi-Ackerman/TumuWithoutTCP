@@ -88,10 +88,10 @@
         android:layout_height="wrap_content"
         android:text="保存数据" />
 
-    <Button
-    android:id="@+id/btn_input_load"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="加载已有数据" />
+    <!--<Button-->
+    <!--android:id="@+id/btn_input_load"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="加载已有数据" />-->
 
 </LinearLayout>
