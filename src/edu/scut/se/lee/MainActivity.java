@@ -95,22 +95,22 @@ public class MainActivity extends BaseActivity implements
             case 0:
                 fragment = new InputFragment();
                 break;
+//            case 1:
+//                fragment = new ParamsDisplayFragment();
+//                break;
             case 1:
-                fragment = new ParamsDisplayFragment();
-                break;
-            case 2:
                 fragment = new CurveRealtimeFragment();
                 break;
-            case 3:
-                fragment = new ArrayDisplayFragment();
-                break;
-            case 4:
-                fragment = new FFTAnalysisFragment();
-                break;
-            case 5:
-                fragment = new ForceComputeFragment();
-                break;
-            case 6:
+//            case 3:
+//                fragment = new ArrayDisplayFragment();
+//                break;
+//            case 4:
+//                fragment = new FFTAnalysisFragment();
+//                break;
+//            case 5:
+//                fragment = new ForceComputeFragment();
+//                break;
+            case 2:
                 fragment = new ForceResultFragment();
                 break;
             default:

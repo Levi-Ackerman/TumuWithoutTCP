@@ -31,7 +31,7 @@ public final class R {
         public static final int btn_input_load=0x7f080019;
         public static final int btn_input_save=0x7f080018;
         public static final int btn_load_result=0x7f080012;
-        public static final int button=0x7f08000c;
+        public static final int button_send=0x7f08000c;
         public static final int container=0x7f080001;
         public static final int drawer_layout=0x7f080000;
         public static final int editText=0x7f08000a;
