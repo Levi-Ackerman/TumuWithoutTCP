@@ -1,13 +1,9 @@
 package edu.scut.se.lee;
 
-import edu.scut.se.lee.fragment.ArrayDisplayFragment;
 import edu.scut.se.lee.fragment.BaseFragment;
 import edu.scut.se.lee.fragment.CurveRealtimeFragment;
-import edu.scut.se.lee.fragment.FFTAnalysisFragment;
-import edu.scut.se.lee.fragment.ForceComputeFragment;
 import edu.scut.se.lee.fragment.ForceResultFragment;
 import edu.scut.se.lee.fragment.InputFragment;
-import edu.scut.se.lee.fragment.ParamsDisplayFragment;
 import edu.scut.se.lee.util.Cache;
 import edu.scut.se.lee.util.Util;
 
@@ -20,7 +16,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import java.io.File;
 
@@ -95,21 +90,9 @@ public class MainActivity extends BaseActivity implements
             case 0:
                 fragment = new InputFragment();
                 break;
-//            case 1:
-//                fragment = new ParamsDisplayFragment();
-//                break;
             case 1:
                 fragment = new CurveRealtimeFragment();
                 break;
-//            case 3:
-//                fragment = new ArrayDisplayFragment();
-//                break;
-//            case 4:
-//                fragment = new FFTAnalysisFragment();
-//                break;
-//            case 5:
-//                fragment = new ForceComputeFragment();
-//                break;
             case 2:
                 fragment = new ForceResultFragment();
                 break;
@@ -119,15 +102,6 @@ public class MainActivity extends BaseActivity implements
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.container, fragment)
                 .commit();
-    }
-
-    int[] titleRes = {R.string.title_section0_input,
-            R.string.title_section1_display_params,
-            R.string.title_section2_realtime_curve,
-            R.string.title_section3_array};
-
-    public void onSectionAttached(int number) {
-        mTitle = getString(titleRes[number - 1]);
     }
 
     public void restoreActionBar() {
