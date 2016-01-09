@@ -45,13 +45,11 @@ import android.widget.Toast;
 import android.view.MenuItem;
 import android.widget.EditText;
 
-import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.future.ConnectFuture;
 import org.apache.mina.core.service.IoHandler;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.transport.socket.nio.NioSocketConnector;
 
-import java.io.UnsupportedEncodingException;
 import java.net.InetSocketAddress;
 
 
@@ -328,17 +326,11 @@ public class CurveRealtimeFragment extends BaseFragment implements
 	private int Frequence = 50;
 	class RefreshSeriesTask extends TimerTask {
 		public void run() {
-			// initLine(line1);
-			// initLine(line2);
-			// System.out.println("refreshing");
-			// chart.scrollBy(10, 0);
-			if (line1.getItemCount()>1000/50*autoSec){
+			if (autoSec > 0 && line1.getItemCount()>Frequence*autoSec){
 				handler.sendEmptyMessage(MSG_CLOSE_SWITCH);
 				return ;
 			}
 			int count = time_datas.size();
-              String value;
-             byte[] data;
 			if (count == 0)
 				return;
 			if (index == 0) {
@@ -350,10 +342,10 @@ public class CurveRealtimeFragment extends BaseFragment implements
 			} else {
 				for (int i = 0; i < count; i++) {
 					long sec = time_datas.get(0).milliSec;
-					if (sec < 20 * index) {
+					if (sec < 1000/Frequence * index) {
 						lastX = sec;
 						lastY = time_datas.get(0).acce;
-					} else if (sec == 20 * index) {
+					} else if (sec == 1000/Frequence * index) {
 						lastX = sec;
 						lastY = time_datas.get(0).acce;
                         line1.add(lastX * 0.001, lastY);
@@ -361,8 +353,8 @@ public class CurveRealtimeFragment extends BaseFragment implements
 					} else {
 						float y = time_datas.get(0).acce;
 						lastY = (y - lastY) / (sec - lastX)
-								* (20 * index - lastX) + lastY;
-						lastX = 20 * index;
+								* (1000/Frequence * index - lastX) + lastY;
+						lastX = 1000/Frequence * index;
 						line1.add(lastX * 0.001, lastY);
 						index++;
 					}
@@ -375,7 +367,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 			double maxtemp = line1.getMaxX();
 			double mintemp = maxtemp - time_cur_max_x + time_cur_min_x;
 
-			if (maxtemp >= time_cur_max_x || maxtemp <= mintemp) {
+			if (maxtemp >= time_cur_max_x || maxtemp <= time_cur_min_x) {
 				// 不在视野里，就要移动窗口
 				mXYMultipleSeriesRenderer.setXAxisMax(maxtemp);
 				mXYMultipleSeriesRenderer.setXAxisMin(mintemp);
@@ -402,6 +394,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 		// TODO Auto-generated method stub
 
 		if (isChecked) {
+			disableAllBtnsAndInput();
 			try {
 				if (TextUtils.isEmpty(etAutoRunTime.getText()))
 					autoSec = -1;
@@ -411,6 +404,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 				autoSec = -1;
 				showMsg("请填写整数");
 				buttonView.setChecked(false);
+				onCheckedChanged(buttonView,false);
 				return ;
 			}
 			isAvailable = sensors.registerListener(listener, sensor,
@@ -431,15 +425,14 @@ public class CurveRealtimeFragment extends BaseFragment implements
 				time_datas.clear();
 				index = 0;
 				lastX = lastY = 0;
-				isFirst = true;
-				// time_datas.add(new Data(0, 0));
-				// index++;
+				isFirst = true;;
 				initLine();
 				timer = new Timer();
 				timer.schedule(new RefreshSeriesTask(), 10, refreshDelay);
 
 			}
 		} else if (isAvailable) {
+			enableAllBtnsAndInput();
 			timer.cancel();
 			sensors.unregisterListener(listener);
 			// try {
@@ -450,18 +443,37 @@ public class CurveRealtimeFragment extends BaseFragment implements
 		}
 	}
 
-  /*  public void initData1() {
-        connector = new NioSocketConnector(); // 创建连接客户端
-        connector.setConnectTimeoutMillis(10000); // 设置连接超时
-        // 添加处理器，主要负责收包
-        connector.setHandler(this);
-        strIP = etIP.getText().toString().trim();
-//        strContent = etContent.getText().toString().trim();
-        port = Integer.parseInt(etPort.getText().toString().trim());
-        setConfig("ip", strIP);
-        setConfig("port", port + "");
-    }
-    */
+	private void disableAllBtnsAndInput() {
+		btn_shiyu.setEnabled(false);
+		btnJisuan.setEnabled(false);
+		btnPinyu.setEnabled(false);
+		btnSave.setEnabled(false);
+		btnSetFreq.setEnabled(false);
+		etAutoRunTime.setEnabled(false);
+		etSetFreq.setEnabled(false);
+	}
+	private void enableAllBtnsAndInput() {
+		btn_shiyu.setEnabled(true);
+		btnJisuan.setEnabled(true);
+		btnPinyu.setEnabled(true);
+		btnSave.setEnabled(true);
+		btnSetFreq.setEnabled(true);
+		etAutoRunTime.setEnabled(true);
+		etSetFreq.setEnabled(true);
+	}
+
+	/*  public void initData1() {
+          connector = new NioSocketConnector(); // 创建连接客户端
+          connector.setConnectTimeoutMillis(10000); // 设置连接超时
+          // 添加处理器，主要负责收包
+          connector.setHandler(this);
+          strIP = etIP.getText().toString().trim();
+  //        strContent = etContent.getText().toString().trim();
+          port = Integer.parseInt(etPort.getText().toString().trim());
+          setConfig("ip", strIP);
+          setConfig("port", port + "");
+      }
+      */
     //将数据保存在历史记录中
     void setConfig(String key, String value) {
      //   getSharedPreferences("config", MODE_PRIVATE).edit().putString(key, value).commit();
@@ -590,7 +602,7 @@ System.out.println("刷新完成");							}
 							int count = fft.count;
 							double[] ys = fft.result;
 							for (int i = 0; i < count; i++) {
-								double x = 25.0 * i / count;
+								double x = 1.0 *Frequence/2 * i / count;
 								line2.add(x, ys[i]);
 							}
 						}
