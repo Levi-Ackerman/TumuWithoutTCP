@@ -63,18 +63,18 @@ public class CurveRealtimeFragment extends BaseFragment implements
     @ViewInject(id = R.id.sw_curve_start)
     private Switch sw_start;
     @ViewInject(id = R.id.btn_curve_pinyu, click = "onClick")
-	private Button btn_jiagong;
+	private Button btnPinyu;
     @ViewInject(id = R.id.btn_curve_shiyu,click = "onClick")
-    private Button btn_save;
+    private Button btn_shiyu;
     @ViewInject(id = R.id.button_jisuan, click = "onClick")
-    private Button  btnSend;
+    private Button  btnJisuan;
 
 	@ViewInject(id = R.id.btn_set_freq,click="onClick")
 	private Button btnSetFreq;
 	@ViewInject(id = R.id.et_set_freq)
 	private EditText etSetFreq;
 
-	@ViewInject(id = R.id.btn_save)
+	@ViewInject(id = R.id.btn_save,click = "onClick")
 	private Button btnSave;
 
 
@@ -665,38 +665,40 @@ System.out.println("刷新完成");							}
 
 					@Override
 					protected Void doInBackground(Void... params) {
-						int size = line1.getItemCount();
-						double[] arr = new double[size];
-						for (int i = 0; i < size; i++) {
-							arr[i] = line1.getY(0);
-							line1.remove(0);
+						if(line2.getItemCount()==0) {
+							int size = line1.getItemCount();
+							double[] arr = new double[size];
+							for (int i = 0; i < size; i++) {
+								arr[i] = line1.getY(0);
+//							line1.remove(0);
+							}
+							FFT fft = new FFT(arr);
+							int count = fft.count;
+							double[] ys = fft.result;
+							for (int i = 0; i < count; i++) {
+								double x = 25.0 * i / count;
+								line2.add(x, ys[i]);
+							}
 						}
-						FFT fft = new FFT(arr);
-						int count = fft.count;
-						double[] ys = fft.result;
-						double xmin=Double.MAX_VALUE,ymin=Double.MAX_VALUE,xmax=Double.MIN_VALUE,ymax=Double.MIN_VALUE;
-						for (int i=0;i<count;i++){
-							double x = 25.0*i/count;
-							line1.add(x,ys[i]);
-
-							xmin = Math.min(xmin,x);
-							xmax = Math.max(xmax,x);
-							ymin = Math.min(ymin,ys[i]);
-							ymax = Math.max(ymax,ys[i]);
-						}
-						setMaxMin(xmin-0.1*(xmax-xmin),ymin-0.1*(ymax-ymin),xmax+0.1*(xmax-xmin),ymax+0.1*(ymax-ymin));
+						setMaxMin(line2.getMinX() - 0.1 * (line2.getMaxX() - line2.getMinX()), line2.getMinY() - 0.1 * (line2.getMaxY() - line2.getMinY()), line2.getMaxX() + 0.1 * (line2.getMaxX() - line2.getMinX()), line2.getMaxY() + 0.1 * (line2.getMaxY() - line2.getMinY()));
 						return null;
 					}
 
 					@Override
 					protected void onPostExecute(Void aVoid) {
+						mDataset.removeSeries(0);
+						mDataset.addSeries(line2);
 						chart.postInvalidate();
-						chart.setEnabled(false);
-						chart.setClickable(false);
+//						chart.setEnabled(false);
+//						chart.setClickable(false);
 					}
 				}.execute((Void) null);
 			break;
 			case R.id.btn_curve_shiyu:
+				mDataset.removeSeries(0);
+				mDataset.addSeries(line1);
+				setMaxMin(line1.getMinX() - 0.1 * (line1.getMaxX() - line1.getMinX()), line1.getMinY() - 0.1 * (line1.getMaxY() - line1.getMinY()), line1.getMaxX() + 0.1 * (line1.getMaxX() - line1.getMinX()), line1.getMaxY() + 0.1 * (line1.getMaxY() - line1.getMinY()));
+				chart.postInvalidate();
 				break;
 		}
 	}
