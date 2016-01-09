@@ -10,6 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ef6f7a9-bfa3-438d-afa3-655d7005d49f" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/generated/source/r/debug/edu/scut/se/lee/R.java" afterPath="$PROJECT_DIR$/build/generated/source/r/debug/edu/scut/se/lee/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/fragment_curve_realtime.xml" afterPath="$PROJECT_DIR$/res/layout/fragment_curve_realtime.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/scut/se/lee/fragment/CurveRealtimeFragment.java" afterPath="$PROJECT_DIR$/src/edu/scut/se/lee/fragment/CurveRealtimeFragment.java" />
     </list>
     <ignored path="TumuWithoutTCP.iws" />
@@ -34,20 +37,24 @@
       <file leaf-file-name="CurveRealtimeFragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/edu/scut/se/lee/fragment/CurveRealtimeFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.45526317">
-              <caret line="699" column="178" selection-start-line="699" selection-start-column="178" selection-end-line="699" selection-end-column="178" />
+            <state vertical-scroll-proportion="0.8236842">
+              <caret line="335" column="59" selection-start-line="335" selection-start-column="59" selection-end-line="335" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#11033#12262#0" expanded="true" />
-                <element signature="e#11724#12127#0" expanded="true" />
-                <element signature="e#12126#12127#0" expanded="true" />
-                <element signature="e#12261#12262#0" expanded="true" />
-                <element signature="e#17916#18152#0" expanded="true" />
-                <element signature="e#18151#18152#0" expanded="true" />
-                <element signature="e#20976#21660#0" expanded="true" />
-                <element signature="e#21659#21660#0" expanded="true" />
-                <element signature="e#22148#22802#0" expanded="true" />
-                <element signature="e#22801#22802#0" expanded="true" />
+                <element signature="e#6573#7802#0" expanded="true" />
+                <element signature="e#7264#7667#0" expanded="true" />
+                <element signature="e#7666#7667#0" expanded="true" />
+                <element signature="e#7801#7802#0" expanded="true" />
+                <element signature="e#9970#10145#0" expanded="true" />
+                <element signature="e#10144#10145#0" expanded="true" />
+                <element signature="e#12655#12891#0" expanded="true" />
+                <element signature="e#12890#12891#0" expanded="true" />
+                <element signature="e#15748#16432#0" expanded="true" />
+                <element signature="e#16223#16410#0" expanded="true" />
+                <element signature="e#16409#16410#0" expanded="true" />
+                <element signature="e#16431#16432#0" expanded="true" />
+                <element signature="e#16920#17574#0" expanded="true" />
+                <element signature="e#17573#17574#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1481,8 +1488,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/fragment_curve_realtime.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8073654">
-          <caret line="68" column="20" selection-start-line="68" selection-start-column="20" selection-end-line="68" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.76487255">
+          <caret line="39" column="59" selection-start-line="39" selection-start-column="59" selection-end-line="39" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/activity_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1492,20 +1510,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/scut/se/lee/fragment/CurveRealtimeFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.45526317">
-          <caret line="699" column="178" selection-start-line="699" selection-start-column="178" selection-end-line="699" selection-end-column="178" />
+        <state vertical-scroll-proportion="0.8236842">
+          <caret line="335" column="59" selection-start-line="335" selection-start-column="59" selection-end-line="335" selection-end-column="59" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#11033#12262#0" expanded="true" />
-            <element signature="e#11724#12127#0" expanded="true" />
-            <element signature="e#12126#12127#0" expanded="true" />
-            <element signature="e#12261#12262#0" expanded="true" />
-            <element signature="e#17916#18152#0" expanded="true" />
-            <element signature="e#18151#18152#0" expanded="true" />
-            <element signature="e#20976#21660#0" expanded="true" />
-            <element signature="e#21659#21660#0" expanded="true" />
-            <element signature="e#22148#22802#0" expanded="true" />
-            <element signature="e#22801#22802#0" expanded="true" />
+            <element signature="e#6573#7802#0" expanded="true" />
+            <element signature="e#7264#7667#0" expanded="true" />
+            <element signature="e#7666#7667#0" expanded="true" />
+            <element signature="e#7801#7802#0" expanded="true" />
+            <element signature="e#9970#10145#0" expanded="true" />
+            <element signature="e#10144#10145#0" expanded="true" />
+            <element signature="e#12655#12891#0" expanded="true" />
+            <element signature="e#12890#12891#0" expanded="true" />
+            <element signature="e#15748#16432#0" expanded="true" />
+            <element signature="e#16223#16410#0" expanded="true" />
+            <element signature="e#16409#16410#0" expanded="true" />
+            <element signature="e#16431#16432#0" expanded="true" />
+            <element signature="e#16920#17574#0" expanded="true" />
+            <element signature="e#17573#17574#0" expanded="true" />
           </folding>
         </state>
       </provider>

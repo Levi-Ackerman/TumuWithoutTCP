@@ -29,6 +29,9 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
@@ -76,7 +79,8 @@ public class CurveRealtimeFragment extends BaseFragment implements
 
 	@ViewInject(id = R.id.btn_save,click = "onClick")
 	private Button btnSave;
-
+	@ViewInject(id=R.id.et_auto_run_time)
+	private EditText etAutoRunTime;
 
 	// 用于存放每条折线的点数据
 	private XYSeries line1;
@@ -93,7 +97,6 @@ public class CurveRealtimeFragment extends BaseFragment implements
 	private Sensor sensor;
 
     boolean isAvailable;
-    boolean isEable = false;
     private IoSession ioSession;
     private NioSocketConnector connector;
     private IoHandler iohandler ;
@@ -111,107 +114,16 @@ public class CurveRealtimeFragment extends BaseFragment implements
 		return R.layout.fragment_curve_realtime;
 	}
 
+	private int autoSec = -1;
 	@Override
 	public void initData() {
 		// TODO Auto-generated method stub
         //改动：初始化控件switch
         sw_start = (Switch)rootView.findViewById(R.id.sw_curve_start);
+
 		time_datas = new ArrayList<Data>();
 		initAcceler();
 		initChart();
-        isEable=false;
-//        btnSend.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                new Thread() {
-//                    @Override
-//                    public void run() {
-//                        if (!isOpening) {
-//                            try {
-//                                connector = new NioSocketConnector(); // 创建连接客户端
-//                                connector.setConnectTimeoutMillis(10000); // 设置连接超时
-//                                // 添加处理器，主要负责收包
-//                                iohandler = new IoHandler() {
-//                                    @Override
-//                                    public void sessionCreated(IoSession ioSession) throws Exception {
-//
-//                                    }
-//
-//                                    @Override
-//                                    public void sessionOpened(IoSession ioSession) throws Exception {
-//
-//                                    }
-//
-//                                    @Override
-//                                    public void sessionClosed(IoSession ioSession) throws Exception {
-//
-//                                    }
-//
-//                                    @Override
-//                                    public void sessionIdle(IoSession ioSession, IdleStatus idleStatus) throws Exception {
-//
-//                                    }
-//
-//                                    @Override
-//                                    public void exceptionCaught(IoSession ioSession, Throwable throwable) throws Exception {
-//
-//                                    }
-//
-//                                    @Override
-//                                    public void messageReceived(IoSession ioSession, Object o) throws Exception {
-//
-//                                    }
-//
-//                                    @Override
-//                                    public void messageSent(IoSession ioSession, Object o) throws Exception {
-//
-//                                    }
-//                                };
-//                                connector.setHandler(iohandler);
-//                                strIP = etIP.getText().toString().trim();
-//                                // strContent = etContent.getText().toString().trim();
-//                                port = Integer.parseInt(etPort.getText().toString().trim());
-//                                setConfig("ip", strIP);
-//                                setConfig("port", port + "");
-//                                createConnection();
-//                                isEable=true;
-//                                getActivity().runOnUiThread(new Runnable() {
-//                                    @Override
-//                                    public void run() {
-//                                        btnSend.setText("停止发送");
-//                                    }
-//                                });
-//                                //manager.registerListener(listener, sensor, SensorManager.SENSOR_DELAY_FASTEST);
-//                                //manager.registerListener(listener, sensor, SensorManager.SENSOR_DELAY_NORMAL);
-//                                isOpening = !isOpening;
-//                            } catch (Exception e) {
-//                                getActivity().runOnUiThread(new Runnable() {
-//                                    @Override
-//                                    public void run() {
-//                                        //  Toast.makeText(CurveRealtimeFragment.this, "连接出错", Toast.LENGTH_SHORT).show();
-//                                    }
-//                                });
-//                            }
-//
-//                        } else {
-//                            ioSession.close(true);
-//                            connector.dispose();
-//                            isEable=false;
-//                            getActivity().runOnUiThread(new Runnable() {
-//                                @Override
-//                                public void run() {
-//                                    btnSend.setText("发送");
-//                                    //Toast.makeText(MainActivity.this, "连接已断开", Toast.LENGTH_SHORT).show();
-//                                }
-//                            });
-//                            // manager.unregisterListener(listener);
-//                            isOpening = !isOpening;
-//                        }
-//                    }
-//                }.start();
-//            }
-//        });
-		// refreshChart();
 	}
 
 	long startMillin;
@@ -401,12 +313,29 @@ public class CurveRealtimeFragment extends BaseFragment implements
 		// mXYMultipleSeriesRenderer.setBackgroundColor(Color.WHITE);
 	}
 
+	static final int MSG_CLOSE_SWITCH = 0;
+	Handler handler = new Handler(){
+		@Override
+		public void handleMessage(Message msg) {
+			switch (msg.what){
+				case MSG_CLOSE_SWITCH:
+					sw_start.setChecked(false);
+					break;
+			}
+		}
+	};
+
+	private int Frequence = 50;
 	class RefreshSeriesTask extends TimerTask {
 		public void run() {
 			// initLine(line1);
 			// initLine(line2);
 			// System.out.println("refreshing");
 			// chart.scrollBy(10, 0);
+			if (line1.getItemCount()>1000/50*autoSec){
+				handler.sendEmptyMessage(MSG_CLOSE_SWITCH);
+				return ;
+			}
 			int count = time_datas.size();
               String value;
              byte[] data;
@@ -417,17 +346,6 @@ public class CurveRealtimeFragment extends BaseFragment implements
 				lastX = time_datas.get(0).milliSec;
 				lastY = time_datas.get(0).acce;
 				line1.add(lastX * 0.001, lastY);
-
-              if(isEable) {
-                  try {
-                      value = time_datas.get(0).milliSec + ";" + time_datas.get(0).acce + ";";
-                      data = (value).getBytes("gbk");//将字符组串转换成GBK字符集，再转换成数组传输
-                      ioSession.write(IoBuffer.wrap(data));
-
-                  } catch (UnsupportedEncodingException e) {
-                      e.printStackTrace();
-                  }
-              }
 				time_datas.remove(0);
 			} else {
 				for (int i = 0; i < count; i++) {
@@ -439,15 +357,6 @@ public class CurveRealtimeFragment extends BaseFragment implements
 						lastX = sec;
 						lastY = time_datas.get(0).acce;
                         line1.add(lastX * 0.001, lastY);
-                       if (isEable) {
-                           try {
-                               value = time_datas.get(0).milliSec + ";" + time_datas.get(0).acce + ";";
-                               data = (value).getBytes("gbk");//将字符组串转换成GBK字符集，再转换成数组传输
-                               ioSession.write(IoBuffer.wrap(data));
-                           } catch (UnsupportedEncodingException e) {
-                               e.printStackTrace();
-                           }
-                       }
                         index++;
 					} else {
 						float y = time_datas.get(0).acce;
@@ -455,15 +364,6 @@ public class CurveRealtimeFragment extends BaseFragment implements
 								* (20 * index - lastX) + lastY;
 						lastX = 20 * index;
 						line1.add(lastX * 0.001, lastY);
-                        if (isEable) {
-                            try {
-                                value = time_datas.get(0).milliSec + ";" + time_datas.get(0).acce + ";";
-                                data = (value).getBytes("gbk");//将字符组串转换成GBK字符集，再转换成数组传输
-                                ioSession.write(IoBuffer.wrap(data));
-                            } catch (UnsupportedEncodingException e) {
-                                e.printStackTrace();
-                            }
-                        }
 						index++;
 					}
 
@@ -502,6 +402,17 @@ public class CurveRealtimeFragment extends BaseFragment implements
 		// TODO Auto-generated method stub
 
 		if (isChecked) {
+			try {
+				if (TextUtils.isEmpty(etAutoRunTime.getText()))
+					autoSec = -1;
+				else
+					autoSec = Integer.parseInt(etAutoRunTime.getText().toString());
+			}catch(Exception e){
+				autoSec = -1;
+				showMsg("请填写整数");
+				buttonView.setChecked(false);
+				return ;
+			}
 			isAvailable = sensors.registerListener(listener, sensor,
 					SensorManager.SENSOR_DELAY_FASTEST);
 			if (!isAvailable) {
@@ -609,6 +520,9 @@ public class CurveRealtimeFragment extends BaseFragment implements
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 			case R.id.button_jisuan:
+
+				break;
+			case -1902://还原数据
 				final EditText et = new EditText(getActivity());
 				et.setText("data.txt");
 				new AlertDialog.Builder(getActivity()).setTitle("输入数据名字").setView(et).setPositiveButton("ok", new DialogInterface.OnClickListener() {

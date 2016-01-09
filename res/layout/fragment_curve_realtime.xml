@@ -17,9 +17,15 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.2" >
+    <EditText
+        android:id="@+id/et_auto_run_time"
+        android:layout_width="wrap_content"
+        android:hint="自动采集时长(s)"
+        android:layout_height="wrap_content" />
 
         <Switch
             android:id="@+id/sw_curve_start"
+            android:layout_below="@+id/et_auto_run_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textOff="停止"
@@ -31,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/sw_curve_start"
+            android:layout_toRightOf="@+id/et_auto_run_time"
             android:text="时域" />
 
         <Button
