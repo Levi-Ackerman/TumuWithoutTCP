@@ -11,9 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ef6f7a9-bfa3-438d-afa3-655d7005d49f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/scut/se/lee/fragment/CurveRealtimeFragment.java" afterPath="$PROJECT_DIR$/src/edu/scut/se/lee/fragment/CurveRealtimeFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/scut/se/lee/util/FFT.java" afterPath="$PROJECT_DIR$/src/edu/scut/se/lee/util/FFT.java" />
     </list>
     <ignored path="TumuWithoutTCP.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,11 +32,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CurveRealtimeFragment.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CurveRealtimeFragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/edu/scut/se/lee/fragment/CurveRealtimeFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.25">
-              <caret line="605" column="0" selection-start-line="605" selection-start-column="0" selection-end-line="605" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.6823204">
+              <caret line="400" column="13" selection-start-line="400" selection-start-column="13" selection-end-line="400" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#6483#7712#0" expanded="true" />
@@ -47,23 +45,23 @@
                 <element signature="e#7711#7712#0" expanded="true" />
                 <element signature="e#9880#10055#0" expanded="true" />
                 <element signature="e#10054#10055#0" expanded="true" />
-                <element signature="e#12619#12855#0" expanded="true" />
-                <element signature="e#12854#12855#0" expanded="true" />
-                <element signature="e#16226#16910#0" expanded="true" />
-                <element signature="e#16701#16888#0" expanded="true" />
-                <element signature="e#16887#16888#0" expanded="true" />
-                <element signature="e#16909#16910#0" expanded="true" />
-                <element signature="e#17398#18052#0" expanded="true" />
-                <element signature="e#18051#18052#0" expanded="true" />
+                <element signature="e#12667#12903#0" expanded="true" />
+                <element signature="e#12902#12903#0" expanded="true" />
+                <element signature="e#16274#16958#0" expanded="true" />
+                <element signature="e#16749#16936#0" expanded="true" />
+                <element signature="e#16935#16936#0" expanded="true" />
+                <element signature="e#16957#16958#0" expanded="true" />
+                <element signature="e#17446#18100#0" expanded="true" />
+                <element signature="e#18099#18100#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FFT.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FFT.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/edu/scut/se/lee/util/FFT.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5191257">
+            <state vertical-scroll-proportion="0.0">
               <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
               <folding />
             </state>
@@ -1333,9 +1331,9 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930514" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930514" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35649547" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35649547" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39879155" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39879155" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -1371,7 +1369,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/edu/scut/se/lee/fragment/CurveRealtimeFragment.java</url>
-          <line>605</line>
+          <line>607</line>
           <properties />
           <option name="timeStamp" value="4" />
         </line-breakpoint>
@@ -1551,10 +1549,18 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/scut/se/lee/util/FFT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/scut/se/lee/fragment/CurveRealtimeFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.25">
-          <caret line="605" column="0" selection-start-line="605" selection-start-column="0" selection-end-line="605" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.6823204">
+          <caret line="400" column="13" selection-start-line="400" selection-start-column="13" selection-end-line="400" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#6483#7712#0" expanded="true" />
@@ -1563,23 +1569,15 @@
             <element signature="e#7711#7712#0" expanded="true" />
             <element signature="e#9880#10055#0" expanded="true" />
             <element signature="e#10054#10055#0" expanded="true" />
-            <element signature="e#12619#12855#0" expanded="true" />
-            <element signature="e#12854#12855#0" expanded="true" />
-            <element signature="e#16226#16910#0" expanded="true" />
-            <element signature="e#16701#16888#0" expanded="true" />
-            <element signature="e#16887#16888#0" expanded="true" />
-            <element signature="e#16909#16910#0" expanded="true" />
-            <element signature="e#17398#18052#0" expanded="true" />
-            <element signature="e#18051#18052#0" expanded="true" />
+            <element signature="e#12667#12903#0" expanded="true" />
+            <element signature="e#12902#12903#0" expanded="true" />
+            <element signature="e#16274#16958#0" expanded="true" />
+            <element signature="e#16749#16936#0" expanded="true" />
+            <element signature="e#16935#16936#0" expanded="true" />
+            <element signature="e#16957#16958#0" expanded="true" />
+            <element signature="e#17446#18100#0" expanded="true" />
+            <element signature="e#18099#18100#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/scut/se/lee/util/FFT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5191257">
-          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>

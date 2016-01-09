@@ -394,9 +394,11 @@ public class CurveRealtimeFragment extends BaseFragment implements
 		// TODO Auto-generated method stub
 
 		if (isChecked) {
-			mDataset.removeSeries(0);
-			mDataset.addSeries(line1);
-			chart.invalidate();
+			if(mDataset.getSeriesAt(0)!=line1) {
+				mDataset.removeSeries(0);
+				mDataset.addSeries(line1);
+				chart.invalidate();
+			}
 			disableAllBtnsAndInput();
 			try {
 				if (TextUtils.isEmpty(etAutoRunTime.getText()))
