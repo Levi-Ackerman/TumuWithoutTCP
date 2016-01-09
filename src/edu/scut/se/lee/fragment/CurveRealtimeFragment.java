@@ -407,8 +407,8 @@ public class CurveRealtimeFragment extends BaseFragment implements
 				time_cur_max_x = maxtemp;
 				time_cur_min_x = mintemp;
 			}
-			mXYMultipleSeriesRenderer.setYAxisMax(line1.getMaxY());
-			mXYMultipleSeriesRenderer.setYAxisMin(line1.getMinY());
+			mXYMultipleSeriesRenderer.setYAxisMax(line1.getMaxY()*1.1);
+			mXYMultipleSeriesRenderer.setYAxisMin(line1.getMinY()*1.1);
 			chart.postInvalidate();
 		}
 	}
