@@ -566,6 +566,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 					avgFreq = avgFreq/MAX_VALUES_COUNT;
 					edu.scut.se.lee.util.Data.avgFreq = avgFreq;
 					showMsg(String.format("索力为%.2fN", edu.scut.se.lee.util.Data.getForce()));
+
 				}
 				break;
 			case R.id.btn_import://还原数据

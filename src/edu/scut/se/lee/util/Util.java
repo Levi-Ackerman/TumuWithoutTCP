@@ -15,7 +15,7 @@ public class Util {
 //	public final static String SD_CARD_PATH = Environment.getExternalStorageDirectory().toString();
     public final static String SD_CARD_PATH = "/sdcard";
     public static String getPrjDir(){
-        return SD_CARD_PATH;//+ "/"+ Cache.getInstance().load(Cache.PRJ_NAME,"acceleration");
+        return SD_CARD_PATH+ "/"+ Cache.getInstance().load(Cache.PRJ_NAME,"acceleration");
     }
 
     public static void showToast(String text) {
