@@ -26,9 +26,9 @@ public final class R {
         public static final int action_settings=0x7f080019;
         public static final int btn_curve_pinyu=0x7f080008;
         public static final int btn_curve_shiyu=0x7f080007;
+        public static final int btn_import=0x7f08000c;
         public static final int btn_input_save=0x7f080013;
         public static final int btn_load_result=0x7f08000d;
-        public static final int btn_save=0x7f08000c;
         public static final int btn_set_freq=0x7f08000b;
         public static final int button_jisuan=0x7f080009;
         public static final int container=0x7f080001;

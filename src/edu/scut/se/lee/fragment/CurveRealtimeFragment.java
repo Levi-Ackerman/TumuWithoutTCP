@@ -1,6 +1,8 @@
 package edu.scut.se.lee.fragment;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -16,7 +18,6 @@ import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
 import edu.scut.se.lee.R;
-import edu.scut.se.lee.util.Data;
 import edu.scut.se.lee.util.FFT;
 import edu.scut.se.lee.util.Util;
 
@@ -46,13 +47,6 @@ import android.widget.Toast;
 import android.view.MenuItem;
 import android.widget.EditText;
 
-import org.apache.mina.core.future.ConnectFuture;
-import org.apache.mina.core.service.IoHandler;
-import org.apache.mina.core.session.IoSession;
-import org.apache.mina.transport.socket.nio.NioSocketConnector;
-
-import java.net.InetSocketAddress;
-
 
 public class CurveRealtimeFragment extends BaseFragment implements
 		OnCheckedChangeListener, OnClickListener {
@@ -76,10 +70,13 @@ public class CurveRealtimeFragment extends BaseFragment implements
 	@ViewInject(id = R.id.et_set_freq)
 	private EditText etSetFreq;
 
-	@ViewInject(id = R.id.btn_save,click = "onClick")
+	@ViewInject(id = R.id.btn_import,click = "onClick")
 	private Button btnSave;
 	@ViewInject(id=R.id.et_auto_run_time)
 	private EditText etAutoRunTime;
+
+	@ViewInject(id = R.id.btn_import, click = "onClick")
+	private Button btnImport;
 
 	// 用于存放每条折线的点数据
 	private XYSeries line1;
@@ -96,14 +93,10 @@ public class CurveRealtimeFragment extends BaseFragment implements
 	private Sensor sensor;
 
     boolean isAvailable;
-    private IoSession ioSession;
-    private NioSocketConnector connector;
-    private IoHandler iohandler ;
-    //EditText etContent, etPort;
-    private String strIP;
-    private int port;
-    boolean isOpening = false;
+
 	private XYSeries line2;
+
+	static final int SelectPointNum = 5;
 
 	//tvToast = (TextView) findViewById(R.id.toast);
 
@@ -220,53 +213,90 @@ public class CurveRealtimeFragment extends BaseFragment implements
 				mXYMultipleSeriesRenderer);
 
 		chart.setBackgroundColor(Color.GRAY);
-		chart.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				GraphicalView gv = (GraphicalView) v;
-				// 将view转换为可以监听的GraphicalView
-				final SeriesSelection ss = gv.getCurrentSeriesAndPoint();
-				// 获得被点击的系列和点
-				if (ss == null)
-					return;
-				// double[] point = new double[] { ss.getXValue(), ss.getValue()
-				// };
-				// 获得当前被点击点的X位置和Y数值
-				// final double[] dest = chart.toScreenPoint(point);
-				// 获得当前被点击点的坐标位置
-
-				new AlertDialog.Builder(getActivity())
-						.setMessage(
-								"删除(" + ss.getXValue() + "," + ss.getValue()
-										+ ")点?")
-						.setNegativeButton("取消", null)
-						.setPositiveButton("删除",
-								new DialogInterface.OnClickListener() {
-
-									@Override
-									public void onClick(DialogInterface dialog,
-											int which) {
-										// TODO Auto-generated method stub
-//										Toast.makeText(getActivity(),
-//												ss.getPointIndex() + "",
-//												Toast.LENGTH_SHORT).show();
-										line1.remove(ss.getPointIndex());
-										chart.postInvalidate();
-									}
-								}).show();
-				// Toast.makeText(getActivity(),
-				// "点击了(" + ss.getXValue() + "," + ss.getValue() + ")点", 1)
-				// .show();
-			}
-		});
+		chart.setOnClickListener(null);
 		// 将该View 对象添加到layout中。
 		dynamic_chart_line_layout.addView(chart, new LayoutParams(
 				LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 		chart.setBackgroundColor(Color.WHITE);
 	}
+	class Point{
+		public Point(double x, double y) {
+			this.x = x;
+			this.y = y;
+		}
 
+		double x;
+		double y;
+	}
+	private List<Point> maxValues = new ArrayList<Point>();
+	private final int MAX_VALUES_COUNT = 5;
+	private OnClickListener chartOnClickListener = new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			if(maxValues.size()>=MAX_VALUES_COUNT){
+				showMsg("已经选了"+MAX_VALUES_COUNT+"个点了");
+				return ;
+			}
+			GraphicalView gv = (GraphicalView) v;
+			// 将view转换为可以监听的GraphicalView
+			final SeriesSelection ss = gv.getCurrentSeriesAndPoint();
+			// 获得被点击的系列和点
+			if (ss == null)
+				return;
+			int index = ss.getPointIndex();
+			for (int i = 0; i < SelectPointNum; i++) {
+				if (index == 0||index == line2.getItemCount()-1){
+					index = -1;
+					break;
+				}else{
+					if (line2.getY(index)<line2.getY(index+1))
+						index ++;
+					else if(line2.getY(index)<line2.getY(index-1)){
+						index --;
+					}
+					else{
+						break;
+					}
+				}
+			}
+			if(index!=-1 && line2.getY(index)>line2.getY(index-1) && line2.getY(index)>line2.getY(index+1)){
+				maxValues.add(new Point(line2.getX(index),line2.getY(index)));
+				showMsg(String.format("选中了极大值点(%f,%f),已经选中了%d个极大值",line2.getX(index),line2.getY(index),maxValues.size()));
+			}else{
+				showMsg(String.format("附近没有极大值，已经选中了%d个极大值",maxValues.size()));
+			}
+			// double[] point = new double[] { ss.getXValue(), ss.getValue()
+			// };
+			// 获得当前被点击点的X位置和Y数值
+			// final double[] dest = chart.toScreenPoint(point);
+			// 获得当前被点击点的坐标位置
+
+//				new AlertDialog.Builder(getActivity())
+//						.setMessage(
+//								"删除(" + ss.getXValue() + "," + ss.getValue()
+//										+ ")点?")
+//						.setNegativeButton("取消", null)
+//						.setPositiveButton("删除",
+//								new DialogInterface.OnClickListener() {
+//
+//									@Override
+//									public void onClick(DialogInterface dialog,
+//											int which) {
+//										// TODO Auto-generated method stub
+////										Toast.makeText(getActivity(),
+////												ss.getPointIndex() + "",
+////												Toast.LENGTH_SHORT).show();
+//										line1.remove(ss.getPointIndex());
+//										chart.postInvalidate();
+//									}
+//								}).show();
+			// Toast.makeText(getActivity(),
+			// "点击了(" + ss.getXValue() + "," + ss.getValue() + ")点", 1)
+			// .show();
+		}
+	};
 	private XYSeriesRenderer initRenderer(XYSeriesRenderer renderer, int color,
 			PointStyle style, boolean fill,int width) {
 		// 设置图表中曲线本身的样式，包括颜色、点的大小以及线的粗细等
@@ -309,6 +339,8 @@ public class CurveRealtimeFragment extends BaseFragment implements
 		mXYMultipleSeriesRenderer.setLegendTextSize(20);
 		mXYMultipleSeriesRenderer.setClickEnabled(true);
 		mXYMultipleSeriesRenderer.setSelectableBuffer(30);
+		mXYMultipleSeriesRenderer.setShowAxes(true);
+
 		// mXYMultipleSeriesRenderer.setBackgroundColor(Color.WHITE);
 	}
 
@@ -478,18 +510,6 @@ public class CurveRealtimeFragment extends BaseFragment implements
 		etSetFreq.setEnabled(true);
 	}
 
-	/*  public void initData1() {
-          connector = new NioSocketConnector(); // 创建连接客户端
-          connector.setConnectTimeoutMillis(10000); // 设置连接超时
-          // 添加处理器，主要负责收包
-          connector.setHandler(this);
-          strIP = etIP.getText().toString().trim();
-  //        strContent = etContent.getText().toString().trim();
-          port = Integer.parseInt(etPort.getText().toString().trim());
-          setConfig("ip", strIP);
-          setConfig("port", port + "");
-      }
-      */
     //将数据保存在历史记录中
     void setConfig(String key, String value) {
      //   getSharedPreferences("config", MODE_PRIVATE).edit().putString(key, value).commit();
@@ -501,24 +521,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
        // return getSharedPreferences("config", MODE_PRIVATE).getString(key, null);
     }
 */
-    protected void createConnection() throws Exception {
-        if (ioSession != null) {
-            ioSession.close(true);
-        }
-        ConnectFuture future = connector
-                .connect(new InetSocketAddress(
-                        strIP, port));
-        future.awaitUninterruptibly();// 等待连接创建成功
-        ioSession = future.getSession();// 获取会话
-    }
 
-   /* @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-       // getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-*/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -545,12 +548,27 @@ public class CurveRealtimeFragment extends BaseFragment implements
     String content;
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
 		switch (v.getId()) {
 			case R.id.button_jisuan:
-
+				if(maxValues.size()<MAX_VALUES_COUNT){
+					showMsg("还没有选够"+MAX_VALUES_COUNT+"个极大值哦");
+				}else{
+					Collections.sort(maxValues, new Comparator<Point>() {
+						@Override
+						public int compare(Point lhs, Point rhs) {
+							return (int)(lhs.x-rhs.x);
+						}
+					});
+					double avgFreq = 0;
+					for (int i = 1; i < MAX_VALUES_COUNT-1; i++) {
+						avgFreq += (maxValues.get(i).x - maxValues.get(i-1).x);
+					}
+					avgFreq = avgFreq/MAX_VALUES_COUNT;
+					edu.scut.se.lee.util.Data.avgFreq = avgFreq;
+					showMsg(String.format("索力为%.2fN", edu.scut.se.lee.util.Data.getForce()));
+				}
 				break;
-			case -1902://还原数据
+			case R.id.btn_import://还原数据
 				final EditText et = new EditText(getActivity());
 				et.setText("data.txt");
 				new AlertDialog.Builder(getActivity()).setTitle("输入数据名字").setView(et).setPositiveButton("ok", new DialogInterface.OnClickListener() {
@@ -564,7 +582,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 						initLine();
 						for (int i=0;i<count;i++){
 							float f = Float.parseFloat(data[i]);
-							Data pt = new Data(20*i,f);
+							Data pt = new Data(1000/Frequence*i,f);
 							time_datas.add(pt);
 						}
 						new Thread(){
@@ -573,7 +591,8 @@ public class CurveRealtimeFragment extends BaseFragment implements
 								Runnable run = new RefreshSeriesTask();
 								run.run();
 								run.run();
-System.out.println("刷新完成");							}
+								System.out.println("刷新完成");
+							}
 						}.start();
 					}
 				}).setNegativeButton("cancel",null).show();
@@ -603,6 +622,7 @@ System.out.println("刷新完成");							}
 //            }).setNegativeButton("取消",null).show();
 //            break;
             case R.id.btn_curve_pinyu:
+				mXYMultipleSeriesRenderer.setXTitle("频率(Hz)");
 				new AsyncTask<Void,Void,Void>(){
 
 					@Override
@@ -633,16 +653,17 @@ System.out.println("刷新完成");							}
 						mDataset.removeSeries(0);
 						mDataset.addSeries(line2);
 						chart.postInvalidate();
-//						chart.setEnabled(false);
-//						chart.setClickable(false);
+						chart.setOnClickListener(chartOnClickListener);
 					}
 				}.execute((Void) null);
 			break;
 			case R.id.btn_curve_shiyu:
+				mXYMultipleSeriesRenderer.setXTitle("时间(s)");
 				mDataset.removeSeries(0);
 				mDataset.addSeries(line1);
 				setMaxMin(line1.getMinX() - 0.1 * (line1.getMaxX() - line1.getMinX()), line1.getMinY() - 0.1 * (line1.getMaxY() - line1.getMinY()), line1.getMaxX() + 0.1 * (line1.getMaxX() - line1.getMinX()), line1.getMaxY() + 0.1 * (line1.getMaxY() - line1.getMinY()));
 				chart.postInvalidate();
+				chart.setOnClickListener(null);
 				break;
 			case R.id.btn_set_freq:
 				if(TextUtils.isEmpty(etSetFreq.getText()))
