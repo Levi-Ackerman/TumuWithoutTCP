@@ -16,7 +16,6 @@ import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
 import edu.scut.se.lee.R;
-import edu.scut.se.lee.util.Data;
 import edu.scut.se.lee.util.FFT;
 import edu.scut.se.lee.util.Util;
 
@@ -38,7 +37,6 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import android.view.MenuItem;
@@ -47,7 +45,6 @@ import android.widget.EditText;
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.future.ConnectFuture;
 import org.apache.mina.core.service.IoHandler;
-import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.transport.socket.nio.NioSocketConnector;
 
@@ -65,16 +62,21 @@ public class CurveRealtimeFragment extends BaseFragment implements
 
     @ViewInject(id = R.id.sw_curve_start)
     private Switch sw_start;
-    @ViewInject(id = R.id.btn_curve_jiagong, click = "onClick")
+    @ViewInject(id = R.id.btn_curve_pinyu, click = "onClick")
 	private Button btn_jiagong;
-    @ViewInject(id = R.id.btn_curve_save,click = "onClick")
+    @ViewInject(id = R.id.btn_curve_shiyu,click = "onClick")
     private Button btn_save;
-    @ViewInject(id = R.id.button_send, click = "onClick")
+    @ViewInject(id = R.id.button_jisuan, click = "onClick")
     private Button  btnSend;
-    @ViewInject(id =R.id.editText)
-    private EditText etIP;
-    @ViewInject(id =R.id.editText3)
-    private EditText etPort;
+
+	@ViewInject(id = R.id.btn_set_freq,click="onClick")
+	private Button btnSetFreq;
+	@ViewInject(id = R.id.et_set_freq)
+	private EditText etSetFreq;
+
+	@ViewInject(id = R.id.btn_save)
+	private Button btnSave;
+
 
 	// 用于存放每条折线的点数据
 	private XYSeries line1;
@@ -86,7 +88,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 	private XYMultipleSeriesRenderer mXYMultipleSeriesRenderer;
 	private GraphicalView chart;
 
-	private myListener listener;
+	private MyListener listener;
 	private SensorManager sensors;
 	private Sensor sensor;
 
@@ -99,8 +101,9 @@ public class CurveRealtimeFragment extends BaseFragment implements
     private String strIP;
     private int port;
     boolean isOpening = false;
+	private XYSeries line2;
 
-    //tvToast = (TextView) findViewById(R.id.toast);
+	//tvToast = (TextView) findViewById(R.id.toast);
 
     @Override
 	public int getRootRes() {
@@ -113,7 +116,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 		// TODO Auto-generated method stub
         //改动：初始化控件switch
         sw_start = (Switch)rootView.findViewById(R.id.sw_curve_start);
-		datas = new ArrayList<Data>();
+		time_datas = new ArrayList<Data>();
 		initAcceler();
 		initChart();
         isEable=false;
@@ -214,12 +217,10 @@ public class CurveRealtimeFragment extends BaseFragment implements
 	long startMillin;
 	// FileWriter fileWriter;
 	private String text;
-	@ViewInject(id = R.id.tv_acc)
-	private TextView textView;
 	int index = 0;
 	double lastSec = 0;
 	double lastX = 0, lastY = 0;
-	List<Data> datas;
+	List<Data> time_datas;
 
 	class Data {
 		public Data(long milliSec, float acce) {
@@ -233,7 +234,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 
 	boolean isFirst = true;
 
-	class myListener implements SensorEventListener {
+	class MyListener implements SensorEventListener {
 
 		@Override
 		public void onSensorChanged(SensorEvent event) {
@@ -245,7 +246,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 				startMillin = System.currentTimeMillis();
 			}
 			long delay = (System.currentTimeMillis() - startMillin);
-			datas.add(new Data(delay, event.values[2]));
+			time_datas.add(new Data(delay, event.values[2]));
 
 			// text = "" + event.values[2];
 			// try {
@@ -267,7 +268,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 	}
 
 	private void initAcceler() {
-		listener = new myListener();
+		listener = new MyListener();
 		// cb_start = (CheckBox) findViewById(R.id.cb_start);
 		sw_start.setOnCheckedChangeListener(this);
 		// db = FinalDb.create(this);
@@ -280,17 +281,17 @@ public class CurveRealtimeFragment extends BaseFragment implements
 		// 初始化，必须保证XYMultipleSeriesDataset对象中的XYSeries数量和
 		// XYMultipleSeriesRenderer对象中的XYSeriesRenderer数量一样多
 		line1 = new XYSeries("加速度曲线");
+		line2 = new XYSeries("频域曲线");
 		initLine();
 		// line2 = new XYSeries("折线2");
 		renderer1 = new XYSeriesRenderer();
-		// renderer2 = new XYSeriesRenderer();
 		mDataset = new XYMultipleSeriesDataset();
 		mXYMultipleSeriesRenderer = new XYMultipleSeriesRenderer();
 
 		// 对XYSeries和XYSeriesRenderer的对象的参数赋值
 		// initLine(line1);
 		// initLine(line2);
-		initRenderer(renderer1, Color.RED, PointStyle.CIRCLE, true);
+		initRenderer(renderer1, Color.RED, PointStyle.POINT, true,4);
 		// initRenderer(renderer2, Color.CYAN, PointStyle.TRIANGLE, true);
 
 		// 将XYSeries对象和XYSeriesRenderer对象分别添加到XYMultipleSeriesDataset对象和XYMultipleSeriesRenderer对象中。
@@ -301,7 +302,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 
 		// 配置chart参数
 		setChartSettings(mXYMultipleSeriesRenderer, "时间(s)", "加速度(m/s^2)",
-				-1, 1, Color.RED, Color.WHITE);
+				-1, 1, Color.BLUE, Color.WHITE);
 
 		// 通过该函数获取到一个View 对象
 		chart = ChartFactory.getLineChartView(getActivity(), mDataset,
@@ -352,20 +353,21 @@ public class CurveRealtimeFragment extends BaseFragment implements
 		// 将该View 对象添加到layout中。
 		dynamic_chart_line_layout.addView(chart, new LayoutParams(
 				LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-
+		chart.setBackgroundColor(Color.WHITE);
 	}
 
 	private XYSeriesRenderer initRenderer(XYSeriesRenderer renderer, int color,
-			PointStyle style, boolean fill) {
+			PointStyle style, boolean fill,int width) {
 		// 设置图表中曲线本身的样式，包括颜色、点的大小以及线的粗细等
 		renderer.setColor(color);
 		renderer.setPointStyle(style);
 		renderer.setFillPoints(fill);
-		renderer.setLineWidth(2);
+		renderer.setLineWidth(width);
 		return renderer;
 	}
 
-	double xMin = 0, xMax = 5;
+	double time_cur_min_x = 0, time_cur_max_x = 5;
+	double time_cur_min_y = 0, time_cur_max_y = 5;
 
 	protected void setChartSettings(
 			XYMultipleSeriesRenderer mXYMultipleSeriesRenderer, String xTitle,
@@ -378,12 +380,13 @@ public class CurveRealtimeFragment extends BaseFragment implements
 		mXYMultipleSeriesRenderer.setAxisTitleTextSize(30);
 		mXYMultipleSeriesRenderer.setChartTitleTextSize(50);
 		mXYMultipleSeriesRenderer.setLabelsTextSize(15);
-		mXYMultipleSeriesRenderer.setXAxisMin(xMin);
-		mXYMultipleSeriesRenderer.setXAxisMax(xMax);
+		mXYMultipleSeriesRenderer.setXAxisMin(time_cur_min_x);
+		mXYMultipleSeriesRenderer.setXAxisMax(time_cur_max_x);
 		mXYMultipleSeriesRenderer.setYAxisMin(yMin);
 		mXYMultipleSeriesRenderer.setYAxisMax(yMax);
 		mXYMultipleSeriesRenderer.setAxesColor(axesColor);
 		mXYMultipleSeriesRenderer.setLabelsColor(labelsColor);
+		mXYMultipleSeriesRenderer.setBackgroundColor(Color.WHITE);
 		mXYMultipleSeriesRenderer.setShowGrid(false);
 		mXYMultipleSeriesRenderer.setGridColor(Color.GRAY);
 		mXYMultipleSeriesRenderer.setXLabels(20);
@@ -404,20 +407,20 @@ public class CurveRealtimeFragment extends BaseFragment implements
 			// initLine(line2);
 			// System.out.println("refreshing");
 			// chart.scrollBy(10, 0);
-			int count = datas.size();
+			int count = time_datas.size();
               String value;
              byte[] data;
 			if (count == 0)
 				return;
 			if (index == 0) {
 				index++;
-				lastX = datas.get(0).milliSec;
-				lastY = datas.get(0).acce;
+				lastX = time_datas.get(0).milliSec;
+				lastY = time_datas.get(0).acce;
 				line1.add(lastX * 0.001, lastY);
 
               if(isEable) {
                   try {
-                      value = datas.get(0).milliSec + ";" + datas.get(0).acce + ";";
+                      value = time_datas.get(0).milliSec + ";" + time_datas.get(0).acce + ";";
                       data = (value).getBytes("gbk");//将字符组串转换成GBK字符集，再转换成数组传输
                       ioSession.write(IoBuffer.wrap(data));
 
@@ -425,20 +428,20 @@ public class CurveRealtimeFragment extends BaseFragment implements
                       e.printStackTrace();
                   }
               }
-				datas.remove(0);
+				time_datas.remove(0);
 			} else {
 				for (int i = 0; i < count; i++) {
-					long sec = datas.get(0).milliSec;
+					long sec = time_datas.get(0).milliSec;
 					if (sec < 20 * index) {
 						lastX = sec;
-						lastY = datas.get(0).acce;
+						lastY = time_datas.get(0).acce;
 					} else if (sec == 20 * index) {
 						lastX = sec;
-						lastY = datas.get(0).acce;
+						lastY = time_datas.get(0).acce;
                         line1.add(lastX * 0.001, lastY);
                        if (isEable) {
                            try {
-                               value = datas.get(0).milliSec + ";" + datas.get(0).acce + ";";
+                               value = time_datas.get(0).milliSec + ";" + time_datas.get(0).acce + ";";
                                data = (value).getBytes("gbk");//将字符组串转换成GBK字符集，再转换成数组传输
                                ioSession.write(IoBuffer.wrap(data));
                            } catch (UnsupportedEncodingException e) {
@@ -447,14 +450,14 @@ public class CurveRealtimeFragment extends BaseFragment implements
                        }
                         index++;
 					} else {
-						float y = datas.get(0).acce;
+						float y = time_datas.get(0).acce;
 						lastY = (y - lastY) / (sec - lastX)
 								* (20 * index - lastX) + lastY;
 						lastX = 20 * index;
 						line1.add(lastX * 0.001, lastY);
                         if (isEable) {
                             try {
-                                value = datas.get(0).milliSec + ";" + datas.get(0).acce + ";";
+                                value = time_datas.get(0).milliSec + ";" + time_datas.get(0).acce + ";";
                                 data = (value).getBytes("gbk");//将字符组串转换成GBK字符集，再转换成数组传输
                                 ioSession.write(IoBuffer.wrap(data));
                             } catch (UnsupportedEncodingException e) {
@@ -464,20 +467,23 @@ public class CurveRealtimeFragment extends BaseFragment implements
 						index++;
 					}
 
-					datas.remove(0);
+					time_datas.remove(0);
 				}
 
 			}
 
 			double maxtemp = line1.getMaxX();
-			double mintemp = maxtemp - xMax + xMin;
-			if (maxtemp >= xMax || maxtemp <= mintemp) {
+			double mintemp = maxtemp - time_cur_max_x + time_cur_min_x;
+
+			if (maxtemp >= time_cur_max_x || maxtemp <= mintemp) {
 				// 不在视野里，就要移动窗口
 				mXYMultipleSeriesRenderer.setXAxisMax(maxtemp);
 				mXYMultipleSeriesRenderer.setXAxisMin(mintemp);
-				xMax = maxtemp;
-				xMin = mintemp;
+				time_cur_max_x = maxtemp;
+				time_cur_min_x = mintemp;
 			}
+			mXYMultipleSeriesRenderer.setYAxisMax(line1.getMaxY());
+			mXYMultipleSeriesRenderer.setYAxisMin(line1.getMinY());
 			chart.postInvalidate();
 		}
 	}
@@ -511,11 +517,11 @@ public class CurveRealtimeFragment extends BaseFragment implements
 									}
 								});
 			} else {
-				datas.clear();
+				time_datas.clear();
 				index = 0;
 				lastX = lastY = 0;
 				isFirst = true;
-				// datas.add(new Data(0, 0));
+				// time_datas.add(new Data(0, 0));
 				// index++;
 				initLine();
 				timer = new Timer();
@@ -592,8 +598,9 @@ public class CurveRealtimeFragment extends BaseFragment implements
 		if (line1.getItemCount() > 0) {
 			line1.clear();
 		}
-		xMin = 0;
-		xMax = 1.5;
+		if(line2.getItemCount()>0){
+			line2.clear();
+		}
 	}
 
     String content;
@@ -601,7 +608,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
-			case R.id.button_send:
+			case R.id.button_jisuan:
 				final EditText et = new EditText(getActivity());
 				et.setText("data.txt");
 				new AlertDialog.Builder(getActivity()).setTitle("输入数据名字").setView(et).setPositiveButton("ok", new DialogInterface.OnClickListener() {
@@ -616,7 +623,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 						for (int i=0;i<count;i++){
 							float f = Float.parseFloat(data[i]);
 							Data pt = new Data(20*i,f);
-							datas.add(pt);
+							time_datas.add(pt);
 						}
 						new Thread(){
 							@Override
@@ -629,7 +636,7 @@ System.out.println("刷新完成");							}
 					}
 				}).setNegativeButton("cancel",null).show();
 				break;
-		case R.id.btn_curve_save:
+		case R.id.btn_save:
             content = "";
             for (int i = 0; i < line1.getItemCount(); i++) {
                 content += line1.getX(i) + "\t" + line1.getY(i)
@@ -653,7 +660,7 @@ System.out.println("刷新完成");							}
                 }
             }).setNegativeButton("取消",null).show();
             break;
-            case R.id.btn_curve_jiagong:
+            case R.id.btn_curve_pinyu:
 				new AsyncTask<Void,Void,Void>(){
 
 					@Override
@@ -667,18 +674,37 @@ System.out.println("刷新完成");							}
 						FFT fft = new FFT(arr);
 						int count = fft.count;
 						double[] ys = fft.result;
+						double xmin=Double.MAX_VALUE,ymin=Double.MAX_VALUE,xmax=Double.MIN_VALUE,ymax=Double.MIN_VALUE;
 						for (int i=0;i<count;i++){
-							line1.add(25.0*i/count,ys[i]);
+							double x = 25.0*i/count;
+							line1.add(x,ys[i]);
+
+							xmin = Math.min(xmin,x);
+							xmax = Math.max(xmax,x);
+							ymin = Math.min(ymin,ys[i]);
+							ymax = Math.max(ymax,ys[i]);
 						}
+						setMaxMin(xmin-0.1*(xmax-xmin),ymin-0.1*(ymax-ymin),xmax+0.1*(xmax-xmin),ymax+0.1*(ymax-ymin));
 						return null;
 					}
 
 					@Override
 					protected void onPostExecute(Void aVoid) {
 						chart.postInvalidate();
+						chart.setEnabled(false);
+						chart.setClickable(false);
 					}
 				}.execute((Void) null);
 			break;
+			case R.id.btn_curve_shiyu:
+				break;
 		}
+	}
+
+	private void setMaxMin(double xmin, double ymin, double xmax, double ymax) {
+		mXYMultipleSeriesRenderer.setXAxisMin(xmin);
+		mXYMultipleSeriesRenderer.setXAxisMax(xmax);
+		mXYMultipleSeriesRenderer.setYAxisMin(ymin);
+		mXYMultipleSeriesRenderer.setYAxisMax(ymax);
 	}
 }

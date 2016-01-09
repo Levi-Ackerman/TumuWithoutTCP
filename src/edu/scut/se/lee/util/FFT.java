@@ -165,7 +165,7 @@ public class FFT {
     }
 
 
-    public final static int POINT_COUNT = 1024;
+    public final static int POINT_COUNT = 3072;
     public static void main(String[] args) throws Exception{
         double[] a = {
                 -0.909768,
