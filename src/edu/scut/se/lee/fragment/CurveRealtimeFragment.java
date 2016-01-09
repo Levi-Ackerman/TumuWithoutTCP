@@ -394,6 +394,9 @@ public class CurveRealtimeFragment extends BaseFragment implements
 		// TODO Auto-generated method stub
 
 		if (isChecked) {
+			mDataset.removeSeries(0);
+			mDataset.addSeries(line1);
+			chart.invalidate();
 			disableAllBtnsAndInput();
 			try {
 				if (TextUtils.isEmpty(etAutoRunTime.getText()))
@@ -593,10 +596,12 @@ System.out.println("刷新完成");							}
 					protected Void doInBackground(Void... params) {
 						if(line2.getItemCount()==0) {
 							int size = line1.getItemCount();
-							double[] arr = new double[size];
-							for (int i = 0; i < size; i++) {
-								arr[i] = line1.getY(0);
-//							line1.remove(0);
+							double[] arr = new double[FFT.POINT_COUNT];
+							for (int i = 0; i < arr.length; i++) {
+								if(i<size)
+									arr[i] = line1.getY(i);
+								else
+									arr[i] = 0;
 							}
 							FFT fft = new FFT(arr);
 							int count = fft.count;
@@ -625,6 +630,19 @@ System.out.println("刷新完成");							}
 				mDataset.addSeries(line1);
 				setMaxMin(line1.getMinX() - 0.1 * (line1.getMaxX() - line1.getMinX()), line1.getMinY() - 0.1 * (line1.getMaxY() - line1.getMinY()), line1.getMaxX() + 0.1 * (line1.getMaxX() - line1.getMinX()), line1.getMaxY() + 0.1 * (line1.getMaxY() - line1.getMinY()));
 				chart.postInvalidate();
+				break;
+			case R.id.btn_set_freq:
+				if(TextUtils.isEmpty(etSetFreq.getText()))
+					showMsg("不能为空");
+				else {
+					try {
+						Frequence = Integer.parseInt(etSetFreq.getText().toString());
+					}catch(Exception e){
+						Frequence = 50;
+						etSetFreq.setText("50");
+						showMsg("请在左边输入数字");
+					}
+				}
 				break;
 		}
 	}
