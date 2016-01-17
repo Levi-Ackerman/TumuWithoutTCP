@@ -44,6 +44,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import android.view.MenuItem;
@@ -56,7 +57,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 	@ViewInject(id = R.id.lay_curve_root)
 	private RelativeLayout dynamic_chart_line_layout;
 
-    private String title = "加速度";
+    private String title = "";
 
     @ViewInject(id = R.id.sw_curve_start)
     private Switch sw_start;
@@ -64,7 +65,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 	private Button btnPinyu;
     @ViewInject(id = R.id.btn_curve_shiyu,click = "onClick")
     private Button btn_shiyu;
-    @ViewInject(id = R.id.button_jisuan, click = "onClick")
+    @ViewInject(id = R.id.button_suoli, click = "onClick")
     private Button  btnJisuan;
 
 	@ViewInject(id = R.id.btn_set_freq,click="onClick")
@@ -80,13 +81,22 @@ public class CurveRealtimeFragment extends BaseFragment implements
 	@ViewInject(id = R.id.btn_import, click = "onClick")
 	private Button btnImport;
 
+	@ViewInject(id = R.id.baseFreq,click = "onClick")
+	Button basefreq;
+
+	@ViewInject(id = R.id.baseFreqNum)
+	TextView tvFreqNum;
+
+	@ViewInject(id = R.id.suoliNum)
+	TextView tvSuoliNum;
+
 	// 用于存放每条折线的点数据
-	private XYSeries line1,linex,liney;
+	private XYSeries line1;//linex,liney;
 	List<XYSeries> points;
 	// 用于存放所有需要绘制的XYSeries
 	private XYMultipleSeriesDataset mDataset;
 	// 用于存放每条折线的风格
-	private XYSeriesRenderer renderer1,rendererx,renderery;
+	private XYSeriesRenderer renderer1;//rendererx,renderery;
 	private List<XYSeriesRenderer> renderer2;
 	// 用于存放所有需要绘制的折线的风格
 	private XYMultipleSeriesRenderer mXYMultipleSeriesRenderer;
@@ -120,6 +130,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 		time_elems = new ArrayList<Elem>();
 		initAcceler();
 		initChart();
+		tvFreqNum.setText("");
 	}
 
 	long startMillin;
@@ -146,26 +157,12 @@ public class CurveRealtimeFragment extends BaseFragment implements
 
 		@Override
 		public void onSensorChanged(SensorEvent event) {
-			// db.save(new AccelerateData(System.currentTimeMillis(),
-			// event.values[2]));
-			// long tm = (System.currentTimeMillis() - startMillin);
 			if (isFirst) {
 				isFirst = false;
 				startMillin = System.currentTimeMillis();
 			}
 			long delay = (System.currentTimeMillis() - startMillin);
 			time_elems.add(new Elem(delay, event.values[2]));
-
-			// text = "" + event.values[2];
-			// try {
-			// fileWriter.write(delay + "\t" + text + "\n");
-			// textView.setText(text);
-
-			// line1.add(0.001 * delay, event.values[2]);
-			// } catch (IOException e) {
-			// // TODO Auto-generated catch block
-			// e.printStackTrace();
-			// }
 		}
 
 		@Override
@@ -188,20 +185,20 @@ public class CurveRealtimeFragment extends BaseFragment implements
 	private void initChart() {
 		// 初始化，必须保证XYMultipleSeriesDataset对象中的XYSeries数量和
 		// XYMultipleSeriesRenderer对象中的XYSeriesRenderer数量一样多
-		line1 = new XYSeries("加速度曲线");
-		linex = new XYSeries("");
-		liney = new XYSeries("");
-		linex.add(50,0);
-		linex.add(-50,0);
-		liney.add(0,25);
-		liney.add(0,-25);
-		line2 = new XYSeries("频域曲线");
+		line1 = new XYSeries("");
+//		linex = new XYSeries("");
+//		liney = new XYSeries("");
+//		linex.add(50,0);
+//		linex.add(-50,0);
+//		liney.add(0,25);
+//		liney.add(0,-25);
+		line2 = new XYSeries("");
 		points = new ArrayList<XYSeries>();
 		initLine();
 		// line2 = new XYSeries("折线2");
 		renderer1 = new XYSeriesRenderer();
-		rendererx = new XYSeriesRenderer();
-		renderery = new XYSeriesRenderer();
+//		rendererx = new XYSeriesRenderer();
+//		renderery = new XYSeriesRenderer();
 		renderer2 = new ArrayList<XYSeriesRenderer>();
 		mDataset = new XYMultipleSeriesDataset();
 		mXYMultipleSeriesRenderer = new XYMultipleSeriesRenderer();
@@ -210,8 +207,8 @@ public class CurveRealtimeFragment extends BaseFragment implements
 		// initLine(line1);
 		// initLine(line2);
 		initRenderer(renderer1, Color.RED, PointStyle.POINT, true,4);
-		initRenderer(rendererx, Color.GRAY, PointStyle.POINT, true,6);
-		initRenderer(renderery, Color.GRAY, PointStyle.POINT, true,6);
+//		initRenderer(rendererx, Color.GRAY, PointStyle.POINT, true,6);
+//		initRenderer(renderery, Color.GRAY, PointStyle.POINT, true,6);
 
 		// 将XYSeries对象和XYSeriesRenderer对象分别添加到XYMultipleSeriesDataset对象和XYMultipleSeriesRenderer对象中。
 		mDataset.addSeries(0,line1);
@@ -228,8 +225,11 @@ public class CurveRealtimeFragment extends BaseFragment implements
 
 		chart.setOnClickListener(null);
 		// 将该View 对象添加到layout中。
+		View towBtns = dynamic_chart_line_layout.findViewById(R.id.twoBtns);
+		dynamic_chart_line_layout.removeView(towBtns);
 		dynamic_chart_line_layout.addView(chart, new LayoutParams(
 				LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+		dynamic_chart_line_layout.addView(towBtns, towBtns.getLayoutParams());
 		chart.setBackgroundColor(Color.WHITE);
 	}
 	class Point{
@@ -289,7 +289,6 @@ public class CurveRealtimeFragment extends BaseFragment implements
 			int index = ss.getPointIndex();
 			for (int i = 0; i < SelectPointNum; i++) {
 				if (index == 0||index == line2.getItemCount()-1){
-//				if (index == line2.getItemCount()-1){
 					index = -1;
 					break;
 				}else{
@@ -326,6 +325,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 //					mXYMultipleSeriesRenderer.removeSeriesRenderer(mXYMultipleSeriesRenderer.getSeriesRendererAt(1+pointIndex));
 //				}
 				chart.invalidate();
+
 			}else{
 				showMsg(String.format("附近没有极大值，已经选中了%d个极大值",maxValues.size()));
 			}
@@ -492,6 +492,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 			if(mDataset.getSeriesAt(0)!=line1) {
 				mDataset.clear();
 				mDataset.addSeries(0,line1);
+				maxValues.clear();
 				mXYMultipleSeriesRenderer.removeAllRenderers();
 				mXYMultipleSeriesRenderer.addSeriesRenderer(renderer1);
 				chart.invalidate();
@@ -613,7 +614,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-			case R.id.button_jisuan:
+			case R.id.button_suoli:
 				if(maxValues.size()<3){
 					showMsg("还没有选够3个极大值");
 				}else{
@@ -627,10 +628,28 @@ public class CurveRealtimeFragment extends BaseFragment implements
 					for (int i = 1; i < maxValues.size()-1; i++) {
 						avgFreq += (maxValues.get(i).x - maxValues.get(i-1).x);
 					}
-					avgFreq = avgFreq/maxValues.size();
+					avgFreq = avgFreq/(maxValues.size()-1);
 					edu.scut.se.lee.util.Data.avgFreq = avgFreq;
-					showMsg("索力计算完成，前往索力结果页面加载查看");
+					tvSuoliNum.setText(String.format("%.5f",Data.getForce()));
 					DB.putResult(new DB.Result(Data.name, Data.lineLength, Data.midu, Data.avgFreq, Data.getForce()));
+				}
+				break;
+			case R.id.baseFreq:
+				if(maxValues.size()>=3) {
+					Collections.sort(maxValues, new Comparator<Point>() {
+						@Override
+						public int compare(Point lhs, Point rhs) {
+							return (int)(lhs.x-rhs.x);
+						}
+					});
+					double avgFreq = 0;
+					for (int i = 1; i < maxValues.size(); i++) {
+						avgFreq += (maxValues.get(i).x - maxValues.get(i - 1).x);
+					}
+					avgFreq = avgFreq / (maxValues.size()-1);
+					tvFreqNum.setText(String.format("%.5f",avgFreq));
+				}else{
+					showMsg("点数不足3");
 				}
 				break;
 			case R.id.btn_import://还原数据
@@ -722,15 +741,15 @@ public class CurveRealtimeFragment extends BaseFragment implements
 					protected void onPostExecute(Void aVoid) {
 						mDataset.clear();
 						mDataset.addSeries(0,line2);
-						mDataset.addSeries(linex);
-						mDataset.addSeries(liney);
+//						mDataset.addSeries(linex);
+//						mDataset.addSeries(liney);
 						for (XYSeries point : points) {
 							mDataset.addSeries(point);
 						}
 						mXYMultipleSeriesRenderer.removeAllRenderers();
 						mXYMultipleSeriesRenderer.addSeriesRenderer(renderer1);
-						mXYMultipleSeriesRenderer.addSeriesRenderer(rendererx);
-						mXYMultipleSeriesRenderer.addSeriesRenderer(renderery);
+//						mXYMultipleSeriesRenderer.addSeriesRenderer(rendererx);
+//						mXYMultipleSeriesRenderer.addSeriesRenderer(renderery);
 						for (XYSeriesRenderer xySeriesRenderer : renderer2) {
 							mXYMultipleSeriesRenderer.addSeriesRenderer(xySeriesRenderer);
 						}

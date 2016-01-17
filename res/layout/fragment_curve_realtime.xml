@@ -3,81 +3,119 @@
     android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-     >
+    android:background="@android:color/white"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/lay_curve_root"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.70" >
+        android:layout_weight="7">
+
+        <LinearLayout
+            android:id="@+id/twoBtns"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/transparent"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btn_curve_shiyu"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/et_auto_run_time"
+                android:text="时程曲线" />
+
+            <Button
+                android:id="@+id/btn_curve_pinyu"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/btn_curve_shiyu"
+                android:text="频谱图" />
+        </LinearLayout>
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.2" >
-    <EditText
-        android:id="@+id/et_auto_run_time"
-        android:layout_width="wrap_content"
-        android:hint="自动采集时长(s)"
-        android:layout_height="wrap_content" />
+        android:layout_weight="2.2">
+
+        <EditText
+            android:id="@+id/et_auto_run_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="采集时长(s)" />
 
         <Switch
             android:id="@+id/sw_curve_start"
-            android:layout_below="@+id/et_auto_run_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/et_auto_run_time"
             android:textOff="停止"
             android:textOn="开始" />
 
-        <Button
-            android:id="@+id/btn_curve_shiyu"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/et_auto_run_time"
-            android:text="时域" />
 
-        <Button
-            android:id="@+id/btn_curve_pinyu"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/btn_curve_shiyu"
-            android:text="频域" />
 
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="计算索力"
-            android:id="@+id/button_jisuan"
-            android:layout_toRightOf="@+id/btn_curve_pinyu"
-            android:layout_toEndOf="@+id/btn_curve_pinyu" />
-<EditText
-    android:id="@+id/et_set_freq"
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentLeft="true"
-    android:layout_width="wrap_content"
-    android:text="50"
-    android:layout_height="wrap_content" />
         <Button
             android:id="@+id/btn_set_freq"
-            android:layout_toRightOf="@+id/et_set_freq"
-            android:layout_alignParentBottom="true"
-            android:text="设置频率"
+            style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/et_auto_run_time"
+            android:text="采样频率" />
+
+        <EditText
+            android:id="@+id/et_set_freq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/btn_set_freq"
+            android:text="50" />
+        <Button
+            android:id="@+id/baseFreq"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:text="基频: "
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/baseFreqNum"
+            android:layout_width="wrap_content"
+            android:text="0.00000"
+            android:layout_marginBottom="10dp"
+            android:layout_toRightOf="@+id/baseFreq"
+            android:layout_alignParentBottom="true"
             android:layout_height="wrap_content" />
         <Button
-        android:id="@+id/btn_import"
-        android:layout_toRightOf="@+id/btn_set_freq"
-        android:layout_alignParentBottom="true"
-        android:text="导入"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-       </RelativeLayout>
+            style="?android:attr/buttonStyleSmall"
+            android:id="@+id/btn_import"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="导入" />
+
+        <Button
+            android:id="@+id/button_suoli"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/baseFreqNum"
+            android:text="索力:" />
+        <TextView
+            android:id="@+id/suoliNum"
+            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:text="       "
+            android:layout_toRightOf="@+id/button_suoli"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
 
 </LinearLayout>
