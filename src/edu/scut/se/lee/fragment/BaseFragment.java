@@ -29,8 +29,13 @@ public abstract class BaseFragment extends Fragment {
 
 	public abstract void initData();
 
-	public void showMsg(String text) {
-		Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
-		Log.e("Lee.",text);
+	public void showMsg(final String text) {
+		getActivity().runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
+				Log.e("Lee.",text);
+			}
+		});
 	}
 }

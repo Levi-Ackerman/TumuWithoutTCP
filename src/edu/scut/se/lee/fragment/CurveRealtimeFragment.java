@@ -80,12 +80,12 @@ public class CurveRealtimeFragment extends BaseFragment implements
 
 	// 用于存放每条折线的点数据
 	private XYSeries line1;
-	XYSeries points;
+	List<XYSeries> points;
 	// 用于存放所有需要绘制的XYSeries
 	private XYMultipleSeriesDataset mDataset;
 	// 用于存放每条折线的风格
 	private XYSeriesRenderer renderer1;
-	private XYSeriesRenderer renderer2;
+	private List<XYSeriesRenderer> renderer2;
 	// 用于存放所有需要绘制的折线的风格
 	private XYMultipleSeriesRenderer mXYMultipleSeriesRenderer;
 	private GraphicalView chart;
@@ -188,11 +188,11 @@ public class CurveRealtimeFragment extends BaseFragment implements
 		// XYMultipleSeriesRenderer对象中的XYSeriesRenderer数量一样多
 		line1 = new XYSeries("加速度曲线");
 		line2 = new XYSeries("频域曲线");
-		points = new XYSeries("N阶点");
+		points = new ArrayList<XYSeries>();
 		initLine();
 		// line2 = new XYSeries("折线2");
 		renderer1 = new XYSeriesRenderer();
-		renderer2 = new XYSeriesRenderer();
+		renderer2 = new ArrayList<XYSeriesRenderer>();
 		mDataset = new XYMultipleSeriesDataset();
 		mXYMultipleSeriesRenderer = new XYMultipleSeriesRenderer();
 
@@ -200,7 +200,6 @@ public class CurveRealtimeFragment extends BaseFragment implements
 		// initLine(line1);
 		// initLine(line2);
 		initRenderer(renderer1, Color.RED, PointStyle.POINT, true,4);
-		 initRenderer(renderer2, Color.BLUE, PointStyle.CIRCLE, true,0);
 
 		// 将XYSeries对象和XYSeriesRenderer对象分别添加到XYMultipleSeriesDataset对象和XYMultipleSeriesRenderer对象中。
 		mDataset.addSeries(0,line1);
@@ -267,7 +266,12 @@ public class CurveRealtimeFragment extends BaseFragment implements
 			if(index!=-1 && line2.getY(index)>line2.getY(index-1) && line2.getY(index)>line2.getY(index+1)){
 				Point point = new Point(line2.getX(index),line2.getY(index));
 				maxValues.add(point);
-				points.add(point.x,point.y);
+				XYSeries series = new XYSeries("");
+				XYSeriesRenderer renderer = new XYSeriesRenderer();
+				initRenderer(renderer,Color.BLUE,PointStyle.CIRCLE,true,0);
+				series.add(point.x,point.y);
+				mDataset.addSeries(series);
+				mXYMultipleSeriesRenderer.addSeriesRenderer(renderer);
 				chart.invalidate();
 				showMsg(String.format("选中了极大值点(%f,%f),已经选中了%d个极大值",line2.getX(index),line2.getY(index),maxValues.size()));
 			}else{
@@ -584,6 +588,10 @@ public class CurveRealtimeFragment extends BaseFragment implements
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						String[] data = Util.loadFileLinesInPrjDir(et.getText().toString().trim());
+						if(data==null){
+							showMsg("不存在该数据");
+							return ;
+						}
 						int count = data.length;
 						if(count>FFT.POINT_COUNT) {
 							count = FFT.POINT_COUNT;
@@ -661,10 +669,14 @@ public class CurveRealtimeFragment extends BaseFragment implements
 					protected void onPostExecute(Void aVoid) {
 						mDataset.clear();
 						mDataset.addSeries(0,line2);
-						mDataset.addSeries(points);
+						for (XYSeries point : points) {
+							mDataset.addSeries(point);
+						}
 						mXYMultipleSeriesRenderer.removeAllRenderers();
 						mXYMultipleSeriesRenderer.addSeriesRenderer(renderer1);
-						mXYMultipleSeriesRenderer.addSeriesRenderer(renderer2);
+						for (XYSeriesRenderer xySeriesRenderer : renderer2) {
+							mXYMultipleSeriesRenderer.addSeriesRenderer(xySeriesRenderer);
+						}
 						chart.postInvalidate();
 						chart.setOnClickListener(chartOnClickListener);
 					}
