@@ -3,6 +3,7 @@ package edu.scut.se.lee.fragment;
 import net.tsz.afinal.FinalActivity;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,5 +31,6 @@ public abstract class BaseFragment extends Fragment {
 
 	public void showMsg(String text) {
 		Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
+		Log.e("Lee.",text);
 	}
 }

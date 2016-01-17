@@ -80,10 +80,12 @@ public class CurveRealtimeFragment extends BaseFragment implements
 
 	// 用于存放每条折线的点数据
 	private XYSeries line1;
+	XYSeries points;
 	// 用于存放所有需要绘制的XYSeries
 	private XYMultipleSeriesDataset mDataset;
 	// 用于存放每条折线的风格
 	private XYSeriesRenderer renderer1;
+	private XYSeriesRenderer renderer2;
 	// 用于存放所有需要绘制的折线的风格
 	private XYMultipleSeriesRenderer mXYMultipleSeriesRenderer;
 	private GraphicalView chart;
@@ -186,9 +188,11 @@ public class CurveRealtimeFragment extends BaseFragment implements
 		// XYMultipleSeriesRenderer对象中的XYSeriesRenderer数量一样多
 		line1 = new XYSeries("加速度曲线");
 		line2 = new XYSeries("频域曲线");
+		points = new XYSeries("N阶点");
 		initLine();
 		// line2 = new XYSeries("折线2");
 		renderer1 = new XYSeriesRenderer();
+		renderer2 = new XYSeriesRenderer();
 		mDataset = new XYMultipleSeriesDataset();
 		mXYMultipleSeriesRenderer = new XYMultipleSeriesRenderer();
 
@@ -196,11 +200,10 @@ public class CurveRealtimeFragment extends BaseFragment implements
 		// initLine(line1);
 		// initLine(line2);
 		initRenderer(renderer1, Color.RED, PointStyle.POINT, true,4);
-		// initRenderer(renderer2, Color.CYAN, PointStyle.TRIANGLE, true);
+		 initRenderer(renderer2, Color.BLUE, PointStyle.CIRCLE, true,0);
 
 		// 将XYSeries对象和XYSeriesRenderer对象分别添加到XYMultipleSeriesDataset对象和XYMultipleSeriesRenderer对象中。
-		mDataset.addSeries(line1);
-		// mDataset.addSeries(line2);
+		mDataset.addSeries(0,line1);
 		mXYMultipleSeriesRenderer.addSeriesRenderer(renderer1);
 		// mXYMultipleSeriesRenderer.addSeriesRenderer(renderer2);
 
@@ -212,7 +215,6 @@ public class CurveRealtimeFragment extends BaseFragment implements
 		chart = ChartFactory.getLineChartView(getActivity(), mDataset,
 				mXYMultipleSeriesRenderer);
 
-		chart.setBackgroundColor(Color.GRAY);
 		chart.setOnClickListener(null);
 		// 将该View 对象添加到layout中。
 		dynamic_chart_line_layout.addView(chart, new LayoutParams(
@@ -248,6 +250,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 			int index = ss.getPointIndex();
 			for (int i = 0; i < SelectPointNum; i++) {
 				if (index == 0||index == line2.getItemCount()-1){
+//				if (index == line2.getItemCount()-1){
 					index = -1;
 					break;
 				}else{
@@ -262,7 +265,10 @@ public class CurveRealtimeFragment extends BaseFragment implements
 				}
 			}
 			if(index!=-1 && line2.getY(index)>line2.getY(index-1) && line2.getY(index)>line2.getY(index+1)){
-				maxValues.add(new Point(line2.getX(index),line2.getY(index)));
+				Point point = new Point(line2.getX(index),line2.getY(index));
+				maxValues.add(point);
+				points.add(point.x,point.y);
+				chart.invalidate();
 				showMsg(String.format("选中了极大值点(%f,%f),已经选中了%d个极大值",line2.getX(index),line2.getY(index),maxValues.size()));
 			}else{
 				showMsg(String.format("附近没有极大值，已经选中了%d个极大值",maxValues.size()));
@@ -428,8 +434,10 @@ public class CurveRealtimeFragment extends BaseFragment implements
 
 		if (isChecked) {
 			if(mDataset.getSeriesAt(0)!=line1) {
-				mDataset.removeSeries(0);
-				mDataset.addSeries(line1);
+				mDataset.clear();
+				mDataset.addSeries(0,line1);
+				mXYMultipleSeriesRenderer.removeAllRenderers();
+				mXYMultipleSeriesRenderer.addSeriesRenderer(renderer1);
 				chart.invalidate();
 			}
 			disableAllBtnsAndInput();
@@ -651,8 +659,12 @@ public class CurveRealtimeFragment extends BaseFragment implements
 
 					@Override
 					protected void onPostExecute(Void aVoid) {
-						mDataset.removeSeries(0);
-						mDataset.addSeries(line2);
+						mDataset.clear();
+						mDataset.addSeries(0,line2);
+						mDataset.addSeries(points);
+						mXYMultipleSeriesRenderer.removeAllRenderers();
+						mXYMultipleSeriesRenderer.addSeriesRenderer(renderer1);
+						mXYMultipleSeriesRenderer.addSeriesRenderer(renderer2);
 						chart.postInvalidate();
 						chart.setOnClickListener(chartOnClickListener);
 					}
@@ -660,8 +672,10 @@ public class CurveRealtimeFragment extends BaseFragment implements
 			break;
 			case R.id.btn_curve_shiyu:
 				mXYMultipleSeriesRenderer.setXTitle("时间(s)");
-				mDataset.removeSeries(0);
-				mDataset.addSeries(line1);
+				mDataset.clear();
+				mDataset.addSeries(0,line1);
+				mXYMultipleSeriesRenderer.removeAllRenderers();
+				mXYMultipleSeriesRenderer.addSeriesRenderer(renderer1);
 				setMaxMin(line1.getMinX() - 0.1 * (line1.getMaxX() - line1.getMinX()), line1.getMinY() - 0.1 * (line1.getMaxY() - line1.getMinY()), line1.getMaxX() + 0.1 * (line1.getMaxX() - line1.getMinX()), line1.getMaxY() + 0.1 * (line1.getMaxY() - line1.getMinY()));
 				chart.postInvalidate();
 				chart.setOnClickListener(null);
