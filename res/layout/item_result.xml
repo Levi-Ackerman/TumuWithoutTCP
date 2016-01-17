@@ -4,31 +4,38 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:layout_weight="1"
-        android:layout_width="wrap_content"
+        android:layout_weight="0.6"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:text="索名"
         android:textColor="@android:color/black"
         android:id="@+id/tv0" />
     <TextView
-        android:layout_weight="1"
-        android:layout_width="wrap_content"
+        android:layout_weight="1.5"
+        android:layout_width="0dp"
         android:textColor="@android:color/black"
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/tv1" />
     <TextView
         android:layout_weight="1"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:textColor="@android:color/black"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:text="索长"
         android:id="@+id/tv2" />
     <TextView
         android:layout_weight="1"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:textColor="@android:color/black"
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/tv3" />
+    <TextView
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:textColor="@android:color/black"
+        android:layout_height="wrap_content"
+        android:text="索力"
+        android:id="@+id/tv4" />
 </LinearLayout>

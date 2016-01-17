@@ -18,6 +18,8 @@ import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
 import edu.scut.se.lee.R;
+import edu.scut.se.lee.util.DB;
+import edu.scut.se.lee.util.Data;
 import edu.scut.se.lee.util.FFT;
 import edu.scut.se.lee.util.Util;
 
@@ -79,12 +81,12 @@ public class CurveRealtimeFragment extends BaseFragment implements
 	private Button btnImport;
 
 	// 用于存放每条折线的点数据
-	private XYSeries line1;
+	private XYSeries line1,linex,liney;
 	List<XYSeries> points;
 	// 用于存放所有需要绘制的XYSeries
 	private XYMultipleSeriesDataset mDataset;
 	// 用于存放每条折线的风格
-	private XYSeriesRenderer renderer1;
+	private XYSeriesRenderer renderer1,rendererx,renderery;
 	private List<XYSeriesRenderer> renderer2;
 	// 用于存放所有需要绘制的折线的风格
 	private XYMultipleSeriesRenderer mXYMultipleSeriesRenderer;
@@ -98,7 +100,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 
 	private XYSeries line2;
 
-	static final int SelectPointNum = 5;
+	static final int SelectPointNum = 10;
 
 	//tvToast = (TextView) findViewById(R.id.toast);
 
@@ -115,7 +117,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
         //改动：初始化控件switch
         sw_start = (Switch)rootView.findViewById(R.id.sw_curve_start);
 
-		time_datas = new ArrayList<Data>();
+		time_elems = new ArrayList<Elem>();
 		initAcceler();
 		initChart();
 	}
@@ -126,10 +128,10 @@ public class CurveRealtimeFragment extends BaseFragment implements
 	int index = 0;
 	double lastSec = 0;
 	double lastX = 0, lastY = 0;
-	List<Data> time_datas;
+	List<Elem> time_elems;
 
-	class Data {
-		public Data(long milliSec, float acce) {
+	class Elem {
+		public Elem(long milliSec, float acce) {
 			this.milliSec = milliSec;
 			this.acce = acce;
 		}
@@ -152,7 +154,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 				startMillin = System.currentTimeMillis();
 			}
 			long delay = (System.currentTimeMillis() - startMillin);
-			time_datas.add(new Data(delay, event.values[2]));
+			time_elems.add(new Elem(delay, event.values[2]));
 
 			// text = "" + event.values[2];
 			// try {
@@ -187,11 +189,19 @@ public class CurveRealtimeFragment extends BaseFragment implements
 		// 初始化，必须保证XYMultipleSeriesDataset对象中的XYSeries数量和
 		// XYMultipleSeriesRenderer对象中的XYSeriesRenderer数量一样多
 		line1 = new XYSeries("加速度曲线");
+		linex = new XYSeries("");
+		liney = new XYSeries("");
+		linex.add(50,0);
+		linex.add(-50,0);
+		liney.add(0,25);
+		liney.add(0,-25);
 		line2 = new XYSeries("频域曲线");
 		points = new ArrayList<XYSeries>();
 		initLine();
 		// line2 = new XYSeries("折线2");
 		renderer1 = new XYSeriesRenderer();
+		rendererx = new XYSeriesRenderer();
+		renderery = new XYSeriesRenderer();
 		renderer2 = new ArrayList<XYSeriesRenderer>();
 		mDataset = new XYMultipleSeriesDataset();
 		mXYMultipleSeriesRenderer = new XYMultipleSeriesRenderer();
@@ -200,6 +210,8 @@ public class CurveRealtimeFragment extends BaseFragment implements
 		// initLine(line1);
 		// initLine(line2);
 		initRenderer(renderer1, Color.RED, PointStyle.POINT, true,4);
+		initRenderer(rendererx, Color.GRAY, PointStyle.POINT, true,6);
+		initRenderer(renderery, Color.GRAY, PointStyle.POINT, true,6);
 
 		// 将XYSeries对象和XYSeriesRenderer对象分别添加到XYMultipleSeriesDataset对象和XYMultipleSeriesRenderer对象中。
 		mDataset.addSeries(0,line1);
@@ -226,6 +238,29 @@ public class CurveRealtimeFragment extends BaseFragment implements
 			this.y = y;
 		}
 
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) return true;
+			if (o == null || getClass() != o.getClass()) return false;
+
+			Point point = (Point) o;
+
+			if (Double.compare(point.x, x) != 0) return false;
+			return Double.compare(point.y, y) == 0;
+
+		}
+
+		@Override
+		public int hashCode() {
+			int result;
+			long temp;
+			temp = Double.doubleToLongBits(x);
+			result = (int) (temp ^ (temp >>> 32));
+			temp = Double.doubleToLongBits(y);
+			result = 31 * result + (int) (temp ^ (temp >>> 32));
+			return result;
+		}
+
 		double x;
 		double y;
 	}
@@ -236,16 +271,21 @@ public class CurveRealtimeFragment extends BaseFragment implements
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-			if(maxValues.size()>=MAX_VALUES_COUNT){
-				showMsg("已经选了"+MAX_VALUES_COUNT+"个点了");
-				return ;
-			}
+
 			GraphicalView gv = (GraphicalView) v;
 			// 将view转换为可以监听的GraphicalView
 			final SeriesSelection ss = gv.getCurrentSeriesAndPoint();
 			// 获得被点击的系列和点
 			if (ss == null)
 				return;
+//			if(maxValues.size()>0 && ss.getSeriesIndex()>0){
+//				//删除已经选中的高阶点
+//				maxValues.remove(ss.getSeriesIndex()-1);
+//				mDataset.removeSeries(ss.getSeriesIndex()-1);
+//				mXYMultipleSeriesRenderer.removeSeriesRenderer(mXYMultipleSeriesRenderer.getSeriesRendererAt(ss.getSeriesIndex()));
+//				chart.invalidate();
+//				return ;
+//			}
 			int index = ss.getPointIndex();
 			for (int i = 0; i < SelectPointNum; i++) {
 				if (index == 0||index == line2.getItemCount()-1){
@@ -265,15 +305,27 @@ public class CurveRealtimeFragment extends BaseFragment implements
 			}
 			if(index!=-1 && line2.getY(index)>line2.getY(index-1) && line2.getY(index)>line2.getY(index+1)){
 				Point point = new Point(line2.getX(index),line2.getY(index));
-				maxValues.add(point);
-				XYSeries series = new XYSeries("");
-				XYSeriesRenderer renderer = new XYSeriesRenderer();
-				initRenderer(renderer,Color.BLUE,PointStyle.CIRCLE,true,0);
-				series.add(point.x,point.y);
-				mDataset.addSeries(series);
-				mXYMultipleSeriesRenderer.addSeriesRenderer(renderer);
+//				int pointIndex = maxValues.indexOf(point);
+//				if(pointIndex == -1) {
+					if(maxValues.size()>=MAX_VALUES_COUNT){
+						showMsg("已经选了"+MAX_VALUES_COUNT+"个点了,请勿再多选");
+						return ;
+					}
+					maxValues.add(point);
+					XYSeries series = new XYSeries("");
+					XYSeriesRenderer renderer = new XYSeriesRenderer();
+					initRenderer(renderer, Color.BLUE, PointStyle.CIRCLE, true, 0);
+					renderer.setPointStrokeWidth(8);
+					series.add(point.x, point.y);
+					mDataset.addSeries(series);
+					mXYMultipleSeriesRenderer.addSeriesRenderer(renderer);
+//					showMsg(String.format("选中了极大值点(%f,%f),已经选中了%d个极大值", line2.getX(index), line2.getY(index), maxValues.size()));
+//				}else{
+//					maxValues.remove(pointIndex);
+//					mDataset.removeSeries(pointIndex);
+//					mXYMultipleSeriesRenderer.removeSeriesRenderer(mXYMultipleSeriesRenderer.getSeriesRendererAt(1+pointIndex));
+//				}
 				chart.invalidate();
-				showMsg(String.format("选中了极大值点(%f,%f),已经选中了%d个极大值",line2.getX(index),line2.getY(index),maxValues.size()));
 			}else{
 				showMsg(String.format("附近没有极大值，已经选中了%d个极大值",maxValues.size()));
 			}
@@ -373,28 +425,28 @@ public class CurveRealtimeFragment extends BaseFragment implements
 				handler.sendEmptyMessage(MSG_CLOSE_SWITCH);
 				return ;
 			}
-			int count = time_datas.size();
+			int count = time_elems.size();
 			if (count == 0)
 				return;
 			if (index == 0) {
 				index++;
-				lastX = time_datas.get(0).milliSec;
-				lastY = time_datas.get(0).acce;
+				lastX = time_elems.get(0).milliSec;
+				lastY = time_elems.get(0).acce;
 				line1.add(lastX * 0.001, lastY);
-				time_datas.remove(0);
+				time_elems.remove(0);
 			} else {
 				for (int i = 0; i < count; i++) {
-					long sec = time_datas.get(0).milliSec;
+					long sec = time_elems.get(0).milliSec;
 					if (sec < 1000/Frequence * index) {
 						lastX = sec;
-						lastY = time_datas.get(0).acce;
+						lastY = time_elems.get(0).acce;
 					} else if (sec == 1000/Frequence * index) {
 						lastX = sec;
-						lastY = time_datas.get(0).acce;
+						lastY = time_elems.get(0).acce;
                         line1.add(lastX * 0.001, lastY);
                         index++;
 					} else {
-						float y = time_datas.get(0).acce;
+						float y = time_elems.get(0).acce;
 						lastY = (y - lastY) / (sec - lastX)
 								* (1000/Frequence * index - lastX) + lastY;
 						lastX = 1000/Frequence * index;
@@ -402,7 +454,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 						index++;
 					}
 
-					time_datas.remove(0);
+					time_elems.remove(0);
 				}
 
 			}
@@ -472,7 +524,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 									}
 								});
 			} else {
-				time_datas.clear();
+				time_elems.clear();
 				index = 0;
 				lastX = lastY = 0;
 				isFirst = true;;
@@ -562,8 +614,8 @@ public class CurveRealtimeFragment extends BaseFragment implements
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.button_jisuan:
-				if(maxValues.size()<MAX_VALUES_COUNT){
-					showMsg("还没有选够"+MAX_VALUES_COUNT+"个极大值哦");
+				if(maxValues.size()<3){
+					showMsg("还没有选够3个极大值");
 				}else{
 					Collections.sort(maxValues, new Comparator<Point>() {
 						@Override
@@ -572,13 +624,13 @@ public class CurveRealtimeFragment extends BaseFragment implements
 						}
 					});
 					double avgFreq = 0;
-					for (int i = 1; i < MAX_VALUES_COUNT-1; i++) {
+					for (int i = 1; i < maxValues.size()-1; i++) {
 						avgFreq += (maxValues.get(i).x - maxValues.get(i-1).x);
 					}
-					avgFreq = avgFreq/MAX_VALUES_COUNT;
+					avgFreq = avgFreq/maxValues.size();
 					edu.scut.se.lee.util.Data.avgFreq = avgFreq;
-					showMsg(String.format("索力为%.2fN", edu.scut.se.lee.util.Data.getForce()));
-
+					showMsg("索力计算完成，前往索力结果页面加载查看");
+					DB.putResult(new DB.Result(Data.name, Data.lineLength, Data.midu, Data.avgFreq, Data.getForce()));
 				}
 				break;
 			case R.id.btn_import://还原数据
@@ -592,6 +644,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 							showMsg("不存在该数据");
 							return ;
 						}
+						initChart();
 						int count = data.length;
 						if(count>FFT.POINT_COUNT) {
 							count = FFT.POINT_COUNT;
@@ -599,8 +652,8 @@ public class CurveRealtimeFragment extends BaseFragment implements
 						initLine();
 						for (int i=0;i<count;i++){
 							float f = Float.parseFloat(data[i]);
-							Data pt = new Data(1000/Frequence*i,f);
-							time_datas.add(pt);
+							Elem pt = new Elem(1000/Frequence*i,f);
+							time_elems.add(pt);
 						}
 						new Thread(){
 							@Override
@@ -669,11 +722,15 @@ public class CurveRealtimeFragment extends BaseFragment implements
 					protected void onPostExecute(Void aVoid) {
 						mDataset.clear();
 						mDataset.addSeries(0,line2);
+						mDataset.addSeries(linex);
+						mDataset.addSeries(liney);
 						for (XYSeries point : points) {
 							mDataset.addSeries(point);
 						}
 						mXYMultipleSeriesRenderer.removeAllRenderers();
 						mXYMultipleSeriesRenderer.addSeriesRenderer(renderer1);
+						mXYMultipleSeriesRenderer.addSeriesRenderer(rendererx);
+						mXYMultipleSeriesRenderer.addSeriesRenderer(renderery);
 						for (XYSeriesRenderer xySeriesRenderer : renderer2) {
 							mXYMultipleSeriesRenderer.addSeriesRenderer(xySeriesRenderer);
 						}

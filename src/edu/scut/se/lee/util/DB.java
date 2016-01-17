@@ -25,45 +25,70 @@ public class DB {
         return getDb().findAll(Result.class);
     }
 
+    public static void deleteResult(long dbId) {
+        getDb().deleteById(Result.class,dbId);
+    }
+
     @Table(name = "Result")
     public static class Result {
+        public long getId() {
+            return id;
+        }
+
+        public void setId(long id) {
+            this.id = id;
+        }
+
         @Id
+        private long id;
         private String name;
-        private double frequency;
-        private double result1;
-        private double result2;
+        private double length;
+        private double midu;
+        private double freq;
+
+        public double getForce() {
+            return force;
+        }
+
+        public void setForce(double force) {
+            this.force = force;
+        }
+
+        private double force;
 
         public Result(){
         }
-        public Result(String name, double frequency, double result1, double result2) {
+
+        public Result(String name, double length, double midu, double freq, double force) {
             this.name = name;
-            this.frequency = frequency;
-            this.result1 = result1;
-            this.result2 = result2;
+            this.length = length;
+            this.midu = midu;
+            this.freq = freq;
+            this.force = force;
         }
 
-        public double getFrequency() {
-            return frequency;
+        public double getLength() {
+            return length;
         }
 
-        public void setFrequency(double frequency) {
-            this.frequency = frequency;
+        public void setLength(double length) {
+            this.length = length;
         }
 
-        public double getResult1() {
-            return result1;
+        public double getMidu() {
+            return midu;
         }
 
-        public void setResult1(double result1) {
-            this.result1 = result1;
+        public void setMidu(double midu) {
+            this.midu = midu;
         }
 
-        public double getResult2() {
-            return result2;
+        public double getFreq() {
+            return freq;
         }
 
-        public void setResult2(double result2) {
-            this.result2 = result2;
+        public void setFreq(double freq) {
+            this.freq = freq;
         }
 
         public String getName() {

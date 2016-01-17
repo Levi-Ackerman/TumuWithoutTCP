@@ -6,12 +6,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_save">存储</string>
     <string name="action_settings">Settings</string>
-    <string name="title_section0_input">数据录入</string>
-    <string name="title_section1_display_params">参数显示</string>
-    <string name="title_section2_realtime_curve">实时曲线</string>
-    <string name="title_section3_array">数组显示</string>
-    <string name="title_section4_fft_analysis">FFT分析</string>
-    <string name="title_section5_force_compute">索力计算</string>
+    <string name="title_section0_input">索参数输入</string>
+    <string name="title_section2_realtime_curve">索力计算</string>
     <string name="title_section6_force_result">索力结果</string>
 
 </resources>

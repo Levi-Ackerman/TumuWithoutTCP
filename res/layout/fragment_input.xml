@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="索名(几号索)" />
+        android:hint="索编号" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,10 +32,6 @@
             <requestFocus />
         </EditText>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="(米)" />
 
     </LinearLayout>
 
@@ -49,23 +45,21 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
-        android:hint="线密度(N/m)">
+        android:hint="线密度(kg/m)">
 
         <requestFocus />
     </EditText>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="(N/m)" />
 
 </LinearLayout>
     <LinearLayout
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <EditText
             android:id="@+id/et_input_strength"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"

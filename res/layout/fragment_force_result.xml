@@ -3,8 +3,8 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <Button
-        android:id="@+id/btn_load_result"
-        android:text="加载结果"
+        android:id="@+id/btn_export_result"
+        android:text="保存结果"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <View

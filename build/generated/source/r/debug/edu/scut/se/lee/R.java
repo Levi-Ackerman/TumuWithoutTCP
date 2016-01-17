@@ -22,13 +22,13 @@ public final class R {
     }
     public static final class id {
         public static final int LinearLayout1=0x7f080003;
-        public static final int action_save=0x7f080018;
-        public static final int action_settings=0x7f080019;
+        public static final int action_save=0x7f080019;
+        public static final int action_settings=0x7f08001a;
         public static final int btn_curve_pinyu=0x7f080008;
         public static final int btn_curve_shiyu=0x7f080007;
+        public static final int btn_export_result=0x7f08000d;
         public static final int btn_import=0x7f08000c;
         public static final int btn_input_save=0x7f080013;
-        public static final int btn_load_result=0x7f08000d;
         public static final int btn_set_freq=0x7f08000b;
         public static final int button_jisuan=0x7f080009;
         public static final int container=0x7f080001;
@@ -47,6 +47,7 @@ public final class R {
         public static final int tv1=0x7f080015;
         public static final int tv2=0x7f080016;
         public static final int tv3=0x7f080017;
+        public static final int tv4=0x7f080018;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -67,12 +68,8 @@ public final class R {
         public static final int navigation_drawer_close=0x7f060003;
         public static final int navigation_drawer_open=0x7f060004;
         public static final int title_section0_input=0x7f060005;
-        public static final int title_section1_display_params=0x7f060006;
-        public static final int title_section2_realtime_curve=0x7f060007;
-        public static final int title_section3_array=0x7f060008;
-        public static final int title_section4_fft_analysis=0x7f060009;
-        public static final int title_section5_force_compute=0x7f06000a;
-        public static final int title_section6_force_result=0x7f06000b;
+        public static final int title_section2_realtime_curve=0x7f060006;
+        public static final int title_section6_force_result=0x7f060007;
     }
     public static final class style {
         /**  API 11 theme customizations can go here. 

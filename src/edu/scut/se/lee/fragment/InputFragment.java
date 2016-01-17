@@ -79,6 +79,6 @@ public class InputFragment extends BaseFragment implements OnClickListener {
         Data.name = mEditLineName.getText().toString().trim();
         Data.lineLength = Double.parseDouble(mEditLineLong.getText().toString());
         Data.midu = Double.parseDouble(mEditDensity.getText().toString());
-        Data.kangwanqiangdu = Double.parseDouble(mEditStrength.getText().toString());
+//        Data.kangwanqiangdu = Double.parseDouble(mEditStrength.getText().toString());
 	}
 }

@@ -11,6 +11,7 @@ import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -102,6 +103,9 @@ public class MainActivity extends BaseActivity implements
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.container, fragment)
                 .commit();
+        Intent intent = new Intent("drawer_item_selected");
+        intent.putExtra("index",position);
+        sendBroadcast(intent);
     }
 
     public void restoreActionBar() {
