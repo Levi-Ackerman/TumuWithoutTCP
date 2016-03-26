@@ -7,7 +7,8 @@
     <string name="action_save">存储</string>
     <string name="action_settings">Settings</string>
     <string name="title_section0_input">索参数输入</string>
-    <string name="title_section2_realtime_curve">索力计算</string>
+    <string name="title_section2_realtime_curve">索力测试</string>
     <string name="title_section6_force_result">索力结果</string>
+    <string name="title_section7_project_manager">工程管理</string>
 
 </resources>

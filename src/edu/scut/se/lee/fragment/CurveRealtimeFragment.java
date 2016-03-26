@@ -615,8 +615,8 @@ public class CurveRealtimeFragment extends BaseFragment implements
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.button_suoli:
-				if(maxValues.size()<3){
-					showMsg("还没有选够3个极大值");
+				if(maxValues.size()<2){
+					showMsg("还没有选够2个极大值");
 				}else{
 					Collections.sort(maxValues, new Comparator<Point>() {
 						@Override
@@ -635,7 +635,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 				}
 				break;
 			case R.id.baseFreq:
-				if(maxValues.size()>=3) {
+				if(maxValues.size()>=2) {
 					Collections.sort(maxValues, new Comparator<Point>() {
 						@Override
 						public int compare(Point lhs, Point rhs) {
@@ -649,7 +649,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 					avgFreq = avgFreq / (maxValues.size()-1);
 					tvFreqNum.setText(String.format("%.5f",avgFreq));
 				}else{
-					showMsg("点数不足3");
+					showMsg("点数不足2");
 				}
 				break;
 			case R.id.btn_import://还原数据
