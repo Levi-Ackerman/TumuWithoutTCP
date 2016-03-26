@@ -68,6 +68,8 @@ public class CurveRealtimeFragment extends BaseFragment implements
     @ViewInject(id = R.id.button_suoli, click = "onClick")
     private Button  btnJisuan;
 
+	@ViewInject(id = R.id.et_jieshu_input)
+	private EditText etJieshuInput;
 	@ViewInject(id = R.id.btn_set_freq,click="onClick")
 	private Button btnSetFreq;
 	@ViewInject(id = R.id.et_set_freq)
@@ -137,8 +139,8 @@ public class CurveRealtimeFragment extends BaseFragment implements
 	// FileWriter fileWriter;
 	private String text;
 	int index = 0;
-	double lastSec = 0;
 	double lastX = 0, lastY = 0;
+	double lastSec = 0;
 	List<Elem> time_elems;
 
 	class Elem {
@@ -264,8 +266,9 @@ public class CurveRealtimeFragment extends BaseFragment implements
 		double x;
 		double y;
 	}
+	private int jieshu ;
 	private List<Point> maxValues = new ArrayList<Point>();
-	private final int MAX_VALUES_COUNT = 5;
+	private final int MAX_VALUES_COUNT = 1;
 	private OnClickListener chartOnClickListener = new OnClickListener() {
 
 		@Override
@@ -325,6 +328,8 @@ public class CurveRealtimeFragment extends BaseFragment implements
 //					mXYMultipleSeriesRenderer.removeSeriesRenderer(mXYMultipleSeriesRenderer.getSeriesRendererAt(1+pointIndex));
 //				}
 				chart.invalidate();
+				showMsg("请在下方输入阶数,再计算基频");
+				etJieshuInput.setVisibility(View.VISIBLE);
 
 			}else{
 				showMsg(String.format("附近没有极大值，已经选中了%d个极大值",maxValues.size()));
@@ -528,7 +533,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 				time_elems.clear();
 				index = 0;
 				lastX = lastY = 0;
-				isFirst = true;;
+				isFirst = true;
 				initLine();
 				timer = new Timer();
 				timer.schedule(new RefreshSeriesTask(), 10, refreshDelay);
@@ -635,21 +640,22 @@ public class CurveRealtimeFragment extends BaseFragment implements
 				}
 				break;
 			case R.id.baseFreq:
-				if(maxValues.size()>=3) {
-					Collections.sort(maxValues, new Comparator<Point>() {
-						@Override
-						public int compare(Point lhs, Point rhs) {
-							return (int)(lhs.x-rhs.x);
-						}
-					});
-					double avgFreq = 0;
-					for (int i = 1; i < maxValues.size(); i++) {
-						avgFreq += (maxValues.get(i).x - maxValues.get(i - 1).x);
-					}
-					avgFreq = avgFreq / (maxValues.size()-1);
+				if(maxValues.size()>=1) {
+//					Collections.sort(maxValues, new Comparator<Point>() {
+//						@Override
+//						public int compare(Point lhs, Point rhs) {
+//							return (int)(lhs.x-rhs.x);
+//						}
+//					});
+					jieshu = Integer.parseInt(etJieshuInput.getText().toString());
+					double avgFreq = maxValues.get(0).x/jieshu;
+//					for (int i = 1; i < maxValues.size(); i++) {
+//						avgFreq += (maxValues.get(i).x - maxValues.get(i - 1).x);
+//					}
+//					avgFreq = avgFreq / (maxValues.size()-1);
 					tvFreqNum.setText(String.format("%.5f",avgFreq));
 				}else{
-					showMsg("点数不足3");
+					showMsg("还没有选点");
 				}
 				break;
 			case R.id.btn_import://还原数据
