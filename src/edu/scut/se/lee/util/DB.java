@@ -31,6 +31,8 @@ public class DB {
 
     @Table(name = "Result")
     public static class Result {
+        private String prjName;
+
         public long getId() {
             return id;
         }
@@ -65,6 +67,7 @@ public class DB {
             this.midu = midu;
             this.freq = freq;
             this.force = force;
+            this.prjName = Cache.getInstance().load(Cache.PRJ_NAME,"");
         }
 
         public double getLength() {
@@ -97,6 +100,14 @@ public class DB {
 
         public void setName(String name) {
             this.name = name;
+        }
+
+        public String getPrjName() {
+            return prjName;
+        }
+
+        public void setPrjName(String prjName) {
+            this.prjName = prjName;
         }
     }
 }

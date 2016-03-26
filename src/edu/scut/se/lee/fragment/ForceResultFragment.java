@@ -2,6 +2,7 @@ package edu.scut.se.lee.fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -17,6 +18,7 @@ import java.util.Map;
 
 import edu.scut.se.lee.App;
 import edu.scut.se.lee.R;
+import edu.scut.se.lee.util.Cache;
 import edu.scut.se.lee.util.DB;
 import edu.scut.se.lee.util.Data;
 import edu.scut.se.lee.util.Util;
@@ -78,14 +80,16 @@ public class ForceResultFragment extends BaseFragment implements View.OnClickLis
         initItems();
         List<DB.Result> ltRes = DB.getResults();
         for (DB.Result res : ltRes) {
-            Map<String, Object> item = new HashMap<String, Object>();
-            item.put("name", res.getName());
-            item.put("length", res.getLength() + "");
-            item.put("midu", res.getMidu() + "");
-            item.put("freq", res.getFreq() + "");
-            item.put("force", res.getForce() + "");
-            item.put("id", res.getId());
-            items.add(item);
+            if (!TextUtils.isEmpty(res.getPrjName())&&res.getPrjName().equals(Cache.getInstance().load(Cache.PRJ_NAME,""))) {
+                Map<String, Object> item = new HashMap<String, Object>();
+                item.put("name", res.getName());
+                item.put("length", res.getLength() + "");
+                item.put("midu", res.getMidu() + "");
+                item.put("freq", res.getFreq() + "");
+                item.put("force", res.getForce() + "");
+                item.put("id", res.getId());
+                items.add(item);
+            }
         }
         adapter.notifyDataSetChanged();
     }
