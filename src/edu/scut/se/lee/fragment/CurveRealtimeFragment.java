@@ -512,30 +512,12 @@ public class CurveRealtimeFragment extends BaseFragment implements
 				onCheckedChanged(buttonView,false);
 				return ;
 			}
-			isAvailable = sensors.registerListener(listener, sensor,
-					SensorManager.SENSOR_DELAY_FASTEST);
-			if (!isAvailable) {
-				new AlertDialog.Builder(getActivity()).setMessage("不支持加速度传感器")
-						.setPositiveButton("确定",
-								new DialogInterface.OnClickListener() {
-
-									@Override
-									public void onClick(DialogInterface dialog,
-											int which) {
-										// TODO Auto-generated method stub
-										getActivity().finish();
-									}
-								});
-			} else {
-				time_elems.clear();
-				index = 0;
-				lastX = lastY = 0;
-				isFirst = true;;
-				initLine();
-				timer = new Timer();
-				timer.schedule(new RefreshSeriesTask(), 10, refreshDelay);
-
-			}
+			buttonView.postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					ready();
+				}
+			},5000);
 		} else if (isAvailable) {
 			enableAllBtnsAndInput();
 			timer.cancel();
@@ -550,12 +532,34 @@ public class CurveRealtimeFragment extends BaseFragment implements
 						.show();
 			else
 				Util.showToast("保存失败");
-			// try {
-			// fileWriter.close();
-			// } catch (IOException e) {
-			// e.printStackTrace();
-			// }
 		}
+	}
+
+	public void ready() {
+		isAvailable = sensors.registerListener(listener, sensor,
+                SensorManager.SENSOR_DELAY_FASTEST);
+		if (!isAvailable) {
+            new AlertDialog.Builder(getActivity()).setMessage("不支持加速度传感器")
+                    .setPositiveButton("确定",
+                            new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                        int which) {
+                                    // TODO Auto-generated method stub
+                                    getActivity().finish();
+                                }
+                            });
+        } else {
+            time_elems.clear();
+            index = 0;
+            lastX = lastY = 0;
+            isFirst = true;;
+            initLine();
+            timer = new Timer();
+            timer.schedule(new RefreshSeriesTask(), 10, refreshDelay);
+
+        }
 	}
 
 	private void disableAllBtnsAndInput() {
