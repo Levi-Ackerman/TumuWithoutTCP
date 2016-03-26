@@ -36,6 +36,7 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
@@ -318,6 +319,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 					series.add(point.x, point.y);
 					mDataset.addSeries(series);
 					mXYMultipleSeriesRenderer.addSeriesRenderer(renderer);
+				Log.i("lee","点击了"+point.x+","+point.y);
 //					showMsg(String.format("选中了极大值点(%f,%f),已经选中了%d个极大值", line2.getX(index), line2.getY(index), maxValues.size()));
 //				}else{
 //					maxValues.remove(pointIndex);
@@ -618,18 +620,6 @@ public class CurveRealtimeFragment extends BaseFragment implements
 				if(maxValues.size()<2){
 					showMsg("还没有选够2个极大值");
 				}else{
-					Collections.sort(maxValues, new Comparator<Point>() {
-						@Override
-						public int compare(Point lhs, Point rhs) {
-							return (int)(lhs.x-rhs.x);
-						}
-					});
-					double avgFreq = 0;
-					for (int i = 1; i < maxValues.size()-1; i++) {
-						avgFreq += (maxValues.get(i).x - maxValues.get(i-1).x);
-					}
-					avgFreq = avgFreq/(maxValues.size()-1);
-					edu.scut.se.lee.util.Data.avgFreq = avgFreq;
 					tvSuoliNum.setText(String.format("%.5f",Data.getForce()));
 					DB.putResult(new DB.Result(Data.name, Data.lineLength, Data.midu, Data.avgFreq, Data.getForce()));
 				}
@@ -648,6 +638,8 @@ public class CurveRealtimeFragment extends BaseFragment implements
 					}
 					avgFreq = avgFreq / (maxValues.size()-1);
 					tvFreqNum.setText(String.format("%.5f",avgFreq));
+					Data.avgFreq = avgFreq;
+					Log.i("lee.","data"+Data.avgFreq+"avg"+avgFreq);
 				}else{
 					showMsg("点数不足2");
 				}
@@ -728,9 +720,11 @@ public class CurveRealtimeFragment extends BaseFragment implements
 							FFT fft = new FFT(arr);
 							int count = fft.count;
 							double[] ys = fft.result;
-							for (int i = 0; i < count; i++) {
+							line2.add(0,0);
+							for (int i = 1; i < count; i++) {
 								double x = 1.0 *Frequence/2 * i / count;
-								line2.add(x, ys[i]);
+								line2.add(x, ys[i-1]);
+								Log.i("lee","频域点"+x+","+ys[i-1]);
 							}
 						}
 						setMaxMin(line2.getMinX() - 0.1 * (line2.getMaxX() - line2.getMinX()), line2.getMinY() - 0.1 * (line2.getMaxY() - line2.getMinY()), line2.getMaxX() + 0.1 * (line2.getMaxX() - line2.getMinX()), line2.getMaxY() + 0.1 * (line2.getMaxY() - line2.getMinY()));

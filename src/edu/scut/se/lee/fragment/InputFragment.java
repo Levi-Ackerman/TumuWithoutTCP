@@ -52,8 +52,8 @@ public class InputFragment extends BaseFragment implements OnClickListener {
                     content += lineLong + mEditLineLong.getText().toString().trim() + "\n";
                     content += density + mEditDensity.getText().toString().trim() + "\n";
                     content += strength + mEditStrength.getText().toString().trim() + "\n";
-                    Util.saveFileInPrjDir(mEditLineName.getText().toString().trim()+".txt", content);
-                    Util.showToast("保存基本信息为"+mEditLineName.getText().toString().trim()+".txt成功");
+//                    Util.saveFileInPrjDir(mEditLineName.getText().toString().trim()+".txt", content);
+                    Util.showToast("保存基本信息成功");
                 } catch (Exception e) {
                     Util.showToast("保存基本信息失败");
                 }
