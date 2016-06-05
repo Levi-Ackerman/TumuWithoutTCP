@@ -43,7 +43,7 @@ public class ForceResultFragment extends BaseFragment implements View.OnClickLis
     public void initData() {
         items = new ArrayList<Map<String, Object>>();
         initItems();
-        adapter = new SimpleAdapter(App.getInstance(), items, R.layout.item_result, new String[]{"name", "midu", "length", "freq", "force"}, new int[]{R.id.tv0, R.id.tv1, R.id.tv2, R.id.tv3, R.id.tv4});
+        adapter = new SimpleAdapter(App.getInstance(), items, R.layout.item_result, new String[]{"name", "force1", "force2", "force3"}, new int[]{R.id.tv0,  R.id.tv2, R.id.tv3, R.id.tv4});
         mLVResult.setAdapter(adapter);
         load();
     }
@@ -52,25 +52,23 @@ public class ForceResultFragment extends BaseFragment implements View.OnClickLis
         items.clear();
         Map<String, Object> item = new HashMap<String, Object>();
         item.put("name", "索名");
-        item.put("midu", "线密度(kg/m)");
-        item.put("length", "索长(m)");
-        item.put("freq", "基频(Hz)");
-        item.put("force", "索力(kN)");
+        item.put("force1", "索力1");
+        item.put("force2", "索力2");
+        item.put("force3", "索力3");
         items.add(item);
     }
 
     @Override
     public void onClick(View v) {
 //        load();
-        StringBuilder builder = new StringBuilder("索名\t线密度(kg/m)\t索长(m)\t基频(Hz)\t索力(kN)\t\n");
+        StringBuilder builder = new StringBuilder("索名\t索力1\t索力2\t索力3\t\n");
         List<DB.Result> ltRes = DB.getResults();
         for (DB.Result ltRe : ltRes) {
             //第一行是表头
             builder.append(ltRe.getName()).append("\t")
-                    .append(ltRe.getMidu()).append("\t")
-                    .append(ltRe.getLength()).append("\t")
-                    .append(ltRe.getFreq()).append("\t")
-                    .append(ltRe.getForce()).append("\t\n");
+                    .append(ltRe.getForce1()).append("\t")
+                    .append(ltRe.getForce2()).append("\t")
+                    .append(ltRe.getForce3()).append("\t\n");
         }
         Util.saveFileInPrjDir(Data.name+"索力结果"+".txt",builder.toString());
         showMsg("保存成功");
@@ -83,10 +81,9 @@ public class ForceResultFragment extends BaseFragment implements View.OnClickLis
             if (!TextUtils.isEmpty(res.getPrjName())&&res.getPrjName().equals(Cache.getInstance().load(Cache.PRJ_NAME,""))) {
                 Map<String, Object> item = new HashMap<String, Object>();
                 item.put("name", res.getName());
-                item.put("length", res.getLength() + "");
-                item.put("midu", res.getMidu() + "");
-                item.put("freq", res.getFreq() + "");
-                item.put("force", res.getForce() + "");
+                item.put("force1", res.getForce1() + "");
+                item.put("force2", res.getForce2() + "");
+                item.put("force3", res.getForce3() + "");
                 item.put("id", res.getId());
                 items.add(item);
             }

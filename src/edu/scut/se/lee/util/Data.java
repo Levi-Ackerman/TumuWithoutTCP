@@ -78,6 +78,7 @@ public class Data {
         public JiePin(int n, double freq) {
             this.n = n;
             this.freq = freq;
+            Log.i("lee.","增加阶数和频率点:"+n+","+freq);
         }
     }
 

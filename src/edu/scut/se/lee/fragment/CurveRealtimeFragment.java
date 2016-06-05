@@ -626,7 +626,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 					showMsg("还没有选够2个极大值");
 				}else{
 					tvSuoliNum.setText(String.format("%.2f",Data.getForce1()));
-					DB.putResult(new DB.Result(Data.name, Data.lineLength, Data.midu, 0, Data.getForce1()));
+					DB.putResult(new DB.Result(Data.name, Data.lineLength, Data.getForce1(), Data.getForce2(), Data.getForce3()));
 				}
 				break;
 			case R.id.baseFreq:

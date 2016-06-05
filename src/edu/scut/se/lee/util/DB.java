@@ -45,28 +45,28 @@ public class DB {
         private long id;
         private String name;
         private double length;
-        private double midu;
-        private double freq;
+        private double force1;
+        private double force2;
 
-        public double getForce() {
-            return force;
+        public double getForce3() {
+            return force3;
         }
 
-        public void setForce(double force) {
-            this.force = force;
+        public void setForce3(double force3) {
+            this.force3 = force3;
         }
 
-        private double force;
+        private double force3;
 
         public Result(){
         }
 
-        public Result(String name, double length, double midu, double freq, double force) {
+        public Result(String name, double length, double force1, double force2, double force3) {
             this.name = name;
             this.length = length;
-            this.midu = midu;
-            this.freq = freq;
-            this.force = force;
+            this.force1 = force1;
+            this.force2 = force2;
+            this.force3 = force3;
             this.prjName = Cache.getInstance().load(Cache.PRJ_NAME,"");
         }
 
@@ -78,20 +78,20 @@ public class DB {
             this.length = length;
         }
 
-        public double getMidu() {
-            return midu;
+        public double getForce1() {
+            return force1;
         }
 
-        public void setMidu(double midu) {
-            this.midu = midu;
+        public void setForce1(double force1) {
+            this.force1 = force1;
         }
 
-        public double getFreq() {
-            return freq;
+        public double getForce2() {
+            return force2;
         }
 
-        public void setFreq(double freq) {
-            this.freq = freq;
+        public void setForce2(double force2) {
+            this.force2 = force2;
         }
 
         public String getName() {

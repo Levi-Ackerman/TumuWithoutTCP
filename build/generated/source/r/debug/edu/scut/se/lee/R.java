@@ -22,8 +22,8 @@ public final class R {
     }
     public static final class id {
         public static final int LinearLayout1=0x7f080003;
-        public static final int action_save=0x7f08001f;
-        public static final int action_settings=0x7f080020;
+        public static final int action_save=0x7f08001e;
+        public static final int action_settings=0x7f08001f;
         public static final int baseFreq=0x7f08000c;
         public static final int baseFreqNum=0x7f08000d;
         public static final int btnOk=0x7f080019;
@@ -49,10 +49,9 @@ public final class R {
         public static final int suoliNum=0x7f080010;
         public static final int sw_curve_start=0x7f080009;
         public static final int tv0=0x7f08001a;
-        public static final int tv1=0x7f08001b;
-        public static final int tv2=0x7f08001c;
-        public static final int tv3=0x7f08001d;
-        public static final int tv4=0x7f08001e;
+        public static final int tv2=0x7f08001b;
+        public static final int tv3=0x7f08001c;
+        public static final int tv4=0x7f08001d;
         public static final int twoBtns=0x7f080005;
     }
     public static final class layout {
