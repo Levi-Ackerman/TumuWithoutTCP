@@ -1,8 +1,0 @@
-/Users/jsonlee/Downloads/tumuClient/build/intermediates/classes/debug
-/Users/jsonlee/Downloads/tumuClient/build/intermediates/pre-dexed/debug/slf4j-api-1.6.6-c561a69f84a2611a0d1d774785bef8eb75e7d557.jar
-/Users/jsonlee/Downloads/tumuClient/build/intermediates/pre-dexed/debug/android-support-v7-gridlayout-3198df1be0e9d5bbc22c50a7e8aa230ddd4eff79.jar
-/Users/jsonlee/Downloads/tumuClient/build/intermediates/pre-dexed/debug/achartengine-1.1.0-0c8eaf2631ff9d8ffa6127a8e3b4bf0d1cf6eb01.jar
-/Users/jsonlee/Downloads/tumuClient/build/intermediates/pre-dexed/debug/afinal_0.5.1_bin-9bf0624b97cf8cf5dbdb7943bd32efdde7cd6b04.jar
-/Users/jsonlee/Downloads/tumuClient/build/intermediates/pre-dexed/debug/android-support-v7-appcompat-a717e63db66eb038274717ca06c5ae42398520ce.jar
-/Users/jsonlee/Downloads/tumuClient/build/intermediates/pre-dexed/debug/mina-core-2.0.7-989e6915047a81b9f1e4609cedfd4b4d4da8c0fa.jar
-/Users/jsonlee/Downloads/tumuClient/build/intermediates/pre-dexed/debug/android-support-v4-be7ef2bea7f0f3d98ff370845bebd97bfcd807e9.jar

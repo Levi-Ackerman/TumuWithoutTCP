@@ -55,6 +55,7 @@ import android.widget.EditText;
 public class CurveRealtimeFragment extends BaseFragment implements
 		OnCheckedChangeListener, OnClickListener {
 
+	private static final double WUCHA = 0.1;
 	@ViewInject(id = R.id.lay_curve_root)
 	private RelativeLayout dynamic_chart_line_layout;
 
@@ -625,7 +626,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 					showMsg("还没有选够2个极大值");
 				}else{
 					tvSuoliNum.setText(String.format("%.2f",Data.getForce()));
-					DB.putResult(new DB.Result(Data.name, Data.lineLength, Data.midu, Data.avgFreq, Data.getForce()));
+					DB.putResult(new DB.Result(Data.name, Data.lineLength, Data.midu, Data.freq, Data.getForce()));
 				}
 				break;
 			case R.id.baseFreq:
@@ -636,14 +637,30 @@ public class CurveRealtimeFragment extends BaseFragment implements
 							return (int)(lhs.x-rhs.x);
 						}
 					});
-					double avgFreq = 0;
+					double minFreq = Double.MAX_VALUE;
 					for (int i = 1; i < maxValues.size(); i++) {
-						avgFreq += (maxValues.get(i).x - maxValues.get(i - 1).x);
+						double temp = (maxValues.get(i).x - maxValues.get(i - 1).x);
+						if(temp < minFreq){
+							minFreq = temp;
+						}
 					}
-					avgFreq = avgFreq / (maxValues.size()-1);
-					tvFreqNum.setText(String.format("%.5f",avgFreq));
-					Data.avgFreq = avgFreq;
-					Log.i("lee.","data"+Data.avgFreq+"avg"+avgFreq);
+					tvFreqNum.setText(String.format("%.5f",minFreq));
+					Data.freq = minFreq;
+					List<Data.JiePin> jiePins = new ArrayList<Data.JiePin>();
+					int i = 1;
+					for (Point point : maxValues) {
+						double n = point.x / minFreq;
+						Log.i("lee.","第"+(i++)+"个数是第"+n+"阶");
+						double tempN = Math.abs(Math.round(n)-n);//四舍五入后值与n的差，控制误差
+						if (tempN < WUCHA) {
+							jiePins.add(new Data.JiePin((int) Math.round(n),point.x));
+							Log.i("lee.","误差为"+tempN+"，留下");
+						}else{
+							Log.i("lee.","误差为"+tempN+",太大了，舍去");
+						}
+					}
+					Data.jiePins = jiePins.toArray(new Data.JiePin[jiePins.size()]);
+					Log.i("lee.","data"+Data.freq +"avg"+minFreq);
 				}else{
 					showMsg("点数不足2");
 				}
