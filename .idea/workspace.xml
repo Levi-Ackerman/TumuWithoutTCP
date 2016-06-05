@@ -12,14 +12,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ef6f7a9-bfa3-438d-afa3-655d7005d49f" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/generated/source/buildConfig/test/debug/edu/scut/se/lee/test/BuildConfig.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/intermediates/tmp/dex/debug/inputList.txt" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/generated/source/buildConfig/debug/edu/scut/se/lee/BuildConfig.java" afterPath="$PROJECT_DIR$/build/generated/source/buildConfig/debug/edu/scut/se/lee/BuildConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/fragment_input.xml" afterPath="$PROJECT_DIR$/res/layout/fragment_input.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/scut/se/lee/fragment/CurveRealtimeFragment.java" afterPath="$PROJECT_DIR$/src/edu/scut/se/lee/fragment/CurveRealtimeFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/scut/se/lee/fragment/InputFragment.java" afterPath="$PROJECT_DIR$/src/edu/scut/se/lee/fragment/InputFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/scut/se/lee/util/Data.java" afterPath="$PROJECT_DIR$/src/edu/scut/se/lee/util/Data.java" />
     </list>
     <ignored path="TumuWithoutTCP.iws" />
@@ -48,26 +43,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="CurveRealtimeFragment.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CurveRealtimeFragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/edu/scut/se/lee/fragment/CurveRealtimeFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="-2.9222221">
               <caret line="661" column="84" selection-start-line="661" selection-start-column="84" selection-end-line="661" selection-end-column="84" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#19074#19213#0" expanded="true" />
-                <element signature="e#19212#19213#0" expanded="true" />
-                <element signature="e#19564#19577#0" expanded="true" />
+                <element signature="e#19076#19215#0" expanded="true" />
+                <element signature="e#19214#19215#0" expanded="true" />
+                <element signature="e#19566#19579#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Data.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Data.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/edu/scut/se/lee/util/Data.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.81534094">
-              <caret line="23" column="38" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="67" column="18" selection-start-line="67" selection-start-column="18" selection-end-line="67" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -86,11 +81,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BaseFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/edu/scut/se/lee/fragment/BaseFragment.java">
+      <file leaf-file-name="InputFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/edu/scut/se/lee/fragment/InputFragment.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+              <caret line="80" column="15" selection-start-line="80" selection-start-column="15" selection-end-line="80" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -1010,7 +1005,6 @@
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/res/layout/item_result.xml" />
         <option value="$PROJECT_DIR$/res/layout/fragment_force_result.xml" />
-        <option value="$PROJECT_DIR$/res/layout/fragment_input.xml" />
         <option value="$PROJECT_DIR$/src/edu/scut/se/lee/fragment/ProjectManagerFragment.java" />
         <option value="$PROJECT_DIR$/src/edu/scut/se/lee/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/edu/scut/se/lee/NavigationDrawerFragment.java" />
@@ -1020,8 +1014,9 @@
         <option value="$PROJECT_DIR$/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/res/layout/fragment_curve_realtime.xml" />
         <option value="$PROJECT_DIR$/src/edu/scut/se/lee/util/FFT.java" />
-        <option value="$PROJECT_DIR$/src/edu/scut/se/lee/fragment/InputFragment.java" />
         <option value="$PROJECT_DIR$/src/edu/scut/se/lee/fragment/CurveRealtimeFragment.java" />
+        <option value="$PROJECT_DIR$/res/layout/fragment_input.xml" />
+        <option value="$PROJECT_DIR$/src/edu/scut/se/lee/fragment/InputFragment.java" />
         <option value="$PROJECT_DIR$/src/edu/scut/se/lee/util/Data.java" />
       </list>
     </option>
@@ -1558,10 +1553,12 @@
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294964" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2265861" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.41993958" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930514" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18882175" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37462234" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -1580,9 +1577,7 @@
       <window_info id="Gerrit" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294964" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930514" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="FindBugs-IDEA" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="SBT" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294964" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1656,9 +1651,9 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#19074#19213#0" expanded="true" />
-            <element signature="e#19212#19213#0" expanded="true" />
-            <element signature="e#19564#19577#0" expanded="true" />
+            <element signature="e#19076#19215#0" expanded="true" />
+            <element signature="e#19214#19215#0" expanded="true" />
+            <element signature="e#19566#19579#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1704,9 +1699,9 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#19074#19213#0" expanded="true" />
-            <element signature="e#19212#19213#0" expanded="true" />
-            <element signature="e#19564#19577#0" expanded="true" />
+            <element signature="e#19076#19215#0" expanded="true" />
+            <element signature="e#19214#19215#0" expanded="true" />
+            <element signature="e#19566#19579#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1717,9 +1712,9 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#19074#19213#0" expanded="true" />
-            <element signature="e#19212#19213#0" expanded="true" />
-            <element signature="e#19564#19577#0" expanded="true" />
+            <element signature="e#19076#19215#0" expanded="true" />
+            <element signature="e#19214#19215#0" expanded="true" />
+            <element signature="e#19566#19579#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1765,9 +1760,9 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#19074#19213#0" expanded="true" />
-            <element signature="e#19212#19213#0" expanded="true" />
-            <element signature="e#19564#19577#0" expanded="true" />
+            <element signature="e#19076#19215#0" expanded="true" />
+            <element signature="e#19214#19215#0" expanded="true" />
+            <element signature="e#19566#19579#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1778,9 +1773,9 @@
           <caret line="448" column="30" selection-start-line="448" selection-start-column="30" selection-end-line="448" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#19074#19213#0" expanded="true" />
-            <element signature="e#19212#19213#0" expanded="true" />
-            <element signature="e#19564#19577#0" expanded="true" />
+            <element signature="e#19076#19215#0" expanded="true" />
+            <element signature="e#19214#19215#0" expanded="true" />
+            <element signature="e#19566#19579#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1791,9 +1786,9 @@
           <caret line="448" column="30" selection-start-line="448" selection-start-column="30" selection-end-line="448" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#19074#19213#0" expanded="true" />
-            <element signature="e#19212#19213#0" expanded="true" />
-            <element signature="e#19564#19577#0" expanded="true" />
+            <element signature="e#19076#19215#0" expanded="true" />
+            <element signature="e#19214#19215#0" expanded="true" />
+            <element signature="e#19566#19579#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1804,9 +1799,9 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#19074#19213#0" expanded="true" />
-            <element signature="e#19212#19213#0" expanded="true" />
-            <element signature="e#19564#19577#0" expanded="true" />
+            <element signature="e#19076#19215#0" expanded="true" />
+            <element signature="e#19214#19215#0" expanded="true" />
+            <element signature="e#19566#19579#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1911,16 +1906,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/fragment_input.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.9830508">
-          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/libs/achartengine-1.1.0.jar!/org/achartengine/renderer/XYMultipleSeriesRenderer.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3598015">
@@ -2017,31 +2002,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/scut/se/lee/fragment/CurveRealtimeFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="661" column="84" selection-start-line="661" selection-start-column="84" selection-end-line="661" selection-end-column="84" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#19074#19213#0" expanded="true" />
-            <element signature="e#19212#19213#0" expanded="true" />
-            <element signature="e#19564#19577#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/scut/se/lee/fragment/BaseFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/scut/se/lee/fragment/InputFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="55" column="42" selection-start-line="55" selection-start-column="42" selection-end-line="55" selection-end-column="42" />
           <folding />
         </state>
       </provider>
@@ -2084,11 +2048,43 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/fragment_input.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.0672646">
+          <caret line="69" column="19" selection-start-line="69" selection-start-column="19" selection-end-line="69" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/scut/se/lee/fragment/InputFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="80" column="15" selection-start-line="80" selection-start-column="15" selection-end-line="80" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/scut/se/lee/util/Data.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.81534094">
-          <caret line="23" column="38" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="67" column="18" selection-start-line="67" selection-start-column="18" selection-end-line="67" selection-end-column="18" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/scut/se/lee/fragment/CurveRealtimeFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.9222221">
+          <caret line="661" column="84" selection-start-line="661" selection-start-column="84" selection-end-line="661" selection-end-column="84" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#19076#19215#0" expanded="true" />
+            <element signature="e#19214#19215#0" expanded="true" />
+            <element signature="e#19566#19579#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
