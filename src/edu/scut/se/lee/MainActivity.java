@@ -6,6 +6,7 @@ import edu.scut.se.lee.fragment.ForceResultFragment;
 import edu.scut.se.lee.fragment.InputFragment;
 import edu.scut.se.lee.fragment.ProjectManagerFragment;
 import edu.scut.se.lee.util.Cache;
+import edu.scut.se.lee.util.Data;
 import edu.scut.se.lee.util.Util;
 
 import android.app.ActionBar;
@@ -14,6 +15,7 @@ import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
@@ -42,7 +44,7 @@ public class MainActivity extends BaseActivity implements
 
         setContentView(R.layout.activity_main);
 
-
+        test();
         mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
                 .findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
@@ -51,6 +53,18 @@ public class MainActivity extends BaseActivity implements
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
         initAlertDlg();
+    }
+
+    private void test() {
+        Data.midu = 61.39;
+        Data.lineLength = 128.05;
+        Data.ei = 5430000;
+        Data.jiePins = new Data.JiePin[2];
+        Data.jiePins[0] = new Data.JiePin(1,0.957);
+        Data.jiePins[1] = new Data.JiePin(2,2.914);
+//        Data.jiePins[2] = new Data.JiePin(3,2.871);
+//        Data.jiePins[3] = new Data.JiePin(4,3.828);
+        Log.i("索力",Data.getForce1()+","+ Data.getForce2()+","+Data.getForce3());
     }
 
     private void initAlertDlg() {
