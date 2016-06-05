@@ -68,7 +68,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
     private Button btnPinyu;
     @ViewInject(id = R.id.btn_curve_shiyu, click = "onClick")
     private Button btn_shiyu;
-    @ViewInject(id = R.id.button_suoli, click = "onClick")
+    @ViewInject(id = R.id.button_jisuansuoli, click = "onClick")
     private Button btnJisuan;
 
     @ViewInject(id = R.id.btn_set_freq, click = "onClick")
@@ -620,47 +620,18 @@ public class CurveRealtimeFragment extends BaseFragment implements
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.button_suoli:
-                if (maxValuesPinyu.size() < 2) {
-                    showMsg("还没有选够2个极大值");
-                } else {
-                    tvSuoliNum.setText(String.format("%.2f", Data.getForce1()));
-                    DB.putResult(new DB.Result(Data.name, Data.lineLength, Data.getForce1(), Data.getForce2(), Data.getForce3()));
+            case R.id.button_jisuansuoli:
+                if (jisuanBaseFreq()) {
+                    if (maxValuesPinyu.size() < 2) {
+                        showMsg("还没有选够2个极大值");
+                    } else {
+                        tvSuoliNum.setText(String.format("%.2f", Data.getForce1()));
+                        DB.putResult(new DB.Result(Data.name, Data.lineLength, Data.getForce1(), Data.getForce2(), Data.getForce3()));
+                    }
                 }
                 break;
             case R.id.baseFreq:
-                if (maxValuesPinyu.size() >= 2) {
-                    Collections.sort(maxValuesPinyu, new Comparator<Point>() {
-                        @Override
-                        public int compare(Point lhs, Point rhs) {
-                            return (int) (lhs.x - rhs.x);
-                        }
-                    });
-                    double minFreq = Double.MAX_VALUE;
-                    for (int i = 1; i < maxValuesPinyu.size(); i++) {
-                        double temp = (maxValuesPinyu.get(i).x - maxValuesPinyu.get(i - 1).x);
-                        if (temp < minFreq) {
-                            minFreq = temp;
-                        }
-                    }
-                    tvFreqNum.setText(String.format("%.5f", minFreq));
-                    List<Data.JiePin> jiePins = new ArrayList<Data.JiePin>();
-                    int i = 1;
-                    for (Point point : maxValuesPinyu) {
-                        double n = point.x / minFreq;
-                        Log.i("lee.", "第" + (i++) + "个数是第" + n + "阶");
-                        double tempN = Math.abs(Math.round(n) - n);//四舍五入后值与n的差，控制误差
-                        if (tempN < WUCHA) {
-                            jiePins.add(new Data.JiePin((int) Math.round(n), point.x));
-                            Log.i("lee.", "误差为" + tempN + "，留下");
-                        } else {
-                            Log.i("lee.", "误差为" + tempN + ",太大了，舍去");
-                        }
-                    }
-                    Data.jiePins = jiePins.toArray(new Data.JiePin[jiePins.size()]);
-                } else {
-                    showMsg("点数不足2");
-                }
+                jisuanBaseFreq();
                 break;
             case R.id.btn_import://还原数据
                 final EditText et = new EditText(getActivity());
@@ -766,6 +737,43 @@ public class CurveRealtimeFragment extends BaseFragment implements
                 }
                 break;
         }
+    }
+
+    public boolean jisuanBaseFreq() {
+        if (maxValuesPinyu.size() >= 2) {
+            Collections.sort(maxValuesPinyu, new Comparator<Point>() {
+                @Override
+                public int compare(Point lhs, Point rhs) {
+                    return (int) (lhs.x - rhs.x);
+                }
+            });
+            double minFreq = Double.MAX_VALUE;
+            for (int i = 1; i < maxValuesPinyu.size(); i++) {
+                double temp = (maxValuesPinyu.get(i).x - maxValuesPinyu.get(i - 1).x);
+                if (temp < minFreq) {
+                    minFreq = temp;
+                }
+            }
+            tvFreqNum.setText(String.format("%.5f", minFreq));
+            List<Data.JiePin> jiePins = new ArrayList<Data.JiePin>();
+            int i = 1;
+            for (Point point : maxValuesPinyu) {
+                double n = point.x / minFreq;
+                Log.i("lee.", "第" + (i++) + "个数是第" + n + "阶");
+                double tempN = Math.abs(Math.round(n) - n);//四舍五入后值与n的差，控制误差
+                if (tempN < WUCHA) {
+                    jiePins.add(new Data.JiePin((int) Math.round(n), point.x));
+                    Log.i("lee.", "误差为" + tempN + "，留下");
+                } else {
+                    Log.i("lee.", "误差为" + tempN + ",太大了，舍去");
+                }
+            }
+            Data.jiePins = jiePins.toArray(new Data.JiePin[jiePins.size()]);
+        } else {
+            showMsg("点数不足2");
+            return false;
+        }
+        return true;
     }
 
     private void setMaxMin(double xmin, double ymin, double xmax, double ymax) {

@@ -51,17 +51,17 @@ public class ForceResultFragment extends BaseFragment implements View.OnClickLis
     private void initItems() {
         items.clear();
         Map<String, Object> item = new HashMap<String, Object>();
-        item.put("name", "索名");
-        item.put("force1", "索力1");
-        item.put("force2", "索力2");
-        item.put("force3", "索力3");
+        item.put("name", "索编号");
+        item.put("force1", "公式1");
+        item.put("force2", "公式2");
+        item.put("force3", "公式3");
         items.add(item);
     }
 
     @Override
     public void onClick(View v) {
 //        load();
-        StringBuilder builder = new StringBuilder("索名\t索力1\t索力2\t索力3\t\n");
+        StringBuilder builder = new StringBuilder("索编号\t公式1\t公式2\t公式3\n");
         List<DB.Result> ltRes = DB.getResults();
         for (DB.Result ltRe : ltRes) {
             //第一行是表头

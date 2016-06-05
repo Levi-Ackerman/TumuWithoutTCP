@@ -30,6 +30,9 @@ public class Data {
 
     public static double getForce2() {
         f2 = 0;
+        if (ei == 0){
+            return f2 = 0;
+        }
         for (JiePin jiePin : jiePins) {
             double force = 0.004 * midu * lineLength * lineLength * jiePin.freq * jiePin.freq / jiePin.n / jiePin.n - jiePin.n * jiePin.n * ei * Math.PI * Math.PI / lineLength / lineLength * 0.001;
             f2 += force;
@@ -41,6 +44,9 @@ public class Data {
 
     public static double getForce3() {
         f3 = 0;
+        if (ei == 0){
+            return f3 = 0;
+        }
         double c = Math.sqrt(ei / midu / Math.pow(lineLength, 4));
         double kexi = Math.sqrt(f1 * 1000 / ei) * lineLength;
         for (JiePin jiePin : jiePins) {

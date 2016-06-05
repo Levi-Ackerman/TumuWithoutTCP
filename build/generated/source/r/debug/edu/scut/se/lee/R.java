@@ -33,7 +33,7 @@ public final class R {
         public static final int btn_import=0x7f08000e;
         public static final int btn_input_save=0x7f080017;
         public static final int btn_set_freq=0x7f08000a;
-        public static final int button_suoli=0x7f08000f;
+        public static final int button_jisuansuoli=0x7f08000f;
         public static final int container=0x7f080001;
         public static final int drawer_layout=0x7f080000;
         public static final int et_auto_run_time=0x7f080007;
