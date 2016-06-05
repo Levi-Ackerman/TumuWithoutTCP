@@ -259,7 +259,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 
     private List<Point> maxValuesPinyu = new ArrayList<Point>();
     private List<Point> maxValuesShiyu = new ArrayList<Point>();
-    private final int MAX_VALUES_COUNT = 5;
+    private final int MAX_VALUES_COUNT = 500;
     private OnClickListener chartOnClickListenerInPinyu = new OnClickListener() {
 
         @Override
@@ -357,7 +357,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
                     for (int i = line1.getItemCount() - 1; line1.getX(i) > large; i--) {
                         line1.remove(i);
                     }
-                    while(line1.getX(0)<min){
+                    while (line1.getX(0) < min) {
                         line1.remove(0);
                     }
                 }
@@ -431,6 +431,7 @@ public class CurveRealtimeFragment extends BaseFragment implements
 
     class RefreshSeriesTask extends TimerTask {
         public void run() {
+            Log.i("lee.","采样频率"+Frequence);
             if (autoSec > 0 && line1.getItemCount() > Frequence * autoSec) {
                 handler.sendEmptyMessage(MSG_CLOSE_SWITCH);
                 return;
@@ -625,8 +626,9 @@ public class CurveRealtimeFragment extends BaseFragment implements
                     if (maxValuesPinyu.size() < 2) {
                         showMsg("还没有选够2个极大值");
                     } else {
-                        tvSuoliNum.setText(String.format("%.2f", Data.getForce1()));
+//                        tvSuoliNum.setText(String.format("%.2f", Data.getForce1()));
                         DB.putResult(new DB.Result(Data.name, Data.lineLength, Data.getForce1(), Data.getForce2(), Data.getForce3()));
+//                        saveToFile();
                     }
                 }
                 break;
@@ -737,6 +739,31 @@ public class CurveRealtimeFragment extends BaseFragment implements
                 }
                 break;
         }
+    }
+
+    public void saveToFile() {
+        content = "";
+        for (int i = 0; i < line1.getItemCount(); i++) {
+            content += line1.getX(i) + "\t" + line1.getY(i)
+                    + "\n";
+        }
+        final EditText editText = new EditText(getActivity());
+        editText.setHint("输入文件名");
+        new AlertDialog.Builder(getActivity()).setTitle("保存数据").setView(editText).setPositiveButton("保存", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String name = editText.getText().toString().trim();
+                if (name.equals("")) {
+                    Util.showToast("请输入文件名");
+                    return;
+                }
+                if (Util.saveFileInPrjDir(name + ".data", content))
+                    Toast.makeText(getActivity(), "保存成功", Toast.LENGTH_SHORT)
+                            .show();
+                else
+                    Util.showToast("保存失败");
+            }
+        }).setNegativeButton("取消", null).show();
     }
 
     public boolean jisuanBaseFreq() {

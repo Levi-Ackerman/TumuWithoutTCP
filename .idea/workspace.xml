@@ -12,10 +12,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ef6f7a9-bfa3-438d-afa3-655d7005d49f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/generated/source/r/debug/edu/scut/se/lee/R.java" afterPath="$PROJECT_DIR$/build/generated/source/r/debug/edu/scut/se/lee/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/fragment_curve_realtime.xml" afterPath="$PROJECT_DIR$/res/layout/fragment_curve_realtime.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/scut/se/lee/fragment/CurveRealtimeFragment.java" afterPath="$PROJECT_DIR$/src/edu/scut/se/lee/fragment/CurveRealtimeFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/scut/se/lee/fragment/ForceResultFragment.java" afterPath="$PROJECT_DIR$/src/edu/scut/se/lee/fragment/ForceResultFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/scut/se/lee/util/FFT.java" afterPath="$PROJECT_DIR$/src/edu/scut/se/lee/util/FFT.java" />
     </list>
     <ignored path="TumuWithoutTCP.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -46,15 +44,27 @@
       <file leaf-file-name="CurveRealtimeFragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/edu/scut/se/lee/fragment/CurveRealtimeFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="40.234375">
-              <caret line="560" column="16" selection-start-line="560" selection-start-column="16" selection-end-line="560" selection-end-column="16" />
+            <state vertical-scroll-proportion="-2.5726495">
+              <caret line="261" column="44" selection-start-line="261" selection-start-column="44" selection-end-line="261" selection-end-column="44" />
               <folding>
                 <element signature="e#8021#8028#0" expanded="true" />
                 <element signature="e#8086#8093#0" expanded="true" />
-                <element signature="e#28030#28222#0" expanded="true" />
-                <element signature="e#28221#28222#0" expanded="true" />
-                <element signature="e#28643#28656#0" expanded="true" />
+                <element signature="e#28409#29010#0" expanded="true" />
+                <element signature="e#29009#29010#0" expanded="true" />
+                <element signature="e#29182#29374#0" expanded="true" />
+                <element signature="e#29373#29374#0" expanded="true" />
+                <element signature="e#29795#29808#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FFT.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/edu/scut/se/lee/util/FFT.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="170" column="16" selection-start-line="170" selection-start-column="16" selection-end-line="170" selection-end-column="16" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -976,7 +986,6 @@
         <option value="$PROJECT_DIR$/src/edu/scut/se/lee/NavigationDrawerFragment.java" />
         <option value="$PROJECT_DIR$/res/layout/fragment_project_manager.xml" />
         <option value="$PROJECT_DIR$/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/src/edu/scut/se/lee/util/FFT.java" />
         <option value="$PROJECT_DIR$/res/layout/fragment_input.xml" />
         <option value="$PROJECT_DIR$/src/edu/scut/se/lee/fragment/InputFragment.java" />
         <option value="$PROJECT_DIR$/src/edu/scut/se/lee/util/DB.java" />
@@ -985,6 +994,7 @@
         <option value="$PROJECT_DIR$/src/edu/scut/se/lee/util/Data.java" />
         <option value="$PROJECT_DIR$/res/layout/fragment_curve_realtime.xml" />
         <option value="$PROJECT_DIR$/src/edu/scut/se/lee/fragment/ForceResultFragment.java" />
+        <option value="$PROJECT_DIR$/src/edu/scut/se/lee/util/FFT.java" />
         <option value="$PROJECT_DIR$/src/edu/scut/se/lee/fragment/CurveRealtimeFragment.java" />
       </list>
     </option>
@@ -1239,12 +1249,28 @@
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="settings.editor.selected.configurable" value="android.sdk-updates" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="device.picker.selection" value="HC46VWY04792" />
+    <property name="device.picker.selection" value="75UBCKT223ST" />
     <property name="DEBUGGABLE_DEVICE" value="htc-htc_m8st-HC46VWY04792" />
     <property name="DEBUGGABLE_PROCESS" value="edu.scut.se.lee" />
     <property name="SHOW_ALL_PROCESSES" value="false" />
     <property name="SearchEverywhereHistoryKey" value="getresult&#9;PSI&#9;JAVA://edu.scut.se.lee.util.DB#getResults&#10;app_na&#9;PSI&#9;JAVA://edu.scut.se.lee.R.string#app_name&#10;_save&#9;PSI&#9;JAVA://edu.scut.se.lee.R.id#btn_save" />
     <property name="extract.method.default.visibility" value="public" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="82" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="101" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="107" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="1064" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="72" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="102" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="107" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="1073" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
   </component>
   <component name="RunManager" selected="Android Application.TumuWithoutTCP">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
@@ -1560,7 +1586,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="797" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1569,7 +1595,7 @@
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930514" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="1.0" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19637462" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37462234" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -1657,9 +1683,11 @@
           <folding>
             <element signature="e#8021#8028#0" expanded="true" />
             <element signature="e#8086#8093#0" expanded="true" />
-            <element signature="e#28030#28222#0" expanded="true" />
-            <element signature="e#28221#28222#0" expanded="true" />
-            <element signature="e#28643#28656#0" expanded="true" />
+            <element signature="e#28409#29010#0" expanded="true" />
+            <element signature="e#29009#29010#0" expanded="true" />
+            <element signature="e#29182#29374#0" expanded="true" />
+            <element signature="e#29373#29374#0" expanded="true" />
+            <element signature="e#29795#29808#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1706,9 +1734,11 @@
           <folding>
             <element signature="e#8021#8028#0" expanded="true" />
             <element signature="e#8086#8093#0" expanded="true" />
-            <element signature="e#28030#28222#0" expanded="true" />
-            <element signature="e#28221#28222#0" expanded="true" />
-            <element signature="e#28643#28656#0" expanded="true" />
+            <element signature="e#28409#29010#0" expanded="true" />
+            <element signature="e#29009#29010#0" expanded="true" />
+            <element signature="e#29182#29374#0" expanded="true" />
+            <element signature="e#29373#29374#0" expanded="true" />
+            <element signature="e#29795#29808#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1720,9 +1750,11 @@
           <folding>
             <element signature="e#8021#8028#0" expanded="true" />
             <element signature="e#8086#8093#0" expanded="true" />
-            <element signature="e#28030#28222#0" expanded="true" />
-            <element signature="e#28221#28222#0" expanded="true" />
-            <element signature="e#28643#28656#0" expanded="true" />
+            <element signature="e#28409#29010#0" expanded="true" />
+            <element signature="e#29009#29010#0" expanded="true" />
+            <element signature="e#29182#29374#0" expanded="true" />
+            <element signature="e#29373#29374#0" expanded="true" />
+            <element signature="e#29795#29808#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1769,9 +1801,11 @@
           <folding>
             <element signature="e#8021#8028#0" expanded="true" />
             <element signature="e#8086#8093#0" expanded="true" />
-            <element signature="e#28030#28222#0" expanded="true" />
-            <element signature="e#28221#28222#0" expanded="true" />
-            <element signature="e#28643#28656#0" expanded="true" />
+            <element signature="e#28409#29010#0" expanded="true" />
+            <element signature="e#29009#29010#0" expanded="true" />
+            <element signature="e#29182#29374#0" expanded="true" />
+            <element signature="e#29373#29374#0" expanded="true" />
+            <element signature="e#29795#29808#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1783,9 +1817,11 @@
           <folding>
             <element signature="e#8021#8028#0" expanded="true" />
             <element signature="e#8086#8093#0" expanded="true" />
-            <element signature="e#28030#28222#0" expanded="true" />
-            <element signature="e#28221#28222#0" expanded="true" />
-            <element signature="e#28643#28656#0" expanded="true" />
+            <element signature="e#28409#29010#0" expanded="true" />
+            <element signature="e#29009#29010#0" expanded="true" />
+            <element signature="e#29182#29374#0" expanded="true" />
+            <element signature="e#29373#29374#0" expanded="true" />
+            <element signature="e#29795#29808#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1797,9 +1833,11 @@
           <folding>
             <element signature="e#8021#8028#0" expanded="true" />
             <element signature="e#8086#8093#0" expanded="true" />
-            <element signature="e#28030#28222#0" expanded="true" />
-            <element signature="e#28221#28222#0" expanded="true" />
-            <element signature="e#28643#28656#0" expanded="true" />
+            <element signature="e#28409#29010#0" expanded="true" />
+            <element signature="e#29009#29010#0" expanded="true" />
+            <element signature="e#29182#29374#0" expanded="true" />
+            <element signature="e#29373#29374#0" expanded="true" />
+            <element signature="e#29795#29808#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1811,9 +1849,11 @@
           <folding>
             <element signature="e#8021#8028#0" expanded="true" />
             <element signature="e#8086#8093#0" expanded="true" />
-            <element signature="e#28030#28222#0" expanded="true" />
-            <element signature="e#28221#28222#0" expanded="true" />
-            <element signature="e#28643#28656#0" expanded="true" />
+            <element signature="e#28409#29010#0" expanded="true" />
+            <element signature="e#29009#29010#0" expanded="true" />
+            <element signature="e#29182#29374#0" expanded="true" />
+            <element signature="e#29373#29374#0" expanded="true" />
+            <element signature="e#29795#29808#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2003,14 +2043,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/scut/se/lee/util/FFT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="160" column="21" selection-start-line="160" selection-start-column="21" selection-end-line="160" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/fragment_input.xml">
       <provider editor-type-id="android-designer">
         <state />
@@ -2090,16 +2122,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/scut/se/lee/util/FFT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="170" column="16" selection-start-line="170" selection-start-column="16" selection-end-line="170" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/scut/se/lee/fragment/CurveRealtimeFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="40.234375">
-          <caret line="560" column="16" selection-start-line="560" selection-start-column="16" selection-end-line="560" selection-end-column="16" />
+        <state vertical-scroll-proportion="-2.5726495">
+          <caret line="261" column="44" selection-start-line="261" selection-start-column="44" selection-end-line="261" selection-end-column="44" />
           <folding>
             <element signature="e#8021#8028#0" expanded="true" />
             <element signature="e#8086#8093#0" expanded="true" />
-            <element signature="e#28030#28222#0" expanded="true" />
-            <element signature="e#28221#28222#0" expanded="true" />
-            <element signature="e#28643#28656#0" expanded="true" />
+            <element signature="e#28409#29010#0" expanded="true" />
+            <element signature="e#29009#29010#0" expanded="true" />
+            <element signature="e#29182#29374#0" expanded="true" />
+            <element signature="e#29373#29374#0" expanded="true" />
+            <element signature="e#29795#29808#0" expanded="true" />
           </folding>
         </state>
       </provider>
