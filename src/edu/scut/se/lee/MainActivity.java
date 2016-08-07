@@ -4,7 +4,9 @@ import edu.scut.se.lee.fragment.BaseFragment;
 import edu.scut.se.lee.fragment.CurveRealtimeFragment;
 import edu.scut.se.lee.fragment.ForceResultFragment;
 import edu.scut.se.lee.fragment.InputFragment;
+import edu.scut.se.lee.fragment.ProjectManagerFragment;
 import edu.scut.se.lee.util.Cache;
+import edu.scut.se.lee.util.Data;
 import edu.scut.se.lee.util.Util;
 
 import android.app.ActionBar;
@@ -13,6 +15,7 @@ import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
@@ -41,7 +44,7 @@ public class MainActivity extends BaseActivity implements
 
         setContentView(R.layout.activity_main);
 
-
+//        test();
         mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
                 .findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
@@ -52,35 +55,20 @@ public class MainActivity extends BaseActivity implements
         initAlertDlg();
     }
 
+    private void test() {
+        Data.midu = 61.39;
+        Data.lineLength = 128.05;
+        Data.ei = 5430000;
+        Data.jiePins = new Data.JiePin[2];
+        Data.jiePins[0] = new Data.JiePin(1,0.957);
+        Data.jiePins[1] = new Data.JiePin(2,2.914);
+//        Data.jiePins[2] = new Data.JiePin(3,2.871);
+//        Data.jiePins[3] = new Data.JiePin(4,3.828);
+        Log.i("索力",Data.getForce1()+","+ Data.getForce2()+","+Data.getForce3());
+    }
+
     private void initAlertDlg() {
-        final EditText etName = new EditText(this);
-        etName.setHint("输入项目名称");
-        etName.setText(Cache.getInstance().load(Cache.PRJ_NAME,""));
-        new AlertDialog.Builder(this).setTitle("项目名称")
-                .setView(etName)
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String name = etName.getText().toString().trim();
-                        if (name == null||name.equals("")) {
-                            Util.showToast("项目名字不能为空");
-                            finish();
-                            return ;
-                        }
-                        Cache.getInstance().save(Cache.PRJ_NAME,name);
-                        File file = new File(Util.getPrjDir());
-                        if (!file.exists() || !file.isDirectory()) {
-                            file.mkdirs();
-                        }
-                    }
-                })
-                .setNegativeButton("退出", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-                })
-                .show();
+
     }
 
     @Override
@@ -88,14 +76,17 @@ public class MainActivity extends BaseActivity implements
         // update the main content by replacing fragments
         BaseFragment fragment = null;
         switch (position) {
-            case 0:
+            case 1:
                 fragment = new InputFragment();
                 break;
-            case 1:
+            case 2:
                 fragment = new CurveRealtimeFragment();
                 break;
-            case 2:
+            case 3:
                 fragment = new ForceResultFragment();
+                break;
+            case 0:
+                fragment = new ProjectManagerFragment();
                 break;
             default:
                 break;

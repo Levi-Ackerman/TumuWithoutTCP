@@ -17,13 +17,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="@android:color/transparent"
+            android:background="@android:color/white"
             android:gravity="center">
 
             <Button
                 android:id="@+id/btn_curve_shiyu"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
+                android:layout_marginRight="10dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/et_auto_run_time"
@@ -36,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/btn_curve_shiyu"
-                android:text="频谱图" />
+                android:text=" 频谱图 " />
         </LinearLayout>
     </RelativeLayout>
 
@@ -77,14 +78,16 @@
             android:text="50" />
         <Button
             android:id="@+id/baseFreq"
+            android:visibility="gone"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
-            android:text="基频: "
+            android:text="    基频    "
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/baseFreqNum"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:text="0.00000"
             android:layout_marginBottom="10dp"
@@ -98,29 +101,23 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:text="导入" />
-        <EditText
-            android:id="@+id/et_jieshu_input"
-            android:layout_toLeftOf="@+id/btn_import"
-            android:layout_alignParentBottom="true"
-            android:layout_width="50dp"
-            android:visibility="gone"
-            android:hint="输入阶数"
-            android:layout_height="wrap_content" />
+            android:text="导入时程" />
+
         <Button
-            android:id="@+id/button_suoli"
+            android:id="@+id/button_jisuansuoli"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_toRightOf="@+id/baseFreqNum"
-            android:text="索力:" />
+            android:layout_centerHorizontal="true"
+            android:text="    计算    " />
         <TextView
             android:id="@+id/suoliNum"
+            android:visibility="gone"
             android:layout_marginBottom="10dp"
             android:layout_width="wrap_content"
             android:text="       "
-            android:layout_toRightOf="@+id/button_suoli"
+            android:layout_toRightOf="@+id/button_jisuansuoli"
             android:layout_alignParentBottom="true"
             android:layout_height="wrap_content" />
     </RelativeLayout>

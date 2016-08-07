@@ -26,29 +26,29 @@ public final class R {
         public static final int action_settings=0x7f08001f;
         public static final int baseFreq=0x7f08000c;
         public static final int baseFreqNum=0x7f08000d;
+        public static final int btnOk=0x7f080019;
         public static final int btn_curve_pinyu=0x7f080008;
         public static final int btn_curve_shiyu=0x7f080006;
-        public static final int btn_export_result=0x7f080012;
+        public static final int btn_export_result=0x7f080011;
         public static final int btn_import=0x7f08000e;
-        public static final int btn_input_save=0x7f080018;
+        public static final int btn_input_save=0x7f080017;
         public static final int btn_set_freq=0x7f08000a;
-        public static final int button_suoli=0x7f080010;
+        public static final int button_jisuansuoli=0x7f08000f;
         public static final int container=0x7f080001;
         public static final int drawer_layout=0x7f080000;
         public static final int et_auto_run_time=0x7f080007;
-        public static final int et_input_density=0x7f080016;
-        public static final int et_input_linelong=0x7f080015;
-        public static final int et_input_linename=0x7f080014;
-        public static final int et_input_strength=0x7f080017;
-        public static final int et_jieshu_input=0x7f08000f;
+        public static final int et_input_density=0x7f080015;
+        public static final int et_input_linelong=0x7f080014;
+        public static final int et_input_linename=0x7f080013;
+        public static final int et_input_strength=0x7f080016;
+        public static final int et_project_name=0x7f080018;
         public static final int et_set_freq=0x7f08000b;
         public static final int lay_curve_root=0x7f080004;
-        public static final int lvResult=0x7f080013;
+        public static final int lvResult=0x7f080012;
         public static final int navigation_drawer=0x7f080002;
-        public static final int suoliNum=0x7f080011;
+        public static final int suoliNum=0x7f080010;
         public static final int sw_curve_start=0x7f080009;
-        public static final int tv0=0x7f080019;
-        public static final int tv1=0x7f08001a;
+        public static final int tv0=0x7f08001a;
         public static final int tv2=0x7f08001b;
         public static final int tv3=0x7f08001c;
         public static final int tv4=0x7f08001d;
@@ -59,8 +59,9 @@ public final class R {
         public static final int fragment_curve_realtime=0x7f030001;
         public static final int fragment_force_result=0x7f030002;
         public static final int fragment_input=0x7f030003;
-        public static final int item_result=0x7f030004;
-        public static final int navigation_drawer=0x7f030005;
+        public static final int fragment_project_manager=0x7f030004;
+        public static final int item_result=0x7f030005;
+        public static final int navigation_drawer=0x7f030006;
     }
     public static final class menu {
         public static final int fragment_curve=0x7f070000;
@@ -75,6 +76,7 @@ public final class R {
         public static final int title_section0_input=0x7f060005;
         public static final int title_section2_realtime_curve=0x7f060006;
         public static final int title_section6_force_result=0x7f060007;
+        public static final int title_section7_project_manager=0x7f060008;
     }
     public static final class style {
         /**  API 11 theme customizations can go here. 

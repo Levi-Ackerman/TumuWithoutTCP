@@ -2,7 +2,6 @@ package edu.scut.se.lee.fragment;
 
 import net.tsz.afinal.annotation.view.ViewInject;
 import edu.scut.se.lee.R;
-import edu.scut.se.lee.util.Cache;
 import edu.scut.se.lee.util.Data;
 import edu.scut.se.lee.util.Util;
 
@@ -24,7 +23,7 @@ public class InputFragment extends BaseFragment implements OnClickListener {
     private final String density = "密度=";
     @ViewInject(id=R.id.et_input_strength)
     private TextView mEditStrength;
-    private final String strength = "强度=";
+    private final String strength = "抗弯刚度=";
 	@ViewInject(id = R.id.btn_input_save,click="onClick")
 	private Button btn_save;
 //    @ViewInject(id=R.id.btn_input_load,click = "onClick")
@@ -52,8 +51,8 @@ public class InputFragment extends BaseFragment implements OnClickListener {
                     content += lineLong + mEditLineLong.getText().toString().trim() + "\n";
                     content += density + mEditDensity.getText().toString().trim() + "\n";
                     content += strength + mEditStrength.getText().toString().trim() + "\n";
-                    Util.saveFileInPrjDir(mEditLineName.getText().toString().trim()+".txt", content);
-                    Util.showToast("保存基本信息为"+mEditLineName.getText().toString().trim()+".txt成功");
+//                    Util.saveFileInPrjDir(mEditLineName.getText().toString().trim()+".txt", content);
+                    Util.showToast("保存基本信息成功");
                 } catch (Exception e) {
                     Util.showToast("保存基本信息失败");
                 }
@@ -79,6 +78,6 @@ public class InputFragment extends BaseFragment implements OnClickListener {
         Data.name = mEditLineName.getText().toString().trim();
         Data.lineLength = Double.parseDouble(mEditLineLong.getText().toString());
         Data.midu = Double.parseDouble(mEditDensity.getText().toString());
-//        Data.kangwanqiangdu = Double.parseDouble(mEditStrength.getText().toString());
+        Data.ei = Double.parseDouble(mEditStrength.getText().toString());
 	}
 }
